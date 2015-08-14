@@ -1,2 +1,2 @@
 # BS-Card-Web-Game
-According to Wikipedia, the card game "BS" is also known as "Cheat", "Bull****", and "I Doubt It."
+According to Wikipedia, the card game "BS" is also known as "Cheat", "Bull****", and "I Doubt It." Because this project is in rather early stages of development, there isn't much to say about it yet, which is why the README.md is rather brief. However, if I keep working on this project, it will eventually have a good readme, at least one release, a demonstrative YouTube video, and unit tests.
