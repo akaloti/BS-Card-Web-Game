@@ -1,3 +1,1 @@
 -include PHP file(s)?
--use shell scripts to make things faster (e.g. automatically add a file
- to the list of files opened by the batch file, update release version)
