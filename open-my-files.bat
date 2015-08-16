@@ -4,4 +4,5 @@ start Notepad++ css/bs.css
 start Notepad++ js/bs.js
 start Notepad++ todo-list.txt
 start Notepad++ open-my-files.bat
+start Notepad++ b.txt
 exit
