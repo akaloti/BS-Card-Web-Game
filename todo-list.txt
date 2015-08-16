@@ -1,1 +1,2 @@
 -include PHP file(s)?
+-allow the user to use arrow keys on the menu?
