@@ -1,4 +1,5 @@
-# The given parameter should be the name of the file to create
+# The given parameter should be the name of the file to create.
+# Note that any already staged files will be included in the generated commit.
 # Sample usage: add-file.sh hello-world.txt
 
 # Create the file
