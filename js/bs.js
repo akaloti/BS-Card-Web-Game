@@ -10,28 +10,29 @@ function Card(name) {
 }
 
 // Precondition: bs.deck is empty
-// Postcondition: bs.deck contains 52 unique strings, each representing
-// a unique card. Each string consists of two letters, the former
+// Postcondition: bs.deck contains 52 unique instances of class Card,
+// each representing a unique card. Each instance's name consists of
+// two letters, the former
 // indicating the suit, and the latter indicating the rank.
 function generateDeck() {
   var suits = ['S', 'H', 'C', 'D'];
   var ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J',
     'Q', 'K'];
 
-  var card = "";
+  var cardName = "";
   for (var s in suits) {
-    card += suits[s];
+    cardName += suits[s];
     for (var r in ranks) {
       // append the rank
-      card += ranks[r];
+      cardName += ranks[r];
 
-      console.log(card);
-      bs.deck.push(card);
+      // console.log(cardName);
+      bs.deck.push(new Card(cardName));
 
       // reset the card back to just the suit
-      card = suits[s];
+      cardName = suits[s];
     }
-    card = "";
+    cardName = "";
   }
 }
 
