@@ -17,13 +17,16 @@ function Player(/*name*/) {
   this.cards = [];
 }
 
-// Precondition: bs.deck is empty
+// Precondition: none
 // Postcondition: bs.deck contains 52 unique instances of class Card,
 // each representing a unique card. Each instance's name consists of
 // two letters, the former
 // indicating the suit, and the latter indicating the rank.
-// bs.deck is empty.
+// Note that bs.deck will be overritten.
 function generateDeck() {
+  // Empty the deck
+  bs.deck = [];
+
   var suits = ['S', 'H', 'C', 'D'];
   var ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J',
     'Q', 'K'];

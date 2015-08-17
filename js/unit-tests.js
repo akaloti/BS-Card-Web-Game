@@ -1,7 +1,4 @@
 QUnit.test("generateDeck()", function(assert) {
-  // artificially enforce the precondition
-  bs.deck = [];
-
   generateDeck();
 
   assert.equal(bs.deck.length, bs.DECK_LENGTH,
@@ -16,6 +13,7 @@ QUnit.test("dealOutCards()", function(assert) {
 
 function testDealOutCards(assert, numberOfArtificalPlayers) {
   // create an artificial environment with players
+  generateDeck();
   bs.players = [];
   for (var i = 0; i < numberOfArtificalPlayers; ++i)
     bs.players.push(new Player());
