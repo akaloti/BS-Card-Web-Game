@@ -22,6 +22,7 @@ function Player(/*name*/) {
 // each representing a unique card. Each instance's name consists of
 // two letters, the former
 // indicating the suit, and the latter indicating the rank.
+// bs.deck is empty.
 function generateDeck() {
   var suits = ['S', 'H', 'C', 'D'];
   var ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J',
@@ -44,6 +45,15 @@ function generateDeck() {
   }
 }
 
+// Precondition: No player has any cards.
+// Postcondition: The deck's cards have been randomly dealt to each player.
+// The number of cards each player has should be equal as possible (within
+// a tolerance of one).
+function dealOutCards() {
+
+}
+
 $(document).ready(function(){
   generateDeck();
+  dealOutCards();
 });
