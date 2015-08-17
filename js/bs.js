@@ -1,5 +1,7 @@
 var bs = {};
 bs.deck = [];
+bs.DECK_LENGTH = 52;
+bs.players = [];
 
 function Card(name) {
   this.name = name;
@@ -9,12 +11,22 @@ function Card(name) {
   // this.y = [get from list]
 }
 
-// Precondition: bs.deck is empty
+function Player() {
+  this.name = name;
+
+  this.cards = [];
+}
+
+// Precondition: none
 // Postcondition: bs.deck contains 52 unique instances of class Card,
 // each representing a unique card. Each instance's name consists of
 // two letters, the former
 // indicating the suit, and the latter indicating the rank.
+// Note that bs.deck will be overritten.
 function generateDeck() {
+  // Empty the deck
+  bs.deck = [];
+
   var suits = ['S', 'H', 'C', 'D'];
   var ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J',
     'Q', 'K'];
@@ -36,6 +48,36 @@ function generateDeck() {
   }
 }
 
+// Precondition: No player has any cards. Deck has been generated.
+// bs.players.length > 0.
+// Postcondition: The deck's cards have been randomly dealt to each player.
+// The number of cards each player has should be equal as possible (within
+// a tolerance of one). bs.deck is empty.
+function dealOutCards() {
+  while (bs.deck.length > 0)
+  {
+    for (var j in bs.players)
+    {
+      if (bs.deck.length > 0)
+      {
+        var randomCardIndex = Math.floor(Math.random() * bs.deck.length);
+        bs.players[j].cards.push(bs.deck.splice(randomCardIndex, 1).pop());
+      }
+      else
+      {
+        // console.log("deck emptied")
+        break;
+      }
+    }
+  }
+}
+
 $(document).ready(function(){
   generateDeck();
+  for (var i = 0; i < 3; ++i)
+  {
+    var player = new Player();
+    bs.players.push(player);
+  }
+  dealOutCards();
 });
