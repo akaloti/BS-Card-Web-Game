@@ -7,6 +7,9 @@ For README:
 -include directions for the (currently two) shell scripts
 -include directions regarding unit tests
 
+For next release:
+-use CDN on all html files
+
 Other:
 -include PHP file(s) (for choosing number of players)?
 -allow the user to use arrow keys on the menu?

@@ -11,8 +11,8 @@ function Card(name) {
   // this.y = [get from list]
 }
 
-function Player(/*name*/) {
-  // this.name = name;
+function Player() {
+  this.name = name;
 
   this.cards = [];
 }
@@ -49,14 +49,35 @@ function generateDeck() {
 }
 
 // Precondition: No player has any cards. Deck has been generated.
+// bs.players.length > 0.
 // Postcondition: The deck's cards have been randomly dealt to each player.
 // The number of cards each player has should be equal as possible (within
 // a tolerance of one). bs.deck is empty.
 function dealOutCards() {
-
+  while (bs.deck.length > 0)
+  {
+    for (var j in bs.players)
+    {
+      if (bs.deck.length > 0)
+      {
+        var randomCardIndex = Math.floor(Math.random() * bs.deck.length);
+        bs.players[j].cards.push(bs.deck.splice(randomCardIndex, 1).pop());
+      }
+      else
+      {
+        // console.log("deck emptied")
+        break;
+      }
+    }
+  }
 }
 
 $(document).ready(function(){
   generateDeck();
+  for (var i = 0; i < 3; ++i)
+  {
+    var player = new Player();
+    bs.players.push(player);
+  }
   dealOutCards();
 });
