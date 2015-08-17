@@ -8,5 +8,11 @@ For README:
 -include directions regarding unit tests
 
 Other:
--include PHP file(s)?
+-include PHP file(s) (for choosing number of players)?
 -allow the user to use arrow keys on the menu?
+-write an application dictionary (in a language Git Bash can run)
+--(e.g. define "contract")
+-figure out how to not allow a commit if unit tests failed?
+-use a saboteur (i.e. me) to test my testing (see p.244 of "The
+ Pragmatic Programmer")
+-consider using unit tests to test rejection if precondition is not met
