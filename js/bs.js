@@ -1,5 +1,6 @@
 var bs = {};
 bs.deck = [];
+bs.players = [];
 
 function Card(name) {
   this.name = name;
@@ -7,6 +8,12 @@ function Card(name) {
   // coordinates of image on sprite sheet
   // this.x = [get from list]
   // this.y = [get from list]
+}
+
+function Player(/*name*/) {
+  // this.name = name;
+
+  this.cards = [];
 }
 
 // Precondition: bs.deck is empty
