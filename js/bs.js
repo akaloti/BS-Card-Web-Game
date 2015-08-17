@@ -84,7 +84,9 @@ function dealOutCards() {
   }
 }
 
-$(document).ready(function(){
+
+
+function setUpGame() {
   generateDeck();
   for (var i = 0; i < 3; ++i)
   {
@@ -92,4 +94,8 @@ $(document).ready(function(){
     bs.players.push(player);
   }
   dealOutCards();
+}
+
+$(document).ready(function(){
+
 });
