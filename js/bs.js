@@ -84,7 +84,16 @@ function dealOutCards() {
   }
 }
 
-
+// Precondition: main menu hasn't been set up
+// Postcondition: a form requesting settings appears if the user selects "Play"
+function setUpMenu() {
+  // $("a[href='#game']").click(function() {
+  $("a[href='#main-menu-options']").click(function() {
+    $(this).after("<form method='post'>" +
+      "Number of players: <input type='text' name='number-of-players'><br>" +
+      "</form>");
+  });
+}
 
 function setUpGame() {
   generateDeck();
@@ -97,5 +106,5 @@ function setUpGame() {
 }
 
 $(document).ready(function(){
-
+  setUpMenu();
 });
