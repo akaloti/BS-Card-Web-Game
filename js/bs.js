@@ -48,10 +48,10 @@ function generateDeck() {
   }
 }
 
-// Precondition: No player has any cards.
+// Precondition: No player has any cards. Deck has been generated.
 // Postcondition: The deck's cards have been randomly dealt to each player.
 // The number of cards each player has should be equal as possible (within
-// a tolerance of one).
+// a tolerance of one). bs.deck is empty.
 function dealOutCards() {
 
 }
