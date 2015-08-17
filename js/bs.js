@@ -1,5 +1,6 @@
 var bs = {};
 bs.deck = [];
+bs.DECK_LENGTH = 52;
 bs.players = [];
 
 function Card(name) {

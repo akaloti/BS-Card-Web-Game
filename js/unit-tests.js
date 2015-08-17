@@ -4,7 +4,8 @@ QUnit.test("generateDeck()", function(assert) {
 
   generateDeck();
 
-  assert.equal(bs.deck.length, 52, "bs.deck contains 52 cards");
+  assert.equal(bs.deck.length, bs.DECK_LENGTH,
+    "bs.deck contains 52 cards");
 });
 
 /*
