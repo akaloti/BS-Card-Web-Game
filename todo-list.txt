@@ -1,2 +1,5 @@
+By end of today:
+-deck is distributed randomly to each player
+
 -include PHP file(s)?
 -allow the user to use arrow keys on the menu?
