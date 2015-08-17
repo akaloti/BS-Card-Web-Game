@@ -11,6 +11,10 @@
 </head>
 <body>
 
+<?php
+ echo "PHP Works!";
+?>
+
 <h1>Congratulations! You are now playing a game.</h1>
 
 <script src="js/bs.js"></script>
