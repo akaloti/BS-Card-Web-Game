@@ -53,22 +53,34 @@ function generateDeck() {
 // Postcondition: The deck's cards have been randomly dealt to each player.
 // The number of cards each player has should be equal as possible (within
 // a tolerance of one). bs.deck is empty.
+// Returns false if exception thrown, otherwise returns nothing
 function dealOutCards() {
-  while (bs.deck.length > 0)
-  {
-    for (var j in bs.players)
+  // enforce bs.players.length precondition to avoid infinite loop
+  try {
+    if (bs.players.length == 0)
+      throw "Exception: There are no players yet. Cancelling dealOutCards()" +
+        " to avoid infinite loop.";
+
+    while (bs.deck.length > 0)
     {
-      if (bs.deck.length > 0)
+      for (var j in bs.players)
       {
-        var randomCardIndex = Math.floor(Math.random() * bs.deck.length);
-        bs.players[j].cards.push(bs.deck.splice(randomCardIndex, 1).pop());
-      }
-      else
-      {
-        // console.log("deck emptied")
-        break;
+        if (bs.deck.length > 0)
+        {
+          var randomCardIndex = Math.floor(Math.random() * bs.deck.length);
+          bs.players[j].cards.push(bs.deck.splice(randomCardIndex, 1).pop());
+        }
+        else
+        {
+          // console.log("deck emptied")
+          break;
+        }
       }
     }
+  }
+  catch(err) {
+    console.log(err);
+    return false;
   }
 }
 
