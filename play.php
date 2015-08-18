@@ -11,11 +11,9 @@
 </head>
 <body>
 
-<?php
- echo "PHP Works!";
-?>
-
 <h1>Congratulations! You are now playing a game.</h1>
+
+<p>Number of players: <?php echo $_POST["number-of-players"]; ?></p>
 
 <script src="js/bs.js"></script>
 </body>
