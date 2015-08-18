@@ -1,22 +1,19 @@
 <!doctype html>
 <html>
 <head>
-<script 
+<script
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 </script>
 <link rel="stylesheet" type="text/css" href="css/bs.css">
 
-<title>Main Menu</title>
+<title>Play: BS</title>
 
 </head>
 <body>
 
-<h1>BS</h1>
+<h1>Congratulations! You are now playing a game.</h1>
 
-<ul id="main-menu-options">
-  <li><a href="play.html">Play</a></li>
-  <li><a href="settings.html">Settings</a></li>
-</ul>
+<p>Number of players: <?php echo $_POST["number-of-players"]; ?></p>
 
 <script src="js/bs.js"></script>
 </body>

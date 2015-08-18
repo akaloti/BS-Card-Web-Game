@@ -6,12 +6,17 @@
 </script>
 <link rel="stylesheet" type="text/css" href="css/bs.css">
 
-<title>Play: BS</title>
+<title>Main Menu</title>
 
 </head>
 <body>
 
-<h1>Congratulations! You are now playing a game.</h1>
+<h1>BS</h1>
+
+<ul id="main-menu-options">
+  <li><a href="#main-menu-options">Play</a></li><br>
+  <li><a href="settings.html">Settings</a></li><br>
+</ul>
 
 <script src="js/bs.js"></script>
 </body>
