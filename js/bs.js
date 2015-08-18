@@ -91,6 +91,8 @@ function setUpMenu() {
     $(this).after("<form method='post'>" +
       "Number of players: <input type='text' name='number-of-players'><br>" +
       "</form>");
+
+    $("a[href='#main-menu-options']").off('click');
   });
 }
 
