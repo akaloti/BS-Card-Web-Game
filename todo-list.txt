@@ -1,3 +1,11 @@
+Next:
+-distribute cards
+-determine if suit and rank should be separate members for class card
+-make center pile
+-determine who goes first
+-output cards (don't do GUI yet; try 2 or 3 players)
+-turn taking
+
 For next release:
 -allow the user to use arrow keys on the menu?
 -write an application dictionary (in a language Git Bash can run)
