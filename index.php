@@ -14,7 +14,6 @@
 <h1>BS</h1>
 
 <ul id="main-menu-options">
-  <!-- <li><a href="play.html">Play</a></li> -->
   <li><a href="#main-menu-options">Play</a></li><br>
   <li><a href="settings.html">Settings</a></li><br>
 </ul>

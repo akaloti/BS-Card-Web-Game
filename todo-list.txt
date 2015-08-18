@@ -1,11 +1,10 @@
 For next release:
--include PHP file(s) (for choosing number of players)?
 -allow the user to use arrow keys on the menu?
 -write an application dictionary (in a language Git Bash can run)
 --(e.g. define "contract")
 -figure out how to not allow a commit if unit tests failed?
 -make webpages look appealing (e.g. CSS)
--implement PHP security
+-implement PHP security?
 
 For README:
 -note the use of the hook regarding trailing whitespace; include directions
