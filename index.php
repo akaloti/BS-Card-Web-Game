@@ -18,6 +18,6 @@
   <li><a href="settings.html">Settings</a></li><br>
 </ul>
 
-<script src="js/bs.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>

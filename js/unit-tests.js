@@ -12,7 +12,8 @@ QUnit.test("dealOutCards()", function(assert) {
 
   // Check the enforcement of the bs.players.length precondition
   bs.players = [];
-  assert.equal(dealOutCards(), false, "Function stops if no players");
+  assert.equal(dealOutCards(), false,
+    "Function throws exception if no players");
 });
 
 function testDealOutCards(assert, numberOfArtificialPlayers) {
