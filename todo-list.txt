@@ -5,6 +5,7 @@ For next release:
 --(e.g. define "contract")
 -figure out how to not allow a commit if unit tests failed?
 -make webpages look appealing (e.g. CSS)
+-implement PHP security
 
 For README:
 -note the use of the hook regarding trailing whitespace; include directions
