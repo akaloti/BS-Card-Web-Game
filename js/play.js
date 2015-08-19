@@ -102,16 +102,6 @@ function createPlayers(numberOfPlayers) {
 // Precondition: game hasn't been set up
 // Postcondition: functions that set the game up have been called
 function setUpGame() {
-
-  // alert(typeof formData);
-  // alert("typeof window['formData'] = " + typeof window["formData"]);
-  // // alert("formData.numberOfPlayers = " + formData.numberOfPlayers);
-  // if (typeof window["formData"] == 'undefined') {
-    // alert("formData is undefined");
-    // var formData = {};
-    // formData.numberOfPlayers = 3;
-  // }
-
   if (shared.isUnitTesting()) {
     alert("isUnitTesting() == true");
   }
