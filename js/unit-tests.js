@@ -56,10 +56,14 @@ QUnit.test("createPlayers()", function(assert) {
   bs.players = [];
 
   // check enforcement of (some) preconditions
-  // assert.ok(!createPlayers(-1), "-1 should be a rejected parameter");
-  // assert.ok(!createPlayers(0), "0 should be a rejected parameter");
-  // assert.ok(!createPlayers(bs.MAX_NUMBER_OF_PLAYERS + 1),
-    // "any value above bs.MAX_NUMBER_OF_PLAYERS should be rejected parameter");
+  assert.equal(createPlayers(-1), shared.PRECONDITION_ERROR,
+    "-1 should be a rejected parameter");
+  assert.equal(createPlayers(0), shared.PRECONDITION_ERROR,
+    "0 should be a rejected parameter");
+  assert.equal(createPlayers(bs.MAX_NUMBER_OF_PLAYERS + 1),
+    shared.PRECONDITION_ERROR,
+    "Any value above bs.MAX_NUMBER_OF_PLAYERS" +
+    " should be rejected parameter");
 
   // reset environment
   bs.players = [];

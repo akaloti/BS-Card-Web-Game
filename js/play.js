@@ -81,12 +81,21 @@ function dealOutCards() {
 // bs.MAX_NUMBER_OF_PLAYERS > numberOfPlayers > 0.
 // Postconditions: bs.players.length = numberOfPlayers
 function createPlayers(numberOfPlayers) {
+  try {
+    // confirm valid numberOfPlayers
+    if (numberOfPlayers > bs.MAX_NUMBER_OF_PLAYERS ||
+      numberOfPlayers <= 0)
+      throw ("Exception: parameter numberOfPlayers falls outside" +
+        " acceptable range.");
 
-
-  for (var i = 0; i < numberOfPlayers; ++i)
-  {
-    // var player = new Player();
-    bs.players.push(new Player());
+    for (var i = 0; i < numberOfPlayers; ++i)
+    {
+      bs.players.push(new Player());
+    }
+  }
+  catch(err) {
+    console.log(err);
+    return shared.PRECONDITION_ERROR;
   }
 }
 
