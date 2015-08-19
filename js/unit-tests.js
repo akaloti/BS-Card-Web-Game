@@ -1,3 +1,5 @@
+"use strict";
+
 QUnit.test("generateDeck()", function(assert) {
   generateDeck();
 
@@ -12,11 +14,14 @@ QUnit.test("dealOutCards()", function(assert) {
 
   // Check the enforcement of the bs.players.length precondition
   bs.players = [];
-  assert.equal(dealOutCards(), false, "Function stops if no players");
+  assert.equal(dealOutCards(), shared.PRECONDITION_ERROR,
+    "Function throws exception if no players");
 });
 
+// Helper function for unit testing of dealOutCards()
 function testDealOutCards(assert, numberOfArtificialPlayers) {
-  // create an artificial environment with players
+  // create an artificial environment with players and that obeys
+  // the preconditions
   generateDeck();
   bs.players = [];
   for (var i = 0; i < numberOfArtificialPlayers; ++i)
@@ -45,6 +50,29 @@ function testDealOutCards(assert, numberOfArtificialPlayers) {
     numberOfArtificialPlayers + " players");
   assert.equal(bs.deck.length, 0, "All cards were dealt");
 }
+
+QUnit.test("createPlayers()", function(assert) {
+  // Create an artificial environment that obeys the preconditions
+  bs.players = [];
+
+  // check enforcement of (some) preconditions
+  assert.equal(createPlayers(-1), shared.PRECONDITION_ERROR,
+    "-1 should be a rejected parameter");
+  assert.equal(createPlayers(0), shared.PRECONDITION_ERROR,
+    "0 should be a rejected parameter");
+  assert.equal(createPlayers(shared.bs.MAX_NUMBER_OF_PLAYERS + 1),
+    shared.PRECONDITION_ERROR,
+    "Any value above shared.bs.MAX_NUMBER_OF_PLAYERS" +
+    " should be rejected parameter");
+
+  // reset environment
+  bs.players = [];
+
+  var testValue = 5;
+  createPlayers(testValue);
+  assert.equal(bs.players.length, testValue,
+    "Correct number of players created");
+});
 
 /*
 QUnit.test( "a basic test example", function( assert ) {

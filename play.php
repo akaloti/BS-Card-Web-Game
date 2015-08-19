@@ -15,6 +15,12 @@
 
 <p>Number of players: <?php echo $_POST["number-of-players"]; ?></p>
 
-<script src="js/bs.js"></script>
+<script>
+  // To get around not being able to use PHP in a JavaScript file
+  var formData = {};
+  formData.numberOfPlayers = "<?php echo $_POST['number-of-players']; ?>";
+</script>
+<script src="js/shared.js"></script>
+<script src="js/play.js"></script>
 </body>
 </html>
