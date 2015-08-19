@@ -7,4 +7,5 @@ start Notepad++ settings.html
 start Notepad++ unit-tests.html
 start Notepad++ js/unit-tests.js
 start Notepad++ js/play.js
+start Notepad++ shared.js
 exit
