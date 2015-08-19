@@ -99,6 +99,8 @@ function createPlayers(numberOfPlayers) {
   }
 }
 
+// Precondition: game hasn't been set up
+// Postcondition: functions that set the game up have been called
 function setUpGame() {
   generateDeck();
   createPlayers();
