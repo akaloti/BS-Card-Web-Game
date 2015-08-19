@@ -4,13 +4,28 @@
 // Postcondition: a form requesting settings appears if the user selects "Play"
 function setUpMenu() {
   $("a[href='#main-menu-options']").click(function() {
-    $(this).after("<form action='play.php' method='post'>" +
-      "Number of players: <input type='text' name='number-of-players' /><br>" +
+    $(this).after("<form name='playSettings' action='play.php'" +
+      " onsubmit='return validatePlaySettingsForm()' method='post'>" +
+      "Number of Players: <input type='text' name='number-of-players' /><br>" +
       "<input type='submit' value='Play' /></form>");
 
     // don't let the user keep generating the text field
     $("a[href='#main-menu-options']").off('click');
   });
+}
+
+// Returns true if number of players entered in form is valid;
+// returns false (and does alert message) otherwise
+function validatePlaySettingsForm() {
+  var numberOfPlayers =
+    document.forms["playSettings"]["number-of-players"].value;
+
+  if (numberOfPlayers == null || numberOfPlayers == "") {
+    alert("Number of Players must be filled out");
+    return false;
+  }
+
+  return true;
 }
 
 $(document).ready(function(){
