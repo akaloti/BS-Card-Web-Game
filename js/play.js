@@ -102,12 +102,7 @@ function createPlayers(numberOfPlayers) {
 // Precondition: game hasn't been set up
 // Postcondition: functions that set the game up have been called
 function setUpGame() {
-  if (shared.isUnitTesting()) {
-    alert("isUnitTesting() == true");
-  }
-  else {
-    alert("isUnitTesting() == false");
-
+  if (!shared.isUnitTesting()) {
     generateDeck();
     createPlayers(formData.numberOfPlayers);
     dealOutCards();
