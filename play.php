@@ -15,6 +15,7 @@
 
 <p>Number of players: <?php echo $_POST["number-of-players"]; ?></p>
 
+<script src="js/shared.js"></script>
 <script src="js/play.js"></script>
 </body>
 </html>
