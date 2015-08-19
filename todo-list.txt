@@ -11,6 +11,8 @@ For next release:
 -figure out how to not allow a commit if unit tests failed?
 -make webpages look appealing (e.g. CSS)
 -implement PHP security?
+-consider whether or not its practical to enforce preconditions in unit tests
+ (as opposed to solely with exceptions)
 
 For README:
 -note the use of the hook regarding trailing whitespace; include directions
@@ -18,6 +20,7 @@ For README:
 -include directions for the shell scripts and batch file(s)
 -include directions regarding unit tests
 -include directions for running the project (on WebMatrix)
+-note how contracts are enforced (unit tests, exceptions and alerts, etc.)
 
 Other:
 -use a saboteur (i.e. me) to test my testing (see p.244 of "The
