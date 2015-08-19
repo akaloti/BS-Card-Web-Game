@@ -1,5 +1,4 @@
 Next:
--form validation with JavaScript
 -output cards (don't do GUI yet; try 2 or 3 players)
 -make center pile
 -determine who goes first
