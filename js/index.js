@@ -14,5 +14,6 @@ function setUpMenu() {
 }
 
 $(document).ready(function(){
-  setUpMenu();
+  if (!shared.isUnitTesting())
+    setUpMenu();
 });
