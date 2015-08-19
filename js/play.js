@@ -1,3 +1,5 @@
+"use strict";
+
 var bs = {};
 bs.deck = [];
 bs.DECK_LENGTH = 52;

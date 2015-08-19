@@ -1,3 +1,5 @@
+"use strict";
+
 QUnit.test("generateDeck()", function(assert) {
   generateDeck();
 

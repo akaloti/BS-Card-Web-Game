@@ -1,3 +1,5 @@
+"use strict";
+
 // Precondition: main menu hasn't been set up
 // Postcondition: a form requesting settings appears if the user selects "Play"
 function setUpMenu() {
