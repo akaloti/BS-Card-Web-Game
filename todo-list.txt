@@ -1,6 +1,4 @@
 Next:
--distribute cards
--determine if suit and rank should be separate members for class card
 -make center pile
 -determine who goes first
 -output cards (don't do GUI yet; try 2 or 3 players)
@@ -17,8 +15,9 @@ For next release:
 For README:
 -note the use of the hook regarding trailing whitespace; include directions
  on how to enable that hook
--include directions for the shell scripts
+-include directions for the shell scripts and batch file(s)
 -include directions regarding unit tests
+-include directions for running the project (on WebMatrix)
 
 Other:
 -use a saboteur (i.e. me) to test my testing (see p.244 of "The
