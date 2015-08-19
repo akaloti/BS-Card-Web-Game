@@ -19,8 +19,8 @@ function Player() {
   this.cards = [];
 }
 
-// Precondition: none
-// Postcondition: bs.deck contains 52 unique instances of class Card,
+// Preconditions: none
+// Postconditions: bs.deck contains 52 unique instances of class Card,
 // each representing a unique card.
 // Note that bs.deck will be overritten.
 function generateDeck() {
@@ -39,9 +39,9 @@ function generateDeck() {
   }
 }
 
-// Precondition: No player has any cards. Deck has been generated.
+// Preconditions: No player has any cards. Deck has been generated.
 // bs.players.length > 0.
-// Postcondition: The deck's cards have been randomly dealt to each player.
+// Postconditions: The deck's cards have been randomly dealt to each player.
 // The number of cards each player has should be equal as possible (within
 // a tolerance of one). bs.deck is empty.
 // Returns false if exception thrown, otherwise returns nothing

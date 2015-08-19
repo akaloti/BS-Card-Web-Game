@@ -17,7 +17,8 @@ QUnit.test("dealOutCards()", function(assert) {
 });
 
 function testDealOutCards(assert, numberOfArtificialPlayers) {
-  // create an artificial environment with players
+  // create an artificial environment with players and that obeys
+  // the preconditions
   generateDeck();
   bs.players = [];
   for (var i = 0; i < numberOfArtificialPlayers; ++i)
