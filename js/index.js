@@ -20,8 +20,15 @@ function validatePlaySettingsForm() {
   var numberOfPlayers =
     document.forms["playSettings"]["number-of-players"].value;
 
+  // Check that something was entered
   if (numberOfPlayers == null || numberOfPlayers == "") {
     alert("Number of Players must be filled out");
+    return false;
+  }
+
+  // Check that a numerical value was entered
+  else if (isNaN(numberOfPlayers)) {
+    alert("Number of Players needs a numerical value");
     return false;
   }
 
