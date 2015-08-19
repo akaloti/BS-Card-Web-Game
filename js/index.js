@@ -25,10 +25,18 @@ function validatePlaySettingsForm() {
     alert("Number of Players must be filled out");
     return false;
   }
-
   // Check that a numerical value was entered
   else if (isNaN(numberOfPlayers)) {
     alert("Number of Players needs a numerical value");
+    return false;
+  }
+  // Check that the number is within the appropriate range
+  else if (numberOfPlayers < 2) {
+    alert("Not enough players");
+    return false;
+  }
+  else if(numberOfPlayers > shared.bs.MAX_NUMBER_OF_PLAYERS) {
+    alert("Too many players");
     return false;
   }
 

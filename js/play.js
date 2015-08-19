@@ -4,7 +4,6 @@ var bs = {};
 bs.deck = [];
 bs.DECK_LENGTH = 52;
 bs.players = [];
-bs.MAX_NUMBER_OF_PLAYERS = 6;
 
 function Card(suit, rank) {
   this.suit = suit;
@@ -83,7 +82,7 @@ function dealOutCards() {
 function createPlayers(numberOfPlayers) {
   try {
     // confirm valid numberOfPlayers
-    if (numberOfPlayers > bs.MAX_NUMBER_OF_PLAYERS ||
+    if (numberOfPlayers > shared.bs.MAX_NUMBER_OF_PLAYERS ||
       numberOfPlayers <= 0)
       throw ("Exception: parameter numberOfPlayers falls outside" +
         " acceptable range.");

@@ -60,9 +60,9 @@ QUnit.test("createPlayers()", function(assert) {
     "-1 should be a rejected parameter");
   assert.equal(createPlayers(0), shared.PRECONDITION_ERROR,
     "0 should be a rejected parameter");
-  assert.equal(createPlayers(bs.MAX_NUMBER_OF_PLAYERS + 1),
+  assert.equal(createPlayers(shared.bs.MAX_NUMBER_OF_PLAYERS + 1),
     shared.PRECONDITION_ERROR,
-    "Any value above bs.MAX_NUMBER_OF_PLAYERS" +
+    "Any value above shared.bs.MAX_NUMBER_OF_PLAYERS" +
     " should be rejected parameter");
 
   // reset environment
