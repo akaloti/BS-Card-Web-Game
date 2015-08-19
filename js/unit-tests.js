@@ -12,7 +12,7 @@ QUnit.test("dealOutCards()", function(assert) {
 
   // Check the enforcement of the bs.players.length precondition
   bs.players = [];
-  assert.equal(dealOutCards(), PRECONDITION_ERROR,
+  assert.equal(dealOutCards(), shared.PRECONDITION_ERROR,
     "Function throws exception if no players");
 });
 

@@ -71,7 +71,7 @@ function dealOutCards() {
   }
   catch(err) {
     console.log(err);
-    return PRECONDITION_ERROR;
+    return shared.PRECONDITION_ERROR;
   }
 }
 
