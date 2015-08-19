@@ -47,6 +47,25 @@ function testDealOutCards(assert, numberOfArtificialPlayers) {
   assert.equal(bs.deck.length, 0, "All cards were dealt");
 }
 
+QUnit.test("createPlayers()", function(assert) {
+  // Create an artificial environment that obeys the preconditions
+  bs.players = [];
+
+  // check enforcement of (some) preconditions
+  // assert.ok(!createPlayers(-1), "-1 should be a rejected parameter");
+  // assert.ok(!createPlayers(0), "0 should be a rejected parameter");
+  // assert.ok(!createPlayers(bs.MAX_NUMBER_OF_PLAYERS + 1),
+    // "any value above bs.MAX_NUMBER_OF_PLAYERS should be rejected parameter");
+
+  // reset environment
+  bs.players = [];
+
+  var testValue = 5;
+  createPlayers(testValue);
+  assert.equal(bs.players.length, testValue,
+    "Correct number of players created");
+});
+
 /*
 QUnit.test( "a basic test example", function( assert ) {
   var value = "hello";

@@ -2,6 +2,7 @@ var bs = {};
 bs.deck = [];
 bs.DECK_LENGTH = 52;
 bs.players = [];
+bs.MAX_NUMBER_OF_PLAYERS = 6;
 
 function Card(suit, rank) {
   this.suit = suit;
@@ -13,7 +14,7 @@ function Card(suit, rank) {
 }
 
 function Player() {
-  this.name = name;
+  // this.name = name;
 
   this.cards = [];
 }
@@ -74,16 +75,25 @@ function dealOutCards() {
   }
 }
 
+// Preconditions: bs.players.length = 0.
+// bs.MAX_NUMBER_OF_PLAYERS > numberOfPlayers > 0.
+// Postconditions: bs.players.length = numberOfPlayers
+function createPlayers(numberOfPlayers) {
+
+
+  for (var i = 0; i < numberOfPlayers; ++i)
+  {
+    // var player = new Player();
+    bs.players.push(new Player());
+  }
+}
+
 function setUpGame() {
   generateDeck();
-  for (var i = 0; i < 3; ++i)
-  {
-    var player = new Player();
-    bs.players.push(player);
-  }
+  createPlayers();
   dealOutCards();
 }
 
 $(document).ready(function(){
-  // setUpGame();
+  setUpGame();
 });
