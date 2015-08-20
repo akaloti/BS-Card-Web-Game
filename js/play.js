@@ -5,9 +5,9 @@ bs.deck = [];
 bs.DECK_LENGTH = 52;
 bs.players = [];
 bs.SUITS = {SPADE : 'S', HEART : 'H', CLUB : 'C', DIAMOND : 'D'};
-bs.RANKS = {ACE : 'A', TWO : '2', THREE : '3', FOUR : '4',
-  FIVE : '5', SIX : '6', SEVEN : '7', EIGHT : '8', NINE : '9',
-  TEN : '10', JACK : 'J', QUEEN : 'Q', KING : 'K'};
+bs.RANKS = {ACE : 1, TWO : 2, THREE : 3, FOUR : 4,
+  FIVE : 5, SIX : 6, SEVEN : 7, EIGHT : 8, NINE : 9,
+  TEN : 10, JACK : 11, QUEEN : 12, KING : 13};
 
 function Card(suit, rank) {
   this.suit = suit;
