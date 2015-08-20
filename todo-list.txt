@@ -6,6 +6,7 @@ Next:
 -turn taking
 -fix acceptable number of players
 -checking for providing of arguments to functions that require it
+-default values for object parameters?
 
 For next release:
 -allow the user to use arrow keys on the menu?
