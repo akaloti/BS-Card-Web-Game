@@ -1,10 +1,11 @@
 Next:
--determine who goes first
 -make center pile
 -turn taking
 -fix acceptable number of players
 -checking for providing of arguments to functions that require it
 -default values for object parameters?
+-consider determining who goes first either based on who has ace of spades
+ or based on the order in which the cards were dealt (for fairness)
 
 For next release:
 -allow the user to use arrow keys on the menu?

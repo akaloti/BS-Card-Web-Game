@@ -122,6 +122,22 @@ function determineHigherRank(firstCard, secondCard) {
   return firstCard.rank - secondCard.rank;
 }
 
+// Precondition: there are players (i.e. bs.players.length > 0)
+// Postcondition: bs.players has a random order
+function randomizePlayerOrder() {
+  var resultantArray = [];
+  var randomIndex = 0;
+
+  // Randomly, singly move one object from bs.players to resultantArray
+  while (bs.players.length > 0) {
+    randomIndex = Math.floor(Math.random() * bs.players.length);
+    resultantArray.push(bs.players.splice(randomIndex, 1));
+  }
+
+  bs.players = resultantArray;
+  console.log("sorted");
+}
+
 // Precondition: game hasn't been set up
 // Postcondition: functions that set the game up have been called
 function setUpGame() {
@@ -129,6 +145,7 @@ function setUpGame() {
   createPlayers(formData.numberOfPlayers);
   dealOutCards();
   sortPlayersCards();
+  randomizePlayerOrder();
 }
 
 $(document).ready(function(){
