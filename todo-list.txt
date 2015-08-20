@@ -1,8 +1,6 @@
 Next:
--output cards (don't do GUI yet; try 2 or 3 players) (or at least sort
- the cards)
--make center pile
 -determine who goes first
+-make center pile
 -turn taking
 -fix acceptable number of players
 -checking for providing of arguments to functions that require it
