@@ -16,6 +16,7 @@ For next release:
 -implement PHP security?
 -consider whether or not its practical to enforce preconditions in unit tests
  (as opposed to solely with exceptions)
+-make readme
 
 For README:
 -note the use of the hook regarding trailing whitespace; include directions
