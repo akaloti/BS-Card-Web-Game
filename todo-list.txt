@@ -5,6 +5,7 @@ Next:
 -determine who goes first
 -turn taking
 -fix acceptable number of players
+-checking for providing of arguments to functions that require it
 
 For next release:
 -allow the user to use arrow keys on the menu?
