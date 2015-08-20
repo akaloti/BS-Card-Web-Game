@@ -4,6 +4,10 @@ var bs = {};
 bs.deck = [];
 bs.DECK_LENGTH = 52;
 bs.players = [];
+bs.SUITS = {SPADE : 'S', HEART : 'H', CLUB : 'C', DIAMOND : 'D'};
+bs.RANKS = {ACE : 'A', TWO : '2', THREE : '3', FOUR : '4',
+  FIVE : '5', SIX : '6', SEVEN : '7', EIGHT : '8', NINE : '9',
+  TEN : '10', JACK : 'J', QUEEN : 'Q', KING : 'K'};
 
 function Card(suit, rank) {
   this.suit = suit;
@@ -28,14 +32,9 @@ function generateDeck() {
   // Empty the deck
   bs.deck = [];
 
-  var suits = ['S', 'H', 'C', 'D'];
-  var ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J',
-    'Q', 'K'];
-
-  for (var s in suits) {
-    for (var r in ranks) {
-      // console.log(cardName);
-      bs.deck.push(new Card(suits[s], ranks[r]));
+  for (var s in bs.SUITS) {
+    for (var r in bs.RANKS) {
+      bs.deck.push(new Card(bs.SUITS[s], bs.RANKS[r]));
     }
   }
 }
