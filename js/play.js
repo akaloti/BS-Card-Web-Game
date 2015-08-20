@@ -4,10 +4,12 @@ var bs = {};
 bs.deck = [];
 bs.DECK_LENGTH = 52;
 bs.players = [];
+bs.currentPlayerIndex = 0;
 bs.SUITS = {SPADE : 'S', HEART : 'H', CLUB : 'C', DIAMOND : 'D'};
 bs.RANKS = {ACE : 1, TWO : 2, THREE : 3, FOUR : 4,
   FIVE : 5, SIX : 6, SEVEN : 7, EIGHT : 8, NINE : 9,
   TEN : 10, JACK : 11, QUEEN : 12, KING : 13};
+bs.currentRank = bs.RANKS.ACE;
 
 function Card(suit, rank) {
   this.suit = suit;
@@ -138,6 +140,21 @@ function randomizePlayerOrder() {
   console.log("sorted");
 }
 
+// Precondition: None
+// Postcondition: The current player indicator and the current card
+// indicator have been updated.
+function updateIndicators() {
+  $("#current-player").html(bs.currentPlayerIndex);
+  $("#current-rank").html(Object.keys(bs.RANKS)[bs.currentRank - 1]);
+}
+
+// Precondition: game is set up
+// Postcondition: went to next turn if user had valid move; otherwise,
+// stayed on same turn and alerted user
+function submitTurn() {
+
+}
+
 // Precondition: game hasn't been set up
 // Postcondition: functions that set the game up have been called
 function setUpGame() {
@@ -146,6 +163,9 @@ function setUpGame() {
   dealOutCards();
   sortPlayersCards();
   randomizePlayerOrder();
+  updateIndicators();
+
+  $("a[href='#submit']").click(submitTurn);
 }
 
 $(document).ready(function(){
