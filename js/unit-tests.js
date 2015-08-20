@@ -74,6 +74,35 @@ QUnit.test("createPlayers()", function(assert) {
     "Correct number of players created");
 });
 
+QUnit.test("sortCards()", function(assert) {
+  // Make an unsorted array of some instances of Card
+  var unsortedArray = [];
+  unsortedArray.push(new Card(bs.SUITS.CLUB, bs.RANKS.QUEEN));
+  unsortedArray.push(new Card(bs.SUITS.DIAMOND, bs.RANKS.ACE));
+  unsortedArray.push(new Card(bs.SUITS.SPADE, bs.RANKS.KING));
+  unsortedArray.push(new Card(bs.SUITS.CLUB, bs.RANKS.SEVEN));
+
+  // Call the function and check
+  var sortedArray = sortCards(unsortedArray);
+  assert.ok((unsortedArray[0].rank === bs.RANKS.ACE) &&
+    (unsortedArray[1].rank === bs.RANKS.SEVEN) &&
+    (unsortedArray[2].rank === bs.RANKS.QUEEN) &&
+    (unsortedArray[3].rank === bs.RANKS.KING),
+    "Properly sorted four cards");
+});
+
+QUnit.test("determineHigherRank()", function(assert) {
+  assert.ok((determineHigherRank(new Card(bs.SUITS.DIAMOND,
+    bs.RANKS.JACK), new Card(bs.SUITS.SPADE, bs.RANKS.THREE)) >
+    0), "Rank Jack should exceed Rank 3");
+  assert.ok((determineHigherRank(new Card(bs.SUITS.CLUB,
+    bs.RANKS.ACE), new Card(bs.SUITS.HEART, bs.RANKS.KING)) <
+    0), "Rank Queen should be exceeded by Rank King");
+  assert.ok((determineHigherRank(new Card(bs.SUITS.DIAMOND,
+    bs.RANKS.FIVE), new Card(bs.SUITS.SPADE, bs.RANKS.FIVE)) ===
+    0), "Rank Five should equal Rank Five");
+});
+
 /*
 QUnit.test( "a basic test example", function( assert ) {
   var value = "hello";

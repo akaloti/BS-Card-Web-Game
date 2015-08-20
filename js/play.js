@@ -97,12 +97,38 @@ function createPlayers(numberOfPlayers) {
   }
 }
 
+// Preconditions: none (empty arrays don't cause bugs)
+// Postconditions: Each players' cards are sorted in order of rank
+function sortPlayersCards() {
+  for (var i in bs.players)
+    bs.players[i].cards = sortCards(bs.players[i].cards);
+}
+
+// Preconditions: arrayOfCards is an array of instances of Card
+// Postcondition: contents of arrayOfCards are sorted from lowest
+// rank to highest rank (e.g. 2, 8, K), with no regard to suit.
+// Returns: sorted version of arrayOfCards
+function sortCards(arrayOfCards) {
+  return arrayOfCards.sort(determineHigherRank);
+}
+
+// This is a compare function.
+// Preconditions: firstCard and secondCard are instances of Card
+// Postconditions: none
+// Returns: negative number if first's rank is below second's rank,
+// zero if the ranks are the same, positive number otherwise
+function determineHigherRank(firstCard, secondCard) {
+  // Recall that each rank is a numeric constant
+  return firstCard.rank - secondCard.rank;
+}
+
 // Precondition: game hasn't been set up
 // Postcondition: functions that set the game up have been called
 function setUpGame() {
   generateDeck();
   createPlayers(formData.numberOfPlayers);
   dealOutCards();
+  sortPlayersCards();
 }
 
 $(document).ready(function(){
