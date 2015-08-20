@@ -4,6 +4,7 @@ Next:
 -make center pile
 -determine who goes first
 -turn taking
+-fix acceptable number of players
 
 For next release:
 -allow the user to use arrow keys on the menu?
