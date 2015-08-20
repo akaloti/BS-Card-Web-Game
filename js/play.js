@@ -4,6 +4,10 @@ var bs = {};
 bs.deck = [];
 bs.DECK_LENGTH = 52;
 bs.players = [];
+bs.SUITS = {SPADE : 'S', HEART : 'H', CLUB : 'C', DIAMOND : 'D'};
+bs.RANKS = {ACE : 1, TWO : 2, THREE : 3, FOUR : 4,
+  FIVE : 5, SIX : 6, SEVEN : 7, EIGHT : 8, NINE : 9,
+  TEN : 10, JACK : 11, QUEEN : 12, KING : 13};
 
 function Card(suit, rank) {
   this.suit = suit;
@@ -28,14 +32,9 @@ function generateDeck() {
   // Empty the deck
   bs.deck = [];
 
-  var suits = ['S', 'H', 'C', 'D'];
-  var ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J',
-    'Q', 'K'];
-
-  for (var s in suits) {
-    for (var r in ranks) {
-      // console.log(cardName);
-      bs.deck.push(new Card(suits[s], ranks[r]));
+  for (var s in bs.SUITS) {
+    for (var r in bs.RANKS) {
+      bs.deck.push(new Card(bs.SUITS[s], bs.RANKS[r]));
     }
   }
 }
@@ -98,16 +97,42 @@ function createPlayers(numberOfPlayers) {
   }
 }
 
+// Preconditions: none (empty arrays don't cause bugs)
+// Postconditions: Each players' cards are sorted in order of rank
+function sortPlayersCards() {
+  for (var i in bs.players)
+    bs.players[i].cards = sortCards(bs.players[i].cards);
+}
+
+// Preconditions: arrayOfCards is an array of instances of Card
+// Postcondition: contents of arrayOfCards are sorted from lowest
+// rank to highest rank (e.g. 2, 8, K), with no regard to suit.
+// Returns: sorted version of arrayOfCards
+function sortCards(arrayOfCards) {
+  return arrayOfCards.sort(determineHigherRank);
+}
+
+// This is a compare function.
+// Preconditions: firstCard and secondCard are instances of Card
+// Postconditions: none
+// Returns: negative number if first's rank is below second's rank,
+// zero if the ranks are the same, positive number otherwise
+function determineHigherRank(firstCard, secondCard) {
+  // Recall that each rank is a numeric constant
+  return firstCard.rank - secondCard.rank;
+}
+
 // Precondition: game hasn't been set up
 // Postcondition: functions that set the game up have been called
 function setUpGame() {
-  if (!shared.isUnitTesting()) {
-    generateDeck();
-    createPlayers(formData.numberOfPlayers);
-    dealOutCards();
-  }
+  generateDeck();
+  createPlayers(formData.numberOfPlayers);
+  dealOutCards();
+  sortPlayersCards();
 }
 
 $(document).ready(function(){
-  setUpGame();
+  if (!shared.isUnitTesting()) {
+    setUpGame();
+  }
 });
