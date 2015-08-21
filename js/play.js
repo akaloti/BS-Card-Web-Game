@@ -133,7 +133,7 @@ function randomizePlayerOrder() {
   // Randomly, singly move one object from bs.players to resultantArray
   while (bs.players.length > 0) {
     randomIndex = Math.floor(Math.random() * bs.players.length);
-    resultantArray.push(bs.players.splice(randomIndex, 1));
+    resultantArray.push(bs.players.splice(randomIndex, 1).pop());
   }
 
   bs.players = resultantArray;
