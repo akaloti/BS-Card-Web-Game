@@ -13,7 +13,15 @@
 
 <h1>Congratulations! You are now playing a game.</h1>
 
-<p>Number of players: <?php echo $_POST["number-of-players"]; ?></p>
+<p>Current player: <span id="current-player"></span></p>
+<p>Current rank: <span id="current-rank"></span></p>
+
+<div>Your cards:
+  <ul id="displayed-cards">
+  </ul>
+</div>
+
+<a id="submit" href="#submit">Submit</a>
 
 <script>
   // To get around not being able to use PHP in a JavaScript file

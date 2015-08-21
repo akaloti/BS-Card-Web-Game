@@ -4,10 +4,12 @@ var bs = {};
 bs.deck = [];
 bs.DECK_LENGTH = 52;
 bs.players = [];
-bs.SUITS = {SPADE : 'S', HEART : 'H', CLUB : 'C', DIAMOND : 'D'};
+bs.currentPlayerIndex = 0;
+bs.SUITS = {SPADE : 0, HEART : 1, CLUB : 2, DIAMOND : 3};
 bs.RANKS = {ACE : 1, TWO : 2, THREE : 3, FOUR : 4,
   FIVE : 5, SIX : 6, SEVEN : 7, EIGHT : 8, NINE : 9,
   TEN : 10, JACK : 11, QUEEN : 12, KING : 13};
+bs.currentRank = bs.RANKS.ACE;
 
 function Card(suit, rank) {
   this.suit = suit;
@@ -131,11 +133,97 @@ function randomizePlayerOrder() {
   // Randomly, singly move one object from bs.players to resultantArray
   while (bs.players.length > 0) {
     randomIndex = Math.floor(Math.random() * bs.players.length);
-    resultantArray.push(bs.players.splice(randomIndex, 1));
+    resultantArray.push(bs.players.splice(randomIndex, 1).pop());
   }
 
   bs.players = resultantArray;
   console.log("sorted");
+}
+
+// Precondition: none
+// Postcondition: bs.currentPlayerIndex and bs.currentRank have
+// each been correctly incremented (with wrap around, if necessary)
+function updateIndicators() {
+  bs.currentPlayerIndex = updateCurrentPlayerIndex(bs.currentPlayerIndex);
+  bs.currentRank = updateCurrentRank(bs.currentRank);
+}
+
+// Precondition: 0 <= index <= (bs.players.length - 1)
+// Returns: incremented version of argument index
+// (with wrap around, if necessary)
+function updateCurrentPlayerIndex(index) {
+  // Wrap around, if necessary
+  if (index + 1 === bs.players.length)
+    return 0;
+  else
+    return (index + 1);
+}
+
+// Precondition: rank equals an object in bs.RANKS
+// Returns: incremented version of argument rank
+// (with wrap around, if necessary)
+function updateCurrentRank(rank) {
+  // Wrap around, if necessary
+  if (rank === bs.RANKS.KING)
+    return bs.RANKS.ACE;
+  else
+    return (rank + 1);
+}
+
+// Precondition: None
+// Postcondition: The current player indicator and the current card
+// indicator have been updated (display-wise).
+function displayIndicators() {
+  $("#current-player").html(bs.currentPlayerIndex + 1);
+  $("#current-rank").html(displayableRank(bs.currentRank));
+}
+
+// Precondition: none
+// Postcondition: the indicators and the displayed cards have been
+// updated
+function nextTurn() {
+  updateIndicators();
+  displayIndicators();
+  updateDisplayedCards();
+}
+
+// Precondition: bs.currentPlayerIndex has been updated
+// Postcondition: webpage displays list of current player's cards
+function updateDisplayedCards() {
+  // Clear the previous list
+  $("#displayed-cards").html("");
+
+  // Create the current list
+  var cards = bs.players[bs.currentPlayerIndex].cards;
+  for (var cardIndex in cards) {
+    $("#displayed-cards").append("<li>" +
+      displayableRank(cards[cardIndex].rank) + " of " +
+      displayableSuit(cards[cardIndex].suit) + "</li>");
+  }
+}
+
+// Precondition: rank === (one of the objects in bs.RANKS)
+// Returns: a more reader-friendly version of rank
+function displayableRank(rank) {
+  // This works because each rank equals a reasonably corresponding
+  // numerical value (e.g. SEVEN = 7, QUEEN = 12).
+  return Object.keys(bs.RANKS)[rank - 1];
+}
+
+// Precondition: suit === (one of the objects in bs.SUITS)
+// Returns: a more reader-friendly version of suit
+function displayableSuit(suit) {
+  return Object.keys(bs.SUITS)[suit];
+}
+
+// Precondition: game is set up
+// Postcondition: went to next turn if user had valid move; otherwise,
+// stayed on same turn and alerted user
+function submitTurn() {
+  // if (validMove())
+    nextTurn();
+  // else
+    // don't go next turn; alert user
 }
 
 // Precondition: game hasn't been set up
@@ -146,6 +234,10 @@ function setUpGame() {
   dealOutCards();
   sortPlayersCards();
   randomizePlayerOrder();
+  displayIndicators();
+  updateDisplayedCards();
+
+  $("a[href='#submit']").click(submitTurn);
 }
 
 $(document).ready(function(){

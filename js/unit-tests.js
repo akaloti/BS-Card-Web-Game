@@ -103,6 +103,58 @@ QUnit.test("determineHigherRank()", function(assert) {
     0), "Rank Five should equal Rank Five");
 });
 
+QUnit.test("updateCurrentPlayerIndex()", function(assert) {
+  // Create three players
+  bs.players = [];
+  for (var i = 0; i < 5; ++i)
+    bs.players.push(new Player());
+
+  assert.equal(updateCurrentPlayerIndex(1), 2,
+    "Normal increment from 1 to 2 worked");
+  assert.equal(updateCurrentPlayerIndex(4), 0,
+    "Wrap around from last player to first player worked");
+});
+
+QUnit.test("updateCurrentRank()", function(assert) {
+  assert.equal(updateCurrentRank(bs.RANKS.ACE), bs.RANKS.TWO,
+    "Normal increment from Ace to Two worked");
+  assert.equal(updateCurrentRank(bs.RANKS.TEN), bs.RANKS.JACK,
+    "Normal increment from Ten to Jack worked");
+  assert.equal(updateCurrentRank(bs.RANKS.KING), bs.RANKS.ACE,
+    "Wrap around 'increment' from King to Ace worked");
+});
+
+QUnit.test("updateDisplayedCards()", function(assert) {
+  $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
+
+  // Create artificial environment
+  bs.players = [];
+  bs.players.push(new Player());
+  bs.currentPlayerIndex = 0;
+  var numberOfCards = 6;
+  for (var i = 0; i < numberOfCards; ++i)
+    bs.players[0].cards.push(new Card(bs.SUITS.HEART, bs.RANKS.ACE));
+
+  updateDisplayedCards();
+
+  assert.equal($("#displayed-cards li").length, numberOfCards,
+    "All of the current player's cards are displayed");
+});
+
+QUnit.test("displayableRank()", function(assert) {
+  assert.equal(displayableRank(bs.RANKS.SEVEN), "SEVEN",
+    "Rank 7 is properly converted");
+  assert.equal(displayableRank(bs.RANKS.QUEEN), "QUEEN",
+    "Rank Queen is properly converted");
+});
+
+QUnit.test("displayableSuit()", function(assert) {
+  assert.equal(displayableSuit(bs.SUITS.SPADE), "SPADE",
+    "Suit Spade is properly converted");
+  assert.equal(displayableSuit(bs.SUITS.DIAMOND), "DIAMOND",
+    "Rank Diamond is properly converted");
+});
+
 /*
 QUnit.test( "a basic test example", function( assert ) {
   var value = "hello";
