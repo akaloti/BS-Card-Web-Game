@@ -1,7 +1,7 @@
 Next:
 -make center pile
 -turn taking
--fix acceptable number of players
+-fix acceptable number of players (can't have 1 player)
 -checking for providing of arguments to functions that require it
 -default values for object parameters?
 -consider determining who goes first either based on who has ace of spades
