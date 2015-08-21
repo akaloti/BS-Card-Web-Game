@@ -103,6 +103,27 @@ QUnit.test("determineHigherRank()", function(assert) {
     0), "Rank Five should equal Rank Five");
 });
 
+QUnit.test("updateCurrentPlayerIndex()", function(assert) {
+  // Create three players
+  bs.players = [];
+  for (var i = 0; i < 5; ++i)
+    bs.players.push(new Player());
+
+  assert.equal(updateCurrentPlayerIndex(1), 2,
+    "Normal increment from 1 to 2 worked");
+  assert.equal(updateCurrentPlayerIndex(4), 0,
+    "Wrap around from last player to first player worked");
+});
+
+QUnit.test("updateCurrentRank()", function(assert) {
+  assert.equal(updateCurrentRank(bs.RANKS.ACE), bs.RANKS.TWO,
+    "Normal increment from Ace to Two worked");
+  assert.equal(updateCurrentRank(bs.RANKS.TEN), bs.RANKS.JACK,
+    "Normal increment from Ten to Jack worked");
+  assert.equal(updateCurrentRank(bs.RANKS.KING), bs.RANKS.ACE,
+    "Wrap around 'increment' from King to Ace worked");
+});
+
 /*
 QUnit.test( "a basic test example", function( assert ) {
   var value = "hello";

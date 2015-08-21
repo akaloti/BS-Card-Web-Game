@@ -140,19 +140,61 @@ function randomizePlayerOrder() {
   console.log("sorted");
 }
 
+// Precondition: none
+// Postcondition: bs.currentPlayerIndex and bs.currentRank have
+// each been correctly incremented (with wrap around, if necessary)
+function updateIndicators() {
+  bs.currentPlayerIndex = updateCurrentPlayerIndex(bs.currentPlayerIndex);
+  bs.currentRank = updateCurrentRank(bs.currentRank);
+}
+
+// Precondition: 0 <= index <= (bs.players.length - 1)
+// Returns: incremented version of argument index
+// (with wrap around, if necessary)
+function updateCurrentPlayerIndex(index) {
+  // Wrap around, if necessary
+  if (index + 1 === bs.players.length)
+    return 0;
+  else
+    return (index + 1);
+}
+
+// Precondition: rank equals an object in bs.RANKS
+// Returns: incremented version of argument rank
+// (with wrap around, if necessary)
+function updateCurrentRank(rank) {
+  // Wrap around, if necessary
+  if (rank === bs.RANKS.KING)
+    return bs.RANKS.ACE;
+  else
+    return (rank + 1);
+}
+
 // Precondition: None
 // Postcondition: The current player indicator and the current card
-// indicator have been updated.
-function updateIndicators() {
+// indicator have been updated (display-wise).
+function displayIndicators() {
   $("#current-player").html(bs.currentPlayerIndex);
   $("#current-rank").html(Object.keys(bs.RANKS)[bs.currentRank - 1]);
+}
+
+// Precondition: none
+// Postcondition: the indicators and the displayed cards have been
+// updated
+function nextTurn() {
+  updateIndicators();
+  displayIndicators();
+  // updateDisplayedCards();
 }
 
 // Precondition: game is set up
 // Postcondition: went to next turn if user had valid move; otherwise,
 // stayed on same turn and alerted user
 function submitTurn() {
-
+  // if (validMove())
+    nextTurn();
+  // else
+    // don't go next turn; alert user
 }
 
 // Precondition: game hasn't been set up
@@ -163,7 +205,7 @@ function setUpGame() {
   dealOutCards();
   sortPlayersCards();
   randomizePlayerOrder();
-  updateIndicators();
+  displayIndicators();
 
   $("a[href='#submit']").click(submitTurn);
 }
