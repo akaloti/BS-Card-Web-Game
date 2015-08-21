@@ -16,6 +16,11 @@
 <p>Current player: <span id="current-player"></span></p>
 <p>Current rank: <span id="current-rank"></span></p>
 
+<div>Your cards:
+  <ul id="displayed-cards">
+  </ul>
+</div>
+
 <a id="submit" href="#submit">Submit</a>
 
 <script>

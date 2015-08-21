@@ -124,11 +124,35 @@ QUnit.test("updateCurrentRank()", function(assert) {
     "Wrap around 'increment' from King to Ace worked");
 });
 
+QUnit.test("updateDisplayedCards()", function(assert) {
+  $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
+
+  // Create artificial environment
+  bs.players = [];
+  bs.players.push(new Player());
+  bs.currentPlayerIndex = 0;
+  var numberOfCards = 6;
+  for (var i = 0; i < numberOfCards; ++i)
+    bs.players[0].cards.push(new Card(bs.SUITS.HEART, bs.RANKS.ACE));
+
+  updateDisplayedCards();
+
+  assert.equal($("#displayed-cards li").length, numberOfCards,
+    "All of the current player's cards are displayed");
+});
+
 QUnit.test("displayableRank()", function(assert) {
   assert.equal(displayableRank(bs.RANKS.SEVEN), "SEVEN",
     "Rank 7 is properly converted");
   assert.equal(displayableRank(bs.RANKS.QUEEN), "QUEEN",
     "Rank Queen is properly converted");
+});
+
+QUnit.test("displayableSuit()", function(assert) {
+  assert.equal(displayableSuit(bs.SUITS.SPADE), "SPADE",
+    "Suit Spade is properly converted");
+  assert.equal(displayableSuit(bs.SUITS.DIAMOND), "DIAMOND",
+    "Rank Diamond is properly converted");
 });
 
 /*

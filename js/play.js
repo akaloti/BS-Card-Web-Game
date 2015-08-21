@@ -174,7 +174,7 @@ function updateCurrentRank(rank) {
 // Postcondition: The current player indicator and the current card
 // indicator have been updated (display-wise).
 function displayIndicators() {
-  $("#current-player").html(bs.currentPlayerIndex);
+  $("#current-player").html(bs.currentPlayerIndex + 1);
   $("#current-rank").html(displayableRank(bs.currentRank));
 }
 
@@ -184,7 +184,22 @@ function displayIndicators() {
 function nextTurn() {
   updateIndicators();
   displayIndicators();
-  // updateDisplayedCards();
+  updateDisplayedCards();
+}
+
+// Precondition: bs.currentPlayerIndex has been updated
+// Postcondition: webpage displays list of current player's cards
+function updateDisplayedCards() {
+  // Clear the previous list
+  $("#displayed-cards").html("");
+
+  // Create the current list
+  var cards = bs.players[bs.currentPlayerIndex].cards;
+  for (var cardIndex in cards) {
+    $("#displayed-cards").append("<li>" +
+      displayableRank(cards[cardIndex].rank) + " of " +
+      displayableSuit(cards[cardIndex].suit) + "</li>");
+  }
 }
 
 // Precondition: rank === (one of the objects in bs.RANKS)
@@ -193,6 +208,12 @@ function displayableRank(rank) {
   // This works because each rank equals a reasonably corresponding
   // numerical value (e.g. SEVEN = 7, QUEEN = 12).
   return Object.keys(bs.RANKS)[rank - 1];
+}
+
+// Precondition: suit === (one of the objects in bs.SUITS)
+// Returns: a more reader-friendly version of suit
+function displayableSuit(suit) {
+  return Object.keys(bs.SUITS)[suit];
 }
 
 // Precondition: game is set up
@@ -214,6 +235,7 @@ function setUpGame() {
   sortPlayersCards();
   randomizePlayerOrder();
   displayIndicators();
+  updateDisplayedCards();
 
   $("a[href='#submit']").click(submitTurn);
 }
