@@ -6,8 +6,7 @@ Next:
 -default values for object parameters?
 -consider determining who goes first either based on who has ace of spades
  or based on the order in which the cards were dealt (for fairness)
-
-For next release:
+-consider support for both use of keys and use of clicking?
 -allow the user to use arrow keys on the menu?
 -write an application dictionary (in a language Git Bash can run)
 --(e.g. define "contract")
