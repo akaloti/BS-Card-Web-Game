@@ -124,6 +124,13 @@ QUnit.test("updateCurrentRank()", function(assert) {
     "Wrap around 'increment' from King to Ace worked");
 });
 
+QUnit.test("displayableRank()", function(assert) {
+  assert.equal(displayableRank(bs.RANKS.SEVEN), "SEVEN",
+    "Rank 7 is properly converted");
+  assert.equal(displayableRank(bs.RANKS.QUEEN), "QUEEN",
+    "Rank Queen is properly converted");
+});
+
 /*
 QUnit.test( "a basic test example", function( assert ) {
   var value = "hello";

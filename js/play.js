@@ -175,7 +175,7 @@ function updateCurrentRank(rank) {
 // indicator have been updated (display-wise).
 function displayIndicators() {
   $("#current-player").html(bs.currentPlayerIndex);
-  $("#current-rank").html(Object.keys(bs.RANKS)[bs.currentRank - 1]);
+  $("#current-rank").html(displayableRank(bs.currentRank));
 }
 
 // Precondition: none
@@ -185,6 +185,14 @@ function nextTurn() {
   updateIndicators();
   displayIndicators();
   // updateDisplayedCards();
+}
+
+// Precondition: rank === (one of the objects in bs.RANKS)
+// Returns: a more reader-friendly version of rank
+function displayableRank(rank) {
+  // This works because each rank equals a reasonably corresponding
+  // numerical value (e.g. SEVEN = 7, QUEEN = 12).
+  return Object.keys(bs.RANKS)[rank - 1];
 }
 
 // Precondition: game is set up
