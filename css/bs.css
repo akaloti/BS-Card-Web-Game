@@ -1,3 +1,11 @@
 #main-menu-options {
   list-style-type: none;
 }
+
+.hovered {
+  background-color: yellow;
+}
+
+.picked {
+  font-style: italic;
+}
