@@ -1,5 +1,27 @@
 "use strict";
 
+/*
+  @pre: none
+  @post: bs.players.length = numberOfPlayers
+  @hasTest: true
+  @param numberOfPlayers to create; must be greater than 0
+  @returns nothing
+  @throws nothing
+*/
+function createArtificialPlayers(numberOfPlayers) {
+  // Clear the players
+  bs.players = [];
+
+  for (var i = 0; i < numberOfPlayers; ++i)
+    bs.players.push(new Player());
+}
+
+QUnit.test("createArtificialPlayers()", function(assert) {
+  createArtificialPlayers(1);
+  assert.ok(bs.players.length === 1, "Correct number of players created");
+  createArtificialPlayers(10);
+  assert.ok(bs.players.length === 10, "Correct number of players created");
+});
 
 QUnit.test("shared.preconditionError()", function(assert) {
   assert.equal(shared.preconditionError("This is a test"),
@@ -29,9 +51,7 @@ function testDealOutCards(assert, numberOfArtificialPlayers) {
   // create an artificial environment with players and that obeys
   // the preconditions
   generateDeck();
-  bs.players = [];
-  for (var i = 0; i < numberOfArtificialPlayers; ++i)
-    bs.players.push(new Player());
+  createArtificialPlayers(numberOfArtificialPlayers);
 
   // call the function
   dealOutCards();
@@ -133,10 +153,7 @@ QUnit.test("updateHoveredCard()", function(assert) {
 });
 
 QUnit.test("updateCurrentPlayerIndex()", function(assert) {
-  // Create five players
-  bs.players = [];
-  for (var i = 0; i < 5; ++i)
-    bs.players.push(new Player());
+  createArtificialPlayers(5);
 
   assert.equal(updateCurrentPlayerIndex(1), 2,
     "Normal increment from 1 to 2 worked");
