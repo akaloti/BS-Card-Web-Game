@@ -14,9 +14,9 @@ shared.isUnitTesting = function() {
 }
 
 /*
-  @pre: none
-  @post: errorMessage printed to console
-  @hasTest: true
+  @pre none
+  @post errorMessage printed to console
+  @hasTest true
   @param errorMessage to print
   @returns constant indicating the precondition error (mostly for unit
   testing purposes)

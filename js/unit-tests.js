@@ -1,9 +1,9 @@
 "use strict";
 
 /*
-  @pre: none
-  @post: bs.players.length = numberOfPlayers
-  @hasTest: true
+  @pre none
+  @post bs.players.length = numberOfPlayers
+  @hasTest true
   @param numberOfPlayers to create; must be greater than 0
   @returns nothing
   @throws nothing
@@ -21,6 +21,32 @@ QUnit.test("createArtificialPlayers()", function(assert) {
   assert.ok(bs.players.length === 1, "Correct number of players created");
   createArtificialPlayers(10);
   assert.ok(bs.players.length === 10, "Correct number of players created");
+});
+
+/*
+  @pre none
+  @post bs.players[playerIndex].cards.length = numberOfCards
+  @hasTest true
+  @param numberOfCards to create; must exceed 0
+  @param playerIndex index of player to give the cards in bs.players
+  @returns nothing
+  @throws nothing
+*/
+function createArtificialCards(numberOfCards, playerIndex) {
+  // Clear the player's cards
+  bs.players[playerIndex].cards = [];
+
+  for (var i = 0; i < numberOfCards; ++i)
+    bs.players[playerIndex].cards.push(new Card(bs.SUITS.SPADE,
+      bs.RANKS.ACE));
+}
+
+QUnit.test("createArtificialCards()", function(assert) {
+  createArtificialPlayers(1);
+  createArtificialCards(1, 0);
+  assert.ok(bs.players[0].cards.length === 1, "Correct number of cards created");
+  createArtificialCards(10, 0);
+  assert.ok(bs.players[0].cards.length === 10, "Correct number of cards created");
 });
 
 QUnit.test("shared.preconditionError()", function(assert) {
@@ -135,10 +161,8 @@ QUnit.test("updateHoveredCard()", function(assert) {
     shared.PRECONDITION_ERROR, "Enforcement of valid parameter");
 
   // Create artificial environment
-  bs.players = [];
-  bs.players.push(new Player());
-  for (var i = 0; i < 5; ++i)
-    bs.players[0].cards.push(new Card(bs.SUITS.SPADE, bs.RANKS.ACE));
+  createArtificialPlayers(1);
+  createArtificialCards(5, 0);
 
   bs.currentPlayerIndex = 0;
 
@@ -174,12 +198,10 @@ QUnit.test("updateDisplayedCards()", function(assert) {
   $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
 
   // Create artificial environment
-  bs.players = [];
-  bs.players.push(new Player());
+  createArtificialPlayers(1);
   bs.currentPlayerIndex = 0;
   var numberOfCards = 6;
-  for (var i = 0; i < numberOfCards; ++i)
-    bs.players[0].cards.push(new Card(bs.SUITS.HEART, bs.RANKS.ACE));
+  createArtificialCards(numberOfCards, bs.currentPlayerIndex);
 
   updateDisplayedCards();
 
