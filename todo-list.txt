@@ -1,22 +1,25 @@
+Next:
+
 For unit tests:
 -add helper function for creating players
 -note which functions have unit tests and which don't
 -distinguish between parameters and preconditions in contracts
 -don't have functions use the value they're changing as parameters
 
-Next:
+-user can change which card is selected
+-user can select and deselect cards (with a maximum)
 -make center pile
 -turn taking
 -fix acceptable number of players (can't have 1 player)
+-write an application dictionary (in a language Git Bash can run)
+--(e.g. define "contract")
+-figure out how to not allow a commit if unit tests failed?
 -checking for providing of arguments to functions that require it
--default values for object parameters?
+-default values for object parameters? (or exception?)
 -consider determining who goes first either based on who has ace of spades
  or based on the order in which the cards were dealt (for fairness)
 -consider support for both use of keys and use of clicking?
 -allow the user to use arrow keys on the menu?
--write an application dictionary (in a language Git Bash can run)
---(e.g. define "contract")
--figure out how to not allow a commit if unit tests failed?
 -make webpages look appealing (e.g. CSS)
 -implement PHP security?
 -consider whether or not its practical to enforce preconditions in unit tests
