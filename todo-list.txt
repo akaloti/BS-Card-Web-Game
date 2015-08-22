@@ -1,3 +1,9 @@
+For unit tests:
+-add helper function for creating players
+-note which functions have unit tests and which don't
+-distinguish between parameters and preconditions in contracts
+-don't have functions use the value they're changing as parameters
+
 Next:
 -make center pile
 -turn taking
