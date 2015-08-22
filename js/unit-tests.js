@@ -1,5 +1,11 @@
 "use strict";
 
+
+QUnit.test("shared.preconditionError()", function(assert) {
+  assert.equal(shared.preconditionError("This is a test"),
+    shared.PRECONDITION_ERROR, "Correct value is returned");
+});
+
 QUnit.test("generateDeck()", function(assert) {
   generateDeck();
 

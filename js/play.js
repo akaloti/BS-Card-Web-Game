@@ -73,8 +73,7 @@ function dealOutCards() {
     }
   }
   catch(err) {
-    console.log(err);
-    return shared.PRECONDITION_ERROR;
+    return shared.preconditionError(err);
   }
 }
 
@@ -95,8 +94,7 @@ function createPlayers(numberOfPlayers) {
     }
   }
   catch(err) {
-    console.log(err);
-    return shared.PRECONDITION_ERROR;
+    return shared.preconditionError(err);
   }
 }
 
@@ -178,8 +176,7 @@ function updateHoveredCard(index, action) {
     }
   }
   catch(err) {
-    console.log(err);
-    return shared.PRECONDITION_ERROR;
+    return shared.preconditionError(err);
   }
 }
 
