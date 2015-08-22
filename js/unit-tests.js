@@ -103,8 +103,31 @@ QUnit.test("determineHigherRank()", function(assert) {
     0), "Rank Five should equal Rank Five");
 });
 
+QUnit.test("updateHoveredCard()", function(assert) {
+  // Check precondition enforcement
+  assert.equal(updateHoveredCard("invalidArgument"),
+    shared.PRECONDITION_ERROR, "Enforcement of valid parameter");
+
+  // Create artificial environment
+  bs.players = [];
+  bs.players.push(new Player());
+  for (var i = 0; i < 5; ++i)
+    bs.players[0].cards.push(new Card(bs.SUITS.SPADE, bs.RANKS.ACE));
+
+  bs.currentPlayerIndex = 0;
+
+  assert.equal(updateHoveredCard(1, "reset"), 0,
+    "Resetting hovered card works");
+  assert.equal(updateHoveredCard(1, "down"), 2, "Hovering down works");
+  assert.equal(updateHoveredCard(1, "up"), 0, "Hovering up works");
+  assert.equal(updateHoveredCard(4, "down"), 0,
+    "Can wrap around from last card to first card");
+  assert.equal(updateHoveredCard(0, "up"), 4,
+    "Can wrap around from first card to last card");
+});
+
 QUnit.test("updateCurrentPlayerIndex()", function(assert) {
-  // Create three players
+  // Create five players
   bs.players = [];
   for (var i = 0; i < 5; ++i)
     bs.players.push(new Player());

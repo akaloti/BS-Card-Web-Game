@@ -5,6 +5,7 @@ bs.deck = [];
 bs.DECK_LENGTH = 52;
 bs.players = [];
 bs.currentPlayerIndex = 0;
+bs.currentHoveredCardIndex = 0;
 bs.SUITS = {SPADE : 0, HEART : 1, CLUB : 2, DIAMOND : 3};
 bs.RANKS = {ACE : 1, TWO : 2, THREE : 3, FOUR : 4,
   FIVE : 5, SIX : 6, SEVEN : 7, EIGHT : 8, NINE : 9,
@@ -142,10 +143,44 @@ function randomizePlayerOrder() {
 
 // Precondition: none
 // Postcondition: bs.currentPlayerIndex and bs.currentRank have
-// each been correctly incremented (with wrap around, if necessary)
+// each been correctly incremented (with wrap around, if necessary).
+// bs.currentHoveredCardIndex has been reset to 0.
 function updateIndicators() {
   bs.currentPlayerIndex = updateCurrentPlayerIndex(bs.currentPlayerIndex);
   bs.currentRank = updateCurrentRank(bs.currentRank);
+  bs.currentHoveredCardIndex = updateHoveredCard(
+    bs.currentHoveredCardIndex, "reset");
+}
+
+// Precondition: index is array index of currently selected card;
+// action has any of the following values: "reset", "up", "down"
+// Returns: if "reset", then 0; if "up", then bs.currentHoveredCardIndex - 1;
+// if "down", then bs.currentHoveredCardIndex + 1; wrap around if necessary
+function updateHoveredCard(index, action) {
+  try {
+    if (action === "reset") {
+      return 0;
+    }
+    else if (action === "up") {
+      // Wrap around, if necessary
+      if (index === 0)
+        return bs.players[bs.currentPlayerIndex].cards.length - 1;
+      return (index - 1);
+    }
+    else if (action === "down") {
+      // Wrap around, if necessary
+      if (index + 1 === bs.players[bs.currentPlayerIndex].cards.length)
+        return 0;
+      return (index + 1);
+    }
+    else {
+      throw "Exception: Invalid argument for updateHoveredCard()";
+    }
+  }
+  catch(err) {
+    console.log(err);
+    return shared.PRECONDITION_ERROR;
+  }
 }
 
 // Precondition: 0 <= index <= (bs.players.length - 1)
@@ -185,10 +220,13 @@ function nextTurn() {
   updateIndicators();
   displayIndicators();
   updateDisplayedCards();
+  bs.currentHoveredCardIndex = updateHoveredCard(
+    bs.currentHoveredCardIndex, "reset");
 }
 
 // Precondition: bs.currentPlayerIndex has been updated
-// Postcondition: webpage displays list of current player's cards
+// Postcondition: webpage displays list of current player's cards,
+// first card is hovered over
 function updateDisplayedCards() {
   // Clear the previous list
   $("#displayed-cards").html("");
@@ -200,6 +238,8 @@ function updateDisplayedCards() {
       displayableRank(cards[cardIndex].rank) + " of " +
       displayableSuit(cards[cardIndex].suit) + "</li>");
   }
+
+  $("#displayed-cards li:first-child").addClass("hovered");
 }
 
 // Precondition: rank === (one of the objects in bs.RANKS)
@@ -238,6 +278,7 @@ function setUpGame() {
   updateDisplayedCards();
 
   $("a[href='#submit']").click(submitTurn);
+  // $(document).keydown(
 }
 
 $(document).ready(function(){
