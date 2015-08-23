@@ -1,7 +1,12 @@
 "use strict";
 
-// Precondition: main menu hasn't been set up
-// Postcondition: a form requesting settings appears if the user selects "Play"
+/*
+  @pre main menu hasn't been set up
+  @post a form requesting settings appears if the user selects "Play"
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
 function setUpMenu() {
   $("a[href='#main-menu-options']").click(function() {
     $(this).after("<form name='playSettings' action='play.php'" +
@@ -14,8 +19,14 @@ function setUpMenu() {
   });
 }
 
-// Returns true if number of players entered in form is valid;
-// returns false (and does alert message) otherwise
+/*
+  @pre none
+  @post alert to browser if invalid form
+  @hasTest no
+  @returns true if number of players entered in form is valid;
+  false otherwise
+  @throws nothing
+*/
 function validatePlaySettingsForm() {
   var numberOfPlayers =
     document.forms["playSettings"]["number-of-players"].value;

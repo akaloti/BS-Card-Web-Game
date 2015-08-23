@@ -1,6 +1,14 @@
-# The first parameter should be the old name of the file.
-# The second parameter should be the new name of the file.
-# Sample usage: rename-file.sh play.html play.php
+#!/bin/sh
+#
+# @pre (optional) A file named open-my-files.bat exists in the same
+# folder as this file.
+# @post The file specified by the first argument has been given the name
+# specified by the second argument, open-my-files.bat has been edited
+# appropriately to open the correct file, and a Git commit announcing
+# the former action has been created.
+# @param $1 old/current name of the file
+# @param $2 new name of the file
+# @example rename-file.sh play.html play.php
 
 # Rename the file
 git mv $1 $2
@@ -8,6 +16,9 @@ git mv $1 $2
 # Edit the batch file that opens files (if applicable)
 sed -i "s~$1~$2~" open-my-files.bat
 
-# Commit the change (The renamed file was added by "git mv")
+# Unstage other changes
+git reset HEAD *
+
+# Commit the change (The renamed file was added earlier by "git mv")
 git add open-my-files.bat
 git commit -m "Renamed file: $1 -> $2"
