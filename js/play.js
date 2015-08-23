@@ -209,7 +209,7 @@ function updateIndicators() {
 
 /*
   @pre none
-  @post none
+  @post correct card is hovered over by user's selector
   @hasTest yes
   @param index array index of currently selected card
   @param action indicates what to do and has any of the
@@ -222,24 +222,34 @@ function updateIndicators() {
 */
 function updateHoveredCard(index, action) {
   try {
+    $("#displayed-cards li:nth-child(" + (index + 1) + ')').
+      removeClass("hovered");
+    var newIndex = 0;
+
     if (action === "reset") {
-      return 0;
+      newIndex = 0;
     }
     else if (action === "up") {
       // Wrap around, if necessary
       if (index === 0)
-        return bs.players[bs.currentPlayerIndex].cards.length - 1;
-      return (index - 1);
+        newIndex = bs.players[bs.currentPlayerIndex].cards.length - 1;
+      else
+        newIndex = (index - 1);
     }
     else if (action === "down") {
       // Wrap around, if necessary
       if (index + 1 === bs.players[bs.currentPlayerIndex].cards.length)
-        return 0;
-      return (index + 1);
+        newIndex = 0;
+      else
+        newIndex = (index + 1);
     }
     else {
       throw "Exception: Invalid argument for updateHoveredCard()";
     }
+
+    $("#displayed-cards li:nth-child(" + (newIndex + 1) + ')').
+      addClass("hovered");
+    return newIndex;
   }
   catch(err) {
     return shared.preconditionError(err);
@@ -296,7 +306,7 @@ function displayIndicators() {
 /*
   @pre none
   @post the indicators and the displayed cards have been
-  updated
+  updated; the first card is hovered over
   @hasTest no
   @returns nothing
   @throws nothing
@@ -311,8 +321,7 @@ function nextTurn() {
 
 /*
   @pre bs.currentPlayerIndex has been updated
-  @post webpage displays list of current player's cards,
-  first card is hovered over
+  @post webpage displays list of current player's cards
   @hasTest yes
   @returns nothing
   @throws nothing
@@ -328,8 +337,6 @@ function updateDisplayedCards() {
       displayableRank(cards[cardIndex].rank) + " of " +
       displayableSuit(cards[cardIndex].suit) + "</li>");
   }
-
-  $("#displayed-cards li:first-child").addClass("hovered");
 }
 
 /*
@@ -388,9 +395,15 @@ function setUpGame() {
   randomizePlayerOrder();
   displayIndicators();
   updateDisplayedCards();
+  $("#displayed-cards li:first-child").
+      addClass("hovered");
 
   $("a[href='#submit']").click(submitTurn);
-  // $(document).keydown(
+
+  $(document).keydown(function () {
+    bs.currentHoveredCardIndex = updateHoveredCard(
+      bs.currentHoveredCardIndex, "down");
+  });
 }
 
 $(document).ready(function(){
