@@ -1,10 +1,9 @@
 Next:
 
 For unit tests:
--note which functions have unit tests and which don't
--distinguish between parameters and preconditions in contracts
 -don't have functions use the value they're changing as parameters
 
+After the above:
 -user can change which card is selected
 -user can select and deselect cards (with a maximum)
 -make center pile

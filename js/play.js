@@ -12,6 +12,15 @@ bs.RANKS = {ACE : 1, TWO : 2, THREE : 3, FOUR : 4,
   TEN : 10, JACK : 11, QUEEN : 12, KING : 13};
 bs.currentRank = bs.RANKS.ACE;
 
+/*
+  @pre none
+  @post instance of class Card created
+  @hasTest no
+  @param suit the suit of the card
+  @param rank the rank of the card
+  @returns nothing
+  @throws nothing
+*/
 function Card(suit, rank) {
   this.suit = suit;
   this.rank = rank;
@@ -21,16 +30,27 @@ function Card(suit, rank) {
   // this.y = [get from list]
 }
 
+/*
+  @pre none
+  @post instance of class Player created
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
 function Player() {
   // this.name = name;
 
   this.cards = [];
 }
 
-// Preconditions: none
-// Postconditions: bs.deck contains 52 unique instances of class Card,
-// each representing a unique card.
-// Note that bs.deck will be overritten.
+/*
+  @pre none
+  @post bs.deck contains 52 unique instances of class Card,
+  each representing a unique card.
+  @hasTest yes
+  @returns none
+  @throws none
+*/
 function generateDeck() {
   // Empty the deck
   bs.deck = [];
@@ -42,12 +62,17 @@ function generateDeck() {
   }
 }
 
-// Preconditions: No player has any cards. Deck has been generated.
-// bs.players.length > 0.
-// Postconditions: The deck's cards have been randomly dealt to each player.
-// The number of cards each player has should be equal as possible (within
-// a tolerance of one). bs.deck is empty.
-// Returns false if exception thrown, otherwise returns nothing
+/*
+  @pre  No player has any cards. Deck has been generated.
+  bs.players.length > 0.
+  @post The deck's cards have been randomly dealt to each player.
+  The number of cards each player has should be equal as possible
+  (within a tolerance of one). bs.deck is empty.
+  @hasTest yes
+  @returns return value of shared.preconditionError()
+  if precondition error
+  @throws (caught) exception if no players
+*/
 function dealOutCards() {
   // enforce bs.players.length precondition to avoid infinite loop
   try {
@@ -77,9 +102,16 @@ function dealOutCards() {
   }
 }
 
-// Preconditions: bs.players.length = 0.
-// bs.MAX_NUMBER_OF_PLAYERS > numberOfPlayers > 0.
-// Postconditions: bs.players.length = numberOfPlayers
+/*
+  @pre bs.players.length = 0.
+  @post bs.players.length = numberOfPlayers
+  @hasTest yes
+  @param numberOfPlayers to create
+  bs.MAX_NUMBER_OF_PLAYERS > numberOfPlayers > 0.
+  @returns return value of shared.preconditionError()
+  if precondition error
+  @throws (caught) exception if invalid number of players
+*/
 function createPlayers(numberOfPlayers) {
   try {
     // confirm valid numberOfPlayers
@@ -98,33 +130,54 @@ function createPlayers(numberOfPlayers) {
   }
 }
 
-// Preconditions: none (empty arrays don't cause bugs)
-// Postconditions: Each players' cards are sorted in order of rank
+/*
+  @pre none (empty arrays don't cause bugs)
+  @post Each players' cards are sorted in order of rank
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
 function sortPlayersCards() {
   for (var i in bs.players)
     bs.players[i].cards = sortCards(bs.players[i].cards);
 }
 
-// Preconditions: arrayOfCards is an array of instances of Card
-// Postcondition: contents of arrayOfCards are sorted from lowest
-// rank to highest rank (e.g. 2, 8, K), with no regard to suit.
-// Returns: sorted version of arrayOfCards
+/*
+  @pre none
+  @post contents of arrayOfCards are sorted from lowest
+  rank to highest rank (e.g. 2, 8, K), with no regard to suit.
+  @hasTest yes
+  @param arrayOfCards array of instances of Card
+  @returns sorted version of arrayOfCards
+  @throws nothing
+*/
 function sortCards(arrayOfCards) {
   return arrayOfCards.sort(determineHigherRank);
 }
 
-// This is a compare function.
-// Preconditions: firstCard and secondCard are instances of Card
-// Postconditions: none
-// Returns: negative number if first's rank is below second's rank,
-// zero if the ranks are the same, positive number otherwise
+/*
+  This is a compare function.
+  @pre none
+  @post none
+  @hasTest yes
+  @param firstCard instance of Card
+  @param secondCard instance of Card
+  @returns negative number if first's rank is below second's rank,
+  zero if the ranks are the same, positive number otherwise
+  @throws nothing
+*/
 function determineHigherRank(firstCard, secondCard) {
   // Recall that each rank is a numeric constant
   return firstCard.rank - secondCard.rank;
 }
 
-// Precondition: there are players (i.e. bs.players.length > 0)
-// Postcondition: bs.players has a random order
+/*
+  @pre there are players (i.e. bs.players.length > 0)
+  @post bs.players has a random order
+  @hasTest no (testing randomness isn't useful)
+  @returns nothing
+  @throws nothing
+*/
 function randomizePlayerOrder() {
   var resultantArray = [];
   var randomIndex = 0;
@@ -136,13 +189,17 @@ function randomizePlayerOrder() {
   }
 
   bs.players = resultantArray;
-  console.log("sorted");
 }
 
-// Precondition: none
-// Postcondition: bs.currentPlayerIndex and bs.currentRank have
-// each been correctly incremented (with wrap around, if necessary).
-// bs.currentHoveredCardIndex has been reset to 0.
+/*
+  @pre none
+  @post bs.currentPlayerIndex and bs.currentRank have
+  each been correctly incremented (with wrap around, if necessary).
+  bs.currentHoveredCardIndex has been reset to 0.
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
 function updateIndicators() {
   bs.currentPlayerIndex = updateCurrentPlayerIndex(bs.currentPlayerIndex);
   bs.currentRank = updateCurrentRank(bs.currentRank);
@@ -150,10 +207,19 @@ function updateIndicators() {
     bs.currentHoveredCardIndex, "reset");
 }
 
-// Precondition: index is array index of currently selected card;
-// action has any of the following values: "reset", "up", "down"
-// Returns: if "reset", then 0; if "up", then bs.currentHoveredCardIndex - 1;
-// if "down", then bs.currentHoveredCardIndex + 1; wrap around if necessary
+/*
+  @pre none
+  @post none
+  @hasTest yes
+  @param index array index of currently selected card
+  @param action indicates what to do and has any of the
+  following values: "reset", "up", "down"
+  @returns if "reset", then 0; if "up", then
+  bs.currentHoveredCardIndex - 1; if "down", then
+  bs.currentHoveredCardIndex + 1 (wrap around if necessary); if invalid
+  value for action, return value of shared.preconditionError()
+  @throws (caught) exception if invalid vlaue of action
+*/
 function updateHoveredCard(index, action) {
   try {
     if (action === "reset") {
@@ -180,9 +246,15 @@ function updateHoveredCard(index, action) {
   }
 }
 
-// Precondition: 0 <= index <= (bs.players.length - 1)
-// Returns: incremented version of argument index
-// (with wrap around, if necessary)
+/*
+  @pre none
+  @post n/a
+  @hasTest yes
+  @param index such that 0 <= index <= (bs.players.length - 1)
+  @returns incremented version of argument index
+  (with wrap around, if necessary)
+  @throws nothing
+*/
 function updateCurrentPlayerIndex(index) {
   // Wrap around, if necessary
   if (index + 1 === bs.players.length)
@@ -191,9 +263,15 @@ function updateCurrentPlayerIndex(index) {
     return (index + 1);
 }
 
-// Precondition: rank equals an object in bs.RANKS
-// Returns: incremented version of argument rank
-// (with wrap around, if necessary)
+/*
+  @pre none
+  @post n/a
+  @hasTest yes
+  @param  rank an object in bs.RANKS
+  @returns incremented version of argument rank
+  (with wrap around, if necessary)
+  @throws nothing
+*/
 function updateCurrentRank(rank) {
   // Wrap around, if necessary
   if (rank === bs.RANKS.KING)
@@ -202,17 +280,27 @@ function updateCurrentRank(rank) {
     return (rank + 1);
 }
 
-// Precondition: None
-// Postcondition: The current player indicator and the current card
-// indicator have been updated (display-wise).
+/*
+  @pre none
+  @post The current player indicator and the current card
+  indicator have been updated (display-wise).
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
 function displayIndicators() {
   $("#current-player").html(bs.currentPlayerIndex + 1);
   $("#current-rank").html(displayableRank(bs.currentRank));
 }
 
-// Precondition: none
-// Postcondition: the indicators and the displayed cards have been
-// updated
+/*
+  @pre none
+  @post the indicators and the displayed cards have been
+  updated
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
 function nextTurn() {
   updateIndicators();
   displayIndicators();
@@ -221,9 +309,14 @@ function nextTurn() {
     bs.currentHoveredCardIndex, "reset");
 }
 
-// Precondition: bs.currentPlayerIndex has been updated
-// Postcondition: webpage displays list of current player's cards,
-// first card is hovered over
+/*
+  @pre bs.currentPlayerIndex has been updated
+  @post webpage displays list of current player's cards,
+  first card is hovered over
+  @hasTest yes
+  @returns nothing
+  @throws nothing
+*/
 function updateDisplayedCards() {
   // Clear the previous list
   $("#displayed-cards").html("");
@@ -239,23 +332,40 @@ function updateDisplayedCards() {
   $("#displayed-cards li:first-child").addClass("hovered");
 }
 
-// Precondition: rank === (one of the objects in bs.RANKS)
-// Returns: a more reader-friendly version of rank
+/*
+  @pre none
+  @post n/a
+  @hasTest yes
+  @param rank one of the objects in bs.RANKS
+  @returns a more reader-friendly version of rank
+  @throws nothing
+*/
 function displayableRank(rank) {
   // This works because each rank equals a reasonably corresponding
   // numerical value (e.g. SEVEN = 7, QUEEN = 12).
   return Object.keys(bs.RANKS)[rank - 1];
 }
 
-// Precondition: suit === (one of the objects in bs.SUITS)
-// Returns: a more reader-friendly version of suit
+/*
+  @pre none
+  @post n/a
+  @hasTest yes
+  @param suit one of the objects in bs.SUITS
+  @returns a more reader-friendly version of suit
+  @throws nothing
+*/
 function displayableSuit(suit) {
   return Object.keys(bs.SUITS)[suit];
 }
 
-// Precondition: game is set up
-// Postcondition: went to next turn if user had valid move; otherwise,
-// stayed on same turn and alerted user
+/*
+  @pre game is set up
+  @post went to next turn if user had valid move; otherwise,
+  stayed on same turn and alerted user
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
 function submitTurn() {
   // if (validMove())
     nextTurn();
@@ -263,8 +373,13 @@ function submitTurn() {
     // don't go next turn; alert user
 }
 
-// Precondition: game hasn't been set up
-// Postcondition: functions that set the game up have been called
+/*
+  @pre game hasn't been set up
+  @post functions that set the game up have been called
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
 function setUpGame() {
   generateDeck();
   createPlayers(formData.numberOfPlayers);
