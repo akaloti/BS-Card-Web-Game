@@ -12,6 +12,7 @@ For unit tests:
 -fix acceptable number of players (can't have 1 player)
 -write an application dictionary (as a webpage?)
 --(e.g. define "contract")
+-fix error messages
 -figure out how to not allow a commit if unit tests failed?
 -checking for providing of arguments to functions that require it
 -default values for object parameters? (or exception?)
