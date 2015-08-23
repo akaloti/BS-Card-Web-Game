@@ -1,3 +1,5 @@
+#!/bin/sh
+#
 # @pre The user has the string "<insert-contract>" in the place(s)
 # where he/she wants the contractual skeleton to be generated.
 # For example:
