@@ -1,29 +1,33 @@
-Next:
-
-For unit tests:
--don't have functions use the value they're changing as parameters
-
-After the above:
--user can change which card is selected
--user can select and deselect cards (with a maximum)
+Next (in order of descending priority):
+-user can change which card is hovered over
+-user can select and deselect cards (with a maximum of 4)
 -make center pile
 -turn taking
+-interim between turns to allow switch of player looking at the screen
 -fix acceptable number of players (can't have 1 player)
--write an application dictionary (as a webpage?)
+-write an application dictionary (as a webpage)
 --(e.g. define "contract")
--fix error messages
--figure out how to not allow a commit if unit tests failed?
+-fix error messages (e.g. argument error vs. precondition error)
+-default values for object parameters? (or exception?); unit tests
+-determine who goes first based on the order in which the cards
+ were dealt (for fairness)
+
+After game functions without graphics:
+-make readme
+-release v0.1
+-graphics (CSS and images)
+
+Considerable:
+-use a saboteur (i.e. me) to test my testing (see p.244 of "The
+ Pragmatic Programmer")
+-don't have functions use the value they're changing as parameters
+-figure out how to not allow a commit if unit tests failed
 -checking for providing of arguments to functions that require it
--default values for object parameters? (or exception?)
--consider determining who goes first either based on who has ace of spades
- or based on the order in which the cards were dealt (for fairness)
--consider support for both use of keys and use of clicking?
--allow the user to use arrow keys on the menu?
--make webpages look appealing (e.g. CSS)
--implement PHP security?
+ (contract may be sufficient)
+-consider support for both use of keys and use of clicking
+-implement PHP security
 -consider whether or not its practical to enforce preconditions in unit tests
  (as opposed to solely with exceptions)
--make readme
 -look into generating tests automatically
 
 For README:
@@ -33,7 +37,3 @@ For README:
 -include directions regarding unit tests
 -include directions for running the project (on WebMatrix)
 -note how contracts are enforced (unit tests, exceptions and alerts, etc.)
-
-Other:
--use a saboteur (i.e. me) to test my testing (see p.244 of "The
- Pragmatic Programmer")
