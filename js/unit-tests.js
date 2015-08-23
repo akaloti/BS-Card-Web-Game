@@ -72,7 +72,18 @@ QUnit.test("dealOutCards()", function(assert) {
     "Function throws exception if no players");
 });
 
-// Helper function for unit testing of dealOutCards()
+/*
+  @pre none
+  @post function dealOutCards has been tested with the given number
+  of players
+  @hasTest false
+  @param assert mandatory parameter that allows usage of unit testing
+  in this function
+  @param numberOfArtificialPlayers number of players to create and
+  deal cards to
+  @returns nothing
+  @throws nothing
+*/
 function testDealOutCards(assert, numberOfArtificialPlayers) {
   // create an artificial environment with players and that obeys
   // the preconditions
@@ -222,13 +233,3 @@ QUnit.test("displayableSuit()", function(assert) {
   assert.equal(displayableSuit(bs.SUITS.DIAMOND), "DIAMOND",
     "Rank Diamond is properly converted");
 });
-
-/*
-QUnit.test( "a basic test example", function( assert ) {
-  var value = "hello";
-  assert.equal( value, "hello", "We expect value to be hello" );
-
-  assert.ok(false, "false fails");
-  assert.ok(true, "true succeeds");
-});
-*/
