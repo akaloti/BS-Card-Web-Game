@@ -276,7 +276,6 @@ function testSubmitCards(assert, numberOfCards,
   createArtificialCards(numberOfCards, bs.currentPlayerIndex);
 
   // Create the illusion that some of the player's cards are selected
-  $("#qunit-fixture").empty();
   $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
   for (var i = 0; i < numberOfCardsToSubmit; ++i)
     $("#displayed-cards").append("<li class='picked'></li>");
@@ -288,4 +287,8 @@ function testSubmitCards(assert, numberOfCards,
     "Correct number of cards were still left to the player");
   assert.equal(bs.centerPile.length, numberOfCardsToSubmit,
     "Correct number of cards were given to center pile");
+
+  // So these tests of submitCards() don't affect the next tests
+  // of submitCards()
+  $("#qunit-fixture").empty();
 }
