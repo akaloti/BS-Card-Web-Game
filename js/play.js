@@ -403,13 +403,40 @@ function setUpGame() {
   $(document).keydown(function(e) {
     var keyCodeDown = 40;
     var keyCodeUp = 38;
+    var keyCodeSpace = 32;
     if (e.which === keyCodeDown)
-      bs.currentHoveredCardIndex = updateHoveredCard(
         bs.currentHoveredCardIndex, "down");
+      bs.currentHoveredCardIndex = updateHoveredCard(
     else if (e.which === keyCodeUp)
       bs.currentHoveredCardIndex = updateHoveredCard(
         bs.currentHoveredCardIndex, "up");
+    else if (e.which === keyCodeSpace)
+      selectOrUnselectCard();
   });
+}
+
+/*
+  @pre bs.currentHoveredCardIndex is updatd
+  @post if user can select the card marked by
+  bs.currentHoveredCardIndex, the card will be selected; if the card
+  was already selected, it will be unselected
+  @hasTest not yet
+  @returns nothing
+  @throws nothing
+*/
+function selectOrUnselectCard() {
+  var cardToAffect = "#displayed-cards li:nth-child(" + (
+    bs.currentHoveredCardIndex + 1) + ')';
+  var cssClassPicked = "picked";
+
+  if ($(cardToAffect).hasClass(cssClassPicked)) {
+    // deselect if card already is picked
+    $(cardToAffect).removeClass(cssClassPicked);
+  }
+  else {
+    // select an unselected card
+    $(cardToAffect).addClass(cssClassPicked);
+  }
 }
 
 $(document).ready(function(){
