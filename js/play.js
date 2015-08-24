@@ -403,12 +403,16 @@ function setUpGame() {
   $(document).keydown(function(e) {
     var keyCodeDown = 40;
     var keyCodeUp = 38;
+    var keyCodeSpace = 32;
     if (e.which === keyCodeDown)
       bs.currentHoveredCardIndex = updateHoveredCard(
         bs.currentHoveredCardIndex, "down");
     else if (e.which === keyCodeUp)
       bs.currentHoveredCardIndex = updateHoveredCard(
         bs.currentHoveredCardIndex, "up");
+    else if (e.which === keyCodeSpace)
+      $("#displayed-cards li:nth-child(" + (
+        bs.currentHoveredCardIndex + 1) + ')').addClass("picked");
   });
 }
 
