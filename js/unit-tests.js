@@ -248,13 +248,32 @@ QUnit.test("isValidMove()", function(assert) {
 });
 
 QUnit.test("submitCards()", function(assert) {
+  testSubmitCards(assert, 4, 1);
+  testSubmitCards(assert, 3, 2);
+  testSubmitCards(assert, 5, 5);
+});
+
+/*
+  @pre none
+  @post three tests have been run: a test of that submitCards()
+  returns the correct number of submitted cards, a test of that the
+  correct number of cards were taken away from the player, and a test
+  of that the correct number of cards were given to the center pile
+  @hasTest no
+  @param assert mandatory parameter that allows user of unit testing
+  methods
+  @param numberOfCards to give the artificial player
+  @param numberOfCardsToSubmit cannot exceed numberOfCards
+  @returns nothing
+  @throws nothing
+*/
+function testSubmitCards(assert, numberOfCards,
+  numberOfCardsToSubmit) {
   // Create artificial environment
   createArtificialPlayers(1);
   bs.centerPile = [];
   bs.currentPlayerIndex = 0;
-  var numberOfCards = 3;
   createArtificialCards(numberOfCards, bs.currentPlayerIndex);
-  var numberOfCardsToSubmit = 2;
 
   // Create the illusion that some of the player's cards are selected
   $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
@@ -265,7 +284,11 @@ QUnit.test("submitCards()", function(assert) {
     "Function successfully returned the number of selected cards");
   assert.equal(bs.players[bs.currentPlayerIndex].cards.length,
     (numberOfCards - numberOfCardsToSubmit),
-    "Correct number of cards were taken away from the player");
+    "Correct number of cards were still left to the player");
   assert.equal(bs.centerPile.length, numberOfCardsToSubmit,
     "Correct number of cards were given to center pile");
-});
+
+  // So these tests of submitCards() don't affect the next tests
+  // of submitCards()
+  $("#qunit-fixture").empty();
+}
