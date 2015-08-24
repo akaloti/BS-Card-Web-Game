@@ -246,3 +246,26 @@ QUnit.test("isValidMove()", function(assert) {
   // The tested function checks if the user's cards have a certain
   // CSS class, which makes no sense to test here
 });
+
+QUnit.test("submitCards()", function(assert) {
+  // Create artificial environment
+  createArtificialPlayers(1);
+  bs.centerPile = [];
+  bs.currentPlayerIndex = 0;
+  var numberOfCards = 3;
+  createArtificialCards(numberOfCards, bs.currentPlayerIndex);
+  var numberOfCardsToSubmit = 2;
+
+  // Create the illusion that some of the player's cards are selected
+  $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
+  for (var i = 0; i < numberOfCardsToSubmit; ++i)
+    $("#displayed-cards").append("<li class='picked'></li>");
+
+  assert.equal(submitCards(), numberOfCardsToSubmit,
+    "Function successfully returned the number of selected cards");
+  assert.equal(bs.players[bs.currentPlayerIndex].cards.length,
+    (numberOfCards - numberOfCardsToSubmit),
+    "Correct number of cards were taken away from the player");
+  assert.equal(bs.centerPile.length, numberOfCardsToSubmit,
+    "Correct number of cards were given to center pile");
+});

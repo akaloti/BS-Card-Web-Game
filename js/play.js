@@ -2,6 +2,7 @@
 
 var bs = {};
 bs.deck = [];
+bs.centerPile = []; // players submit cards to this pile
 bs.DECK_LENGTH = 52;
 bs.players = [];
 bs.currentPlayerIndex = 0;
@@ -374,12 +375,13 @@ function displayableSuit(suit) {
   @throws nothing
 */
 function submitTurn() {
-  if (isValidMove())
-    // submitCards();
+  if (isValidMove()) {
+    submitCards();
     // announceSubmission();
     // checkForCallsBS();
     // checkForWin();
     nextTurn();
+  }
   else
     alert("Invalid move: please pick at least one card");
 }
@@ -397,6 +399,36 @@ function isValidMove() {
     return false;
   else
     return true;
+}
+
+/*
+  @pre game indicators (e.g. current player) are correct; at least
+  one of the current player's cards is selected
+  @post current player's selected cards have been transferred
+  to the center pile
+  @hasTest yes
+  @returns number of cards transferred
+  @throws nothing
+*/
+function submitCards() {
+  // Traverse the list of the player's cards, figure out which ones
+  // have the class "picked", and transfer them from the current
+  // player to the center pile
+  var cssClassPicked = "picked";
+  var numberOfCardsSubmitted = 0;
+  for (var i = 0; i < bs.players[bs.currentPlayerIndex].cards.length;
+    ++i)
+  {
+    var cardToTest = "#displayed-cards li:nth-child(" + (
+      i + 1) + ')';
+    if ($(cardToTest).hasClass(cssClassPicked)) {
+      bs.centerPile.push(bs.players[bs.currentPlayerIndex].cards.
+        splice(i, 1).pop());
+      ++numberOfCardsSubmitted;
+    }
+  }
+
+  return numberOfCardsSubmitted;
 }
 
 /*
