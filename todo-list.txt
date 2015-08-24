@@ -1,5 +1,4 @@
 Next (in order of descending priority):
--user can change which card is hovered over
 -user can select and deselect cards (with a maximum of 4)
 -make center pile
 -turn taking

@@ -400,9 +400,15 @@ function setUpGame() {
 
   $("a[href='#submit']").click(submitTurn);
 
-  $(document).keydown(function () {
-    bs.currentHoveredCardIndex = updateHoveredCard(
-      bs.currentHoveredCardIndex, "down");
+  $(document).keydown(function(e) {
+    var keyCodeDown = 40;
+    var keyCodeUp = 38;
+    if (e.which === keyCodeDown)
+      bs.currentHoveredCardIndex = updateHoveredCard(
+        bs.currentHoveredCardIndex, "down");
+    else if (e.which === keyCodeUp)
+      bs.currentHoveredCardIndex = updateHoveredCard(
+        bs.currentHoveredCardIndex, "up");
   });
 }
 
