@@ -376,8 +376,7 @@ function displayableSuit(suit) {
 */
 function submitTurn() {
   if (isValidMove()) {
-    submitCards();
-    // announceSubmission();
+    announceSubmission(submitCards());
     // checkForCallsBS();
     // checkForWin();
     nextTurn();
@@ -442,6 +441,23 @@ function submitCards() {
   }
 
   return numberOfCardsSubmitted;
+}
+
+/*
+  @pre game indicators are correct
+  @post the webpage says how many cards were submitted by the current
+  player and what rank the cards were
+  @hasTest no
+  @param numberOfCardsSubmitted by the player who has submitted
+  his choice
+  @returns nothing
+  @throws nothing
+*/
+function announceSubmission(numberOfCardsSubmitted) {
+  var output = "Player " + (bs.currentPlayerIndex + 1) + " has " +
+    "submitted " + numberOfCardsSubmitted + " cards of rank " +
+    displayableRank(bs.currentRank);
+  $("#announcement").html(output);
 }
 
 /*

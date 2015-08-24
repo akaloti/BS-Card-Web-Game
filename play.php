@@ -16,6 +16,8 @@
 <p>Current player: <span id="current-player"></span></p>
 <p>Current rank: <span id="current-rank"></span></p>
 
+<p id="announcement"></p>
+
 <div>Your cards:
   <ul id="displayed-cards">
   </ul>
