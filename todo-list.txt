@@ -27,6 +27,7 @@ Considerable:
 -consider whether or not its practical to enforce preconditions in unit tests
  (as opposed to solely with exceptions)
 -look into generating tests automatically
+-CSS variables
 
 For README:
 -note the use of the hook regarding trailing whitespace; include directions
