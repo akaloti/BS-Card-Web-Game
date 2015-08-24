@@ -411,21 +411,34 @@ function isValidMove() {
   @throws nothing
 */
 function submitCards() {
-  // Traverse the list of the player's cards, figure out which ones
-  // have the class "picked", and transfer them from the current
-  // player to the center pile
   var cssClassPicked = "picked";
   var numberOfCardsSubmitted = 0;
+  var indexesOfSubmittedCards = [];
+
+  // Traverse the list of the player's cards; figure out which ones
+  // have the class "picked"
   for (var i = 0; i < bs.players[bs.currentPlayerIndex].cards.length;
     ++i)
   {
     var cardToTest = "#displayed-cards li:nth-child(" + (
       i + 1) + ')';
     if ($(cardToTest).hasClass(cssClassPicked)) {
-      bs.centerPile.push(bs.players[bs.currentPlayerIndex].cards.
-        splice(i, 1).pop());
-      ++numberOfCardsSubmitted;
+      // mark the index of the card to remove from the player
+      indexesOfSubmittedCards.push(i);
     }
+  }
+
+  // Transfer the picked cards from the current
+  // player to the center pile
+  for (var j = 0; j < indexesOfSubmittedCards.length; ++j) {
+    // The index must be adjusted to account for already removed
+    // elements (i.e. if two cards are removed, the indexes of
+    // the later cards drop by 2)
+    var indexOfSubmittedCard = indexesOfSubmittedCards[j] - j;
+
+    bs.centerPile.push(bs.players[bs.currentPlayerIndex].cards.
+      splice(indexOfSubmittedCard, 1).pop());
+    ++numberOfCardsSubmitted;
   }
 
   return numberOfCardsSubmitted;
@@ -467,7 +480,7 @@ function setUpGame() {
 }
 
 /*
-  @pre bs.currentHoveredCardIndex is updatd
+  @pre bs.currentHoveredCardIndex is updated
   @post if user can select the card marked by
   bs.currentHoveredCardIndex, the card will be selected; if the card
   was already selected, it will be unselected
