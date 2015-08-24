@@ -233,3 +233,16 @@ QUnit.test("displayableSuit()", function(assert) {
   assert.equal(displayableSuit(bs.SUITS.DIAMOND), "DIAMOND",
     "Rank Diamond is properly converted");
 });
+
+QUnit.test("isValidMove()", function(assert) {
+  // Create artificial environment
+  createArtificialPlayers(1);
+  bs.currentPlayerIndex = 0;
+  createArtificialCards(3, bs.currentPlayerIndex);
+
+  assert.equal(isValidMove(), false,
+    "Requirement that at least one card be selected works");
+
+  // The tested function checks if the user's cards have a certain
+  // CSS class, which makes no sense to test here
+});

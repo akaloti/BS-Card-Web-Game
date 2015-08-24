@@ -375,9 +375,27 @@ function displayableSuit(suit) {
 */
 function submitTurn() {
   // if (validMove())
+    // announceSubmission();
+    // checkForCallsBS();
+    // checkForWin();
     nextTurn();
   // else
     // don't go next turn; alert user
+}
+
+/*
+  @pre user submitted cards that he/she owns, game indicators
+  (e.g. current player) are correct
+  @post n/a
+  @hasTest yes
+  @returns true if user submitted at least one card; false otherwise
+  @throws nothing
+*/
+function isValidMove() {
+  if ($("#displayed-cards li.selected").length === 0)
+    return false;
+  else
+    return true;
 }
 
 /*
@@ -405,8 +423,8 @@ function setUpGame() {
     var keyCodeUp = 38;
     var keyCodeSpace = 32;
     if (e.which === keyCodeDown)
-        bs.currentHoveredCardIndex, "down");
       bs.currentHoveredCardIndex = updateHoveredCard(
+        bs.currentHoveredCardIndex, "down");
     else if (e.which === keyCodeUp)
       bs.currentHoveredCardIndex = updateHoveredCard(
         bs.currentHoveredCardIndex, "up");
@@ -420,7 +438,7 @@ function setUpGame() {
   @post if user can select the card marked by
   bs.currentHoveredCardIndex, the card will be selected; if the card
   was already selected, it will be unselected
-  @hasTest not yet
+  @hasTest no
   @returns nothing
   @throws nothing
 */
