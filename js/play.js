@@ -374,13 +374,14 @@ function displayableSuit(suit) {
   @throws nothing
 */
 function submitTurn() {
-  // if (validMove())
+  if (isValidMove())
+    // submitCards();
     // announceSubmission();
     // checkForCallsBS();
     // checkForWin();
     nextTurn();
-  // else
-    // don't go next turn; alert user
+  else
+    alert("Invalid move: please pick at least one card");
 }
 
 /*
@@ -392,7 +393,7 @@ function submitTurn() {
   @throws nothing
 */
 function isValidMove() {
-  if ($("#displayed-cards li.selected").length === 0)
+  if ($("#displayed-cards li.picked").length === 0)
     return false;
   else
     return true;
