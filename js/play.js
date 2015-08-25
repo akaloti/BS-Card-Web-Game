@@ -6,6 +6,8 @@ bs.centerPile = []; // players submit cards to this pile
 bs.DECK_LENGTH = 52;
 bs.players = [];
 bs.currentPlayerIndex = 0;
+bs.currentBSAskingIndex = 0; // current player whose being asked if
+                             // wishes to call BS
 bs.currentHoveredCardIndex = 0;
 bs.SUITS = {SPADE : 0, HEART : 1, CLUB : 2, DIAMOND : 3};
 bs.RANKS = {ACE : 1, TWO : 2, THREE : 3, FOUR : 4,
@@ -382,14 +384,18 @@ function displayableSuit(suit) {
 function submitTurn() {
   if (isValidMove()) {
     announceSubmission(submitCards());
-    // checkForCallsBS();
-    checkForWin();
 
-    if (bs.isWinner) {
-      updateWebpageForWinner();
-    }
-    else
-      nextTurn();
+    bs.currentBSAskingIndex =
+      getIncrementedPlayerIndex(bs.currentPlayerIndex);
+    askIfCallBS(bs.currentBSAskingIndex);
+
+    // checkForWin();
+
+    // if (bs.isWinner) {
+      // updateWebpageForWinner();
+    // }
+    // else
+      // nextTurn();
   }
   else
     alert("Invalid move: please pick at least one card");
@@ -491,17 +497,31 @@ function checkForCallsBS() {
   @post the player indicated by playerIndex has been shown his cards
   and asked if he wants to call "BS" on the current player's move
   @hasTest no
-  @param playerIndex
+  @param playerIndex the index in bs.players of the player to ask;
+  playerIndex != bs.currentPlayerIndex
   @returns nothing
   @throws nothing
 */
 function askIfCallBS(playerIndex) {
   // replace the current turn's player's cards by the asked player's
   // cards
+  updateDisplayedCards(playerIndex);
 
   // generate the prompt
+  $("#prompt").html("Would you like to call BS?");
 
-  // temporarily replace the submit button with the options yes or no
+  // temporarily hide the submit button
+
+  // temporarily disable event handlers
+
+  // add yes and no buttons;
+  // if the yes button is clicked, the call of BS is checked and
+  // evaluated, then a win is checked, and if there is no win, the
+  // game continues and the submit button is returned
+  // if the no button is called, the next player index is checked
+  // to determine whether to check for a win and (if there is no win)
+  // return the submit button, or to determine whether to call
+  // this function again with the next index.
 }
 
 /*
