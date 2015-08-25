@@ -608,20 +608,7 @@ function setUpGame() {
       addClass("hovered");
 
   showSubmitButton(true);
-
-  $(document).keydown(function(e) {
-    var keyCodeDown = 40;
-    var keyCodeUp = 38;
-    var keyCodeSpace = 32;
-    if (e.which === keyCodeDown)
-      bs.currentHoveredCardIndex = updateHoveredCard(
-        bs.currentHoveredCardIndex, "down");
-    else if (e.which === keyCodeUp)
-      bs.currentHoveredCardIndex = updateHoveredCard(
-        bs.currentHoveredCardIndex, "up");
-    else if (e.which === keyCodeSpace)
-      selectOrUnselectCard();
-  });
+  enableResponseToKeyPresses(true);
 }
 
 /*
@@ -641,6 +628,33 @@ function showSubmitButton(bool) {
   }
   else
     $("#submit-button").empty();
+}
+
+/*
+  @pre none
+  @post see @param
+  @hasTest no
+  @param bool true to enable responses to key presses; false otherwise
+  @returns nothing
+  @throws nothing
+*/
+function enableResponseToKeyPresses(bool) {
+  if (bool)
+    $(document).on("keydown", function(e) {
+      var keyCodeDown = 40;
+      var keyCodeUp = 38;
+      var keyCodeSpace = 32;
+      if (e.which === keyCodeDown)
+        bs.currentHoveredCardIndex = updateHoveredCard(
+          bs.currentHoveredCardIndex, "down");
+      else if (e.which === keyCodeUp)
+        bs.currentHoveredCardIndex = updateHoveredCard(
+          bs.currentHoveredCardIndex, "up");
+      else if (e.which === keyCodeSpace)
+        selectOrUnselectCard();
+    });
+  else
+    $(document).off("keydown");
 }
 
 /*
