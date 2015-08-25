@@ -299,6 +299,57 @@ function testSubmitCards(assert, numberOfCards,
   $("#qunit-fixture").empty();
 }
 
+/*
+  @pre bs.currentRank is correct
+  @post the requested artificial environment for testing the function
+  isBS has been created with three cards
+  @hasTest no
+  @param firstIsBS true if first card should be given the non-current
+  rank, false otherwise
+  @param secondIsBS same as firstIsBS, but for second card
+  @param thirdIsBS same as firstIsBS, but for third card
+  @returns nothing
+  @throws nothing
+*/
+function setUpTestIsBS(firstIsBS, secondIsBS, thirdIsBS) {
+  // Empty the center pile
+  bs.centerPile = [];
+
+  // Make sure the rank to give the BS cards is different from
+  // the current rank
+  var bsRank = bs.RANKS.JACK;
+  if (bs.currentRank === bs.RANKS.JACK)
+    bsRank = bs.RANKS.QUEEN;
+
+  var trivialSuit = bs.SUITS.HEART;
+
+  if (firstIsBS)
+    bs.centerPile.push(new Card(trivialSuit, bsRank));
+  else
+    bs.centerPile.push(new Card(trivialSuit, bs.currentRank));
+
+  if (secondIsBS)
+    bs.centerPile.push(new Card(trivialSuit, bsRank));
+  else
+    bs.centerPile.push(new Card(trivialSuit, bs.currentRank));
+
+  if (thirdIsBS)
+    bs.centerPile.push(new Card(trivialSuit, bsRank));
+  else
+    bs.centerPile.push(new Card(trivialSuit, bs.currentRank));
+}
+
+QUnit.test("isBS()", function(assert) {
+  // Create aritifical environment
+  bs.currentRank = bs.RANKS.JACK;
+  setUpTestIsBS(false, false, true);
+  assert.equal(isBS(), true, "BS due to one card was detected");
+  setUpTestIsBS(true, true, true);
+  assert.equal(isBS(), true, "BS due to all bad cards was detected");
+  setUpTestIsBS(false, false, false);
+  assert.equal(isBS(), false, "Lack of BS was detected");
+});
+
 QUnit.test("checkForWin()", function(assert) {
   // Create artificial environment in which there are three players
   // and in which only the second player has no cards
