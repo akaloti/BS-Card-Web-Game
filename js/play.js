@@ -502,7 +502,6 @@ function checkForWin() {
 function updateWebpageForWinner() {
   announceWinner();
   removeCardInteraction();
-  // stopGame();
 }
 
 /*
