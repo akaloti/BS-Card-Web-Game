@@ -205,7 +205,8 @@ function randomizePlayerOrder() {
   @throws nothing
 */
 function updateIndicators() {
-  bs.currentPlayerIndex = updateCurrentPlayerIndex(bs.currentPlayerIndex);
+  bs.currentPlayerIndex =
+    getIncrementedPlayerIndex(bs.currentPlayerIndex);
   bs.currentRank = updateCurrentRank(bs.currentRank);
   bs.currentHoveredCardIndex = updateHoveredCard(
     bs.currentHoveredCardIndex, "reset");
@@ -269,7 +270,7 @@ function updateHoveredCard(index, action) {
   (with wrap around, if necessary)
   @throws nothing
 */
-function updateCurrentPlayerIndex(index) {
+function getIncrementedPlayerIndex(index) {
   // Wrap around, if necessary
   if (index + 1 === bs.players.length)
     return 0;

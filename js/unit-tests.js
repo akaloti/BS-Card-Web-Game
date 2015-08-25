@@ -187,12 +187,12 @@ QUnit.test("updateHoveredCard()", function(assert) {
     "Can wrap around from first card to last card");
 });
 
-QUnit.test("updateCurrentPlayerIndex()", function(assert) {
+QUnit.test("getIncrementedPlayerIndex()", function(assert) {
   createArtificialPlayers(5);
 
-  assert.equal(updateCurrentPlayerIndex(1), 2,
+  assert.equal(getIncrementedPlayerIndex(1), 2,
     "Normal increment from 1 to 2 worked");
-  assert.equal(updateCurrentPlayerIndex(4), 0,
+  assert.equal(getIncrementedPlayerIndex(4), 0,
     "Wrap around from last player to first player worked");
 });
 
