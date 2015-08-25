@@ -525,6 +525,7 @@ function askIfCallBS(playerIndex) {
   // to determine whether to check for a win and (if there is no win)
   // return the submit button, or to determine whether to call
   // this function again with the next index.
+  createBSCallButtons(true);
 }
 
 /*
@@ -656,6 +657,25 @@ function enableResponseToKeyPresses(bool) {
     });
   else
     $(document).off("keydown");
+}
+
+/*
+  @pre none
+  @post see @param
+  @hasTest no
+  @param bool true if wish to generate "yes" and "no" buttons for
+  calling BS; false if wish to delete those buttons
+  @returns nothing
+  @throws nothing
+*/
+function createBSCallButtons(bool) {
+  if (bool) {
+    $("#bs-call-buttons").append(
+      "<a id='bs-yes' href='#bs-call-buttons'>Yes</a><br>").
+      append("<a id='bs-no' href='#bs-call-buttons'>No</a>");
+  }
+  else
+    $("#bs-call-buttons").empty();
 }
 
 /*

@@ -27,6 +27,9 @@
 <div id="submit-button">
 </div>
 
+<div id="bs-call-buttons">
+</div>
+
 <script>
   // To get around not being able to use PHP in a JavaScript file
   var formData = {};
