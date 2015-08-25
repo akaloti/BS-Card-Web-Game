@@ -318,7 +318,7 @@ function displayIndicators() {
 function nextTurn() {
   updateIndicators();
   displayIndicators();
-  updateDisplayedCards();
+  updateDisplayedCards(bs.currentPlayerIndex);
   bs.currentHoveredCardIndex = updateHoveredCard(
     bs.currentHoveredCardIndex, "reset");
 }
@@ -580,7 +580,7 @@ function setUpGame() {
   sortPlayersCards();
   randomizePlayerOrder();
   displayIndicators();
-  updateDisplayedCards();
+  updateDisplayedCards(bs.currentPlayerIndex);
   $("#displayed-cards li:first-child").
       addClass("hovered");
 
