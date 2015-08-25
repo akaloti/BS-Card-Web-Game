@@ -381,8 +381,13 @@ function submitTurn() {
   if (isValidMove()) {
     announceSubmission(submitCards());
     // checkForCallsBS();
-    // checkForWin();
-    nextTurn();
+    checkForWin();
+
+    if (bs.isWinner) {
+      updateWebpageForWinner();
+    }
+    else
+      nextTurn();
   }
   else
     alert("Invalid move: please pick at least one card");
@@ -484,6 +489,33 @@ function checkForWin() {
 
   bs.isWinner = false;
   bs.winningPlayerIndex = bs.NO_WINNER_INDEX;
+}
+
+/*
+  @pre
+  @post
+  @hasTest
+  @param
+  @returns
+  @throws
+*/
+function updateWebpageForWinner() {
+  announceWinner();
+  // removeDisplayedCards();
+  // stopGame();
+}
+
+/*
+  @pre bs.winningPlayerIndex is updated
+  @post the winning player is announced on the webpage
+  @hasTest no (because testing the use of a jQuery function isn't
+  useful)
+  @returns nothing
+  @throws nothing
+*/
+function announceWinner() {
+  $("#announcement").html("The winner is: Player " +
+    (bs.winningPlayerIndex + 1));
 }
 
 /*
