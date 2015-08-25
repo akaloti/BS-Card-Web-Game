@@ -492,12 +492,12 @@ function checkForWin() {
 }
 
 /*
-  @pre
-  @post
-  @hasTest
-  @param
-  @returns
-  @throws
+  @pre there is a winner
+  @post webpage is redesigned in a way that makes it clear who the
+  winner is
+  @hasTest no
+  @returns nothing
+  @throws nothing
 */
 function updateWebpageForWinner() {
   announceWinner();
