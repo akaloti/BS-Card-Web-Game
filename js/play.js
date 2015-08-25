@@ -12,6 +12,9 @@ bs.RANKS = {ACE : 1, TWO : 2, THREE : 3, FOUR : 4,
   FIVE : 5, SIX : 6, SEVEN : 7, EIGHT : 8, NINE : 9,
   TEN : 10, JACK : 11, QUEEN : 12, KING : 13};
 bs.currentRank = bs.RANKS.ACE;
+bs.isWinner = false;
+bs.NO_WINNER_INDEX = -1;
+bs.winningPlayerIndex = bs.NO_WINNER_INDEX;
 
 /*
   @pre none
@@ -458,6 +461,29 @@ function announceSubmission(numberOfCardsSubmitted) {
     "submitted " + numberOfCardsSubmitted + " cards of rank " +
     displayableRank(bs.currentRank);
   $("#announcement").html(output);
+}
+
+/*
+  @pre nothing significant (e.g. players exist); can't be more than
+  one player with no cards (which would be impossible in the game)
+  @post if a player has no cards left, he's marked as the winner
+  through an update of bs.winningPlayerIndex, and the game is
+  told that a winner exists through an update of bs.isWinner
+  @hasTest yes
+  @returns nothing
+  @throws nothing
+*/
+function checkForWin() {
+  for (var i = 0; i < bs.players.length; ++i) {
+    if (bs.players[i].cards.length === 0) {
+      bs.isWinner = true;
+      bs.winningPlayerIndex = i;
+      return;
+    }
+  }
+
+  bs.isWinner = false;
+  bs.winningPlayerIndex = bs.NO_WINNER_INDEX;
 }
 
 /*
