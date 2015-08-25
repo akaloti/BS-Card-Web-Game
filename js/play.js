@@ -501,7 +501,7 @@ function checkForWin() {
 */
 function updateWebpageForWinner() {
   announceWinner();
-  // removeDisplayedCards();
+  removeCardInteraction();
   // stopGame();
 }
 
@@ -516,6 +516,20 @@ function updateWebpageForWinner() {
 function announceWinner() {
   $("#announcement").html("The winner is: Player " +
     (bs.winningPlayerIndex + 1));
+}
+
+/*
+  @pre none
+  @post any means that the players can use to interact with cards
+  has been removed
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
+function removeCardInteraction() {
+  $("#game-indicators").remove();
+  $("#card-display").remove();
+  $("#submit").remove();
 }
 
 /*
