@@ -17,6 +17,7 @@ bs.currentRank = bs.RANKS.ACE;
 bs.isWinner = false;
 bs.NO_WINNER_INDEX = -1;
 bs.winningPlayerIndex = bs.NO_WINNER_INDEX;
+bs.numberOfCardsSubmitted = 0; // updated each turn
 
 /*
   @pre none
@@ -383,7 +384,8 @@ function displayableSuit(suit) {
 */
 function submitTurn() {
   if (isValidMove()) {
-    announceSubmission(submitCards());
+    bs.numberOfCardsSubmitted = submitCards();
+    announceSubmission(bs.numberOfCardsSubmitted);
 
     bs.currentBSAskingIndex =
       getIncrementedPlayerIndex(bs.currentPlayerIndex);
