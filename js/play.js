@@ -469,6 +469,40 @@ function announceSubmission(numberOfCardsSubmitted) {
 }
 
 /*
+  @pre none besides the obvious (e.g. players exist)
+  @post each player (besides the current turn's player) has been
+  asked (in order) if she wants to call BS
+  @hasTest no
+  @returns none
+  @throws none
+*/
+function checkForCallsBS() {
+  for (var i = 0; i < bs.players.length; ++i) {
+    if (i != bs.currentPlayerIndex) {
+      askIfCallBS(i);
+    }
+  }
+}
+
+/*
+  @pre none
+  @post the player indicated by playerIndex has been shown his cards
+  and asked if he wants to call "BS" on the current player's move
+  @hasTest no
+  @param playerIndex
+  @returns nothing
+  @throws nothing
+*/
+function askIfCallBS(playerIndex) {
+  // replace the current turn's player's cards by the asked player's
+  // cards
+
+  // generate the prompt
+
+  // temporarily replace the submit button with the options yes or no
+}
+
+/*
   @pre nothing significant (e.g. players exist); can't be more than
   one player with no cards (which would be impossible in the game)
   @post if a player has no cards left, he's marked as the winner
