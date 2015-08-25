@@ -24,7 +24,8 @@
   </ul>
 </div>
 
-<a id="submit" href="#submit">Submit</a>
+<div id="submit-button">
+</div>
 
 <script>
   // To get around not being able to use PHP in a JavaScript file

@@ -511,6 +511,7 @@ function askIfCallBS(playerIndex) {
   $("#prompt").html("Would you like to call BS?");
 
   // temporarily hide the submit button
+  showSubmitButton(false);
 
   // temporarily disable event handlers
 
@@ -605,7 +606,7 @@ function setUpGame() {
   $("#displayed-cards li:first-child").
       addClass("hovered");
 
-  $("a[href='#submit']").click(submitTurn);
+  showSubmitButton(true);
 
   $(document).keydown(function(e) {
     var keyCodeDown = 40;
@@ -620,6 +621,25 @@ function setUpGame() {
     else if (e.which === keyCodeSpace)
       selectOrUnselectCard();
   });
+}
+
+/*
+  @pre none
+  @post see @param
+  @hasTest no
+  @param bool true if want to generate submit button and click handler;
+  false if want to remove it
+  @returns nothing
+  @throws nothing
+*/
+function showSubmitButton(bool) {
+  if (bool) {
+    $("#submit-button").append(
+      "<a href='#submit-button'>Submit</a>");
+    $("a[href='#submit-button']").click(submitTurn);
+  }
+  else
+    $("#submit-button").empty();
 }
 
 /*
