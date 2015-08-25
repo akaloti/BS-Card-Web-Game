@@ -292,3 +292,31 @@ function testSubmitCards(assert, numberOfCards,
   // of submitCards()
   $("#qunit-fixture").empty();
 }
+
+QUnit.test("checkForWin()", function(assert) {
+  // Create artificial environment in which there are three players
+  // and in which only the second player has no cards
+  createArtificialPlayers(3);
+  createArtificialCards(5, 0);
+  createArtificialCards(5, 2);
+  bs.winningPlayerIndex = bs.NO_WINNER_INDEX;
+  bs.isWinner = false;
+
+  // Call the function and test the postcondition
+  checkForWin();
+  assert.equal(bs.isWinner, true, "Winner is detected");
+  assert.equal(bs.winningPlayerIndex, 1,
+    "bs.winningPlayerIndex is correctly associated with the winner");
+
+  // Change the artificial environment so that none of the players
+  // are winners
+  createArtificialCards(5, 1);
+  bs.winningPlayerIndex = bs.NO_WINNER_INDEX;
+  bs.isWinner = true; // set to true so that a change can be detected
+
+  // Call the function and test the postcondition
+  checkForWin();
+  assert.equal(bs.isWinner, false, "Lack of winner is detected");
+  assert.equal(bs.winningPlayerIndex, bs.NO_WINNER_INDEX,
+    "bs.winningPlayerIndex isn't affected if no winner");
+});
