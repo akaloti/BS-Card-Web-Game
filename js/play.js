@@ -512,7 +512,7 @@ function askIfCallBS(playerIndex) {
     ", would you like to call BS?");
 
   // temporarily hide the submit button
-  showSubmitButton(false);
+  createSubmitButton(false);
 
   // temporarily disable event handlers
   enableResponseToKeyPresses(false);
@@ -608,7 +608,7 @@ function setUpGame() {
   $("#displayed-cards li:first-child").
       addClass("hovered");
 
-  showSubmitButton(true);
+  createSubmitButton(true);
   enableResponseToKeyPresses(true);
 }
 
@@ -621,7 +621,7 @@ function setUpGame() {
   @returns nothing
   @throws nothing
 */
-function showSubmitButton(bool) {
+function createSubmitButton(bool) {
   if (bool) {
     $("#submit-button").append(
       "<a href='#submit-button'>Submit</a>");
