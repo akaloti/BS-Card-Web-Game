@@ -342,6 +342,7 @@ function setUpTestIsBS(firstIsBS, secondIsBS, thirdIsBS) {
 QUnit.test("isBS()", function(assert) {
   // Create aritifical environment
   bs.currentRank = bs.RANKS.JACK;
+  bs.numberOfCardsSubmitted = 3;
   setUpTestIsBS(false, false, true);
   assert.equal(isBS(), true, "BS due to one card was detected");
   setUpTestIsBS(true, true, true);

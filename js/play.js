@@ -531,6 +531,45 @@ function askIfCallBS(playerIndex) {
 }
 
 /*
+  @pre
+  @post
+  @hasTest
+  @param
+  @returns
+  @throws
+*/
+function callsBS() {
+  // reveal cards
+  // if correct call
+    // give center pile to lying player
+    // return to game
+  // if false call
+    // give center pile to incorrect player
+    // prompt the next player to call BS, or check for win if no
+    // more players to ask
+}
+
+/*
+  @pre bs.currentRank, bs.numberOfCardsSubmitted, and bs.centerPile
+  are correct
+  @post n/a
+  @hasTest yes
+  @returns true if not all of the submitted cards are of the current
+  rank; false otherwise
+  @throws nothing
+*/
+function isBS() {
+  // Check a number of cards at the top of the center pile equal
+  // to the number of cards submitted
+  for (var i = 0; i < bs.numberOfCardsSubmitted; ++i) {
+    var cardToCheck = bs.centerPile[bs.centerPile.length - 1 - i];
+    if (cardToCheck.rank !== bs.currentRank)
+      return true;
+  }
+  return false;
+}
+
+/*
   @pre nothing significant (e.g. players exist); can't be more than
   one player with no cards (which would be impossible in the game)
   @post if a player has no cards left, he's marked as the winner
@@ -675,6 +714,7 @@ function createBSCallButtons(bool) {
     $("#bs-call-buttons").append(
       "<a id='bs-yes' href='#bs-call-buttons'>Yes</a><br>").
       append("<a id='bs-no' href='#bs-call-buttons'>No</a>");
+    $("a#bs-yes").click(callsBS);
   }
   else
     $("#bs-call-buttons").empty();
