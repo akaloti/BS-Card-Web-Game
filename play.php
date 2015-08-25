@@ -11,14 +11,14 @@
 </head>
 <body>
 
-<h1>Congratulations! You are now playing a game.</h1>
-
-<p>Current player: <span id="current-player"></span></p>
-<p>Current rank: <span id="current-rank"></span></p>
+<div id="game-indicators">
+  <p>Current player: <span id="current-player"></span></p>
+  <p>Current rank: <span id="current-rank"></span></p>
+</div>
 
 <p id="announcement"></p>
 
-<div>Your cards:
+<div id="card-display">Your cards:
   <ul id="displayed-cards">
   </ul>
 </div>
