@@ -327,15 +327,16 @@ function nextTurn() {
   @pre bs.currentPlayerIndex has been updated
   @post webpage displays list of current player's cards
   @hasTest yes
+  @param playerIndex index of the player whose cards to display
   @returns nothing
   @throws nothing
 */
-function updateDisplayedCards() {
+function updateDisplayedCards(playerIndex) {
   // Clear the previous list
   $("#displayed-cards").html("");
 
   // Create the current list
-  var cards = bs.players[bs.currentPlayerIndex].cards;
+  var cards = bs.players[playerIndex].cards;
   for (var cardIndex in cards) {
     $("#displayed-cards").append("<li>" +
       displayableRank(cards[cardIndex].rank) + " of " +

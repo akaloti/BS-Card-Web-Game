@@ -209,15 +209,21 @@ QUnit.test("updateDisplayedCards()", function(assert) {
   $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
 
   // Create artificial environment
-  createArtificialPlayers(1);
-  bs.currentPlayerIndex = 0;
-  var numberOfCards = 6;
-  createArtificialCards(numberOfCards, bs.currentPlayerIndex);
+  createArtificialPlayers(3);
+  var numberOfCards1 = 6;
+  var numberOfCards3 = 2;
+  createArtificialCards(numberOfCards1, 0);
+  createArtificialCards(numberOfCards3, 2);
 
-  updateDisplayedCards();
+  // Test display of the third artificial player's cards
+  updateDisplayedCards(2);
+  assert.equal($("#displayed-cards li").length, numberOfCards3,
+    "The correct player's cards are displayed");
 
-  assert.equal($("#displayed-cards li").length, numberOfCards,
-    "All of the current player's cards are displayed");
+  // Test display of the first artificial player's cards
+  updateDisplayedCards(0);
+  assert.equal($("#displayed-cards li").length, numberOfCards1,
+    "The correct player's cards are displayed");
 });
 
 QUnit.test("displayableRank()", function(assert) {
