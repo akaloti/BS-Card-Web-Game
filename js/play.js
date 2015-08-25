@@ -515,6 +515,7 @@ function askIfCallBS(playerIndex) {
   showSubmitButton(false);
 
   // temporarily disable event handlers
+  enableResponseToKeyPresses(false);
 
   // add yes and no buttons;
   // if the yes button is clicked, the call of BS is checked and
