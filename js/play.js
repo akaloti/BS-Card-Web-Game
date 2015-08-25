@@ -508,7 +508,8 @@ function askIfCallBS(playerIndex) {
   updateDisplayedCards(playerIndex);
 
   // generate the prompt
-  $("#prompt").html("Would you like to call BS?");
+  $("#prompt").html("Player " + (playerIndex + 1) +
+    ", would you like to call BS?");
 
   // temporarily hide the submit button
   showSubmitButton(false);
