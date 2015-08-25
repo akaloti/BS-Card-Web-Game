@@ -1,13 +1,11 @@
 Next (in order of descending priority):
--turn taking; submit turn
--make center pile
 -look into nth-child error that pops up in console in unit testing
 -write an application dictionary (as a webpage)
 --(e.g. define: contract, center pile, pick, hover)
 -interim between turns to allow switch of player looking at the screen
 -fix acceptable number of players (can't have 1 player)
 -fix error messages (e.g. argument error vs. precondition error)
--default values for object parameters? (or exception?); unit tests
+-default values for Class parameters? (or exception?); unit tests
 -determine who goes first based on the order in which the cards
  were dealt (for fairness)
 
@@ -31,6 +29,7 @@ Considerable:
 -look into generating tests automatically
 -CSS variables
 -consider performance issues (e.g. with function append())
+-modules for unit tests (e.g. based on which file each function is in)
 
 For README:
 -note the use of the hook regarding trailing whitespace; include directions
