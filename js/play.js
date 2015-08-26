@@ -598,6 +598,27 @@ function revealSubmittedCards(bool) {
 }
 
 /*
+  @pre bs.centerPile is correct
+  @post all the cards in bs.centerPile have been transferred to the
+  player indicated by playerIndex
+  @hasTest yes
+  @param playerIndex the index of the player in bs.players that will
+  receive the cards that are in bs.centerPile
+  @returns number of cards transferred
+  @throws nothing
+*/
+function giveCenterPileTo(playerIndex) {
+  var numberOfCardsTransferred = 0;
+
+  while (bs.centerPile.length > 0) {
+    bs.players[playerIndex].cards.push(bs.centerPile.pop());
+    ++numberOfCardsTransferred;
+  }
+
+  return numberOfCardsTransferred;
+}
+
+/*
   @pre nothing significant (e.g. players exist); can't be more than
   one player with no cards (which would be impossible in the game)
   @post if a player has no cards left, he's marked as the winner

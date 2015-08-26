@@ -351,6 +351,25 @@ QUnit.test("isBS()", function(assert) {
   assert.equal(isBS(), false, "Lack of BS was detected");
 });
 
+QUnit.test("giveCenterPileTo()", function(assert) {
+  // Create artificial environment
+  bs.centerPile = [];
+  var numberOfCards = 5;
+  for (var i = 0; i < numberOfCards; ++i) {
+    bs.centerPile.push(new Card(bs.SUITS.HEART, bs.RANKS.ACE));
+  }
+  createArtificialPlayers(3);
+  var indexPlayerToTransferTo = 2;
+
+  assert.equal(giveCenterPileTo(indexPlayerToTransferTo),
+    numberOfCards, "Number of transferred cards is returned");
+  assert.equal(bs.centerPile.length, 0,
+    "The center pile has been emptied");
+  assert.equal(bs.players[indexPlayerToTransferTo].cards.length,
+    numberOfCards,
+    "The correct player has been given the correct number of cards");
+});
+
 QUnit.test("checkForWin()", function(assert) {
   // Create artificial environment in which there are three players
   // and in which only the second player has no cards
