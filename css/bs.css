@@ -13,3 +13,7 @@
 #submission-display {
   background-color: yellow;
 }
+
+.invisible {
+  visibility: hidden;
+}

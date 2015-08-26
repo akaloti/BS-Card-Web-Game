@@ -321,10 +321,26 @@ function displayIndicators() {
 */
 function nextTurn() {
   updateIndicators();
+  waitForPlayer(bs.currentPlayerIndex);
   displayIndicators();
   updateDisplayedCards(bs.currentPlayerIndex);
   bs.currentHoveredCardIndex = updateHoveredCard(
     bs.currentHoveredCardIndex, "reset");
+}
+
+/*
+  @pre none
+  @post webpage is hidden, except for a message telling the demanded
+  player (indicatd by playerIndex) to press Spacebar
+  @hasTest no (only webpage manipulation and jQuery functions
+  are used)
+  @param playerIndex the index in bs.players of the player who is
+  being waited for
+  @returns nothing
+  @throws nothing
+*/
+function waitForPlayer(playerIndex) {
+  $("#game").addClass("invisible");
 }
 
 /*
