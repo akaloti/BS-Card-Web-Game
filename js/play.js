@@ -505,6 +505,8 @@ function announceSubmission(numberOfCardsSubmitted) {
   @throws nothing
 */
 function askIfCallBS(playerIndex) {
+  // wait for player marked by playerIndex to confirm himself
+
   // replace the current turn's player's cards by the asked player's
   // cards
   updateDisplayedCards(playerIndex);
@@ -565,9 +567,11 @@ function callsBS() {
   revealSubmittedCards(true);
 
   // if correct call
+    // announce this
     // give center pile to lying player
     // return to game
   // if false call
+    // announce this
     // give center pile to incorrect player
     // prompt the next player to call BS, or check for win if no
     // more players to ask
