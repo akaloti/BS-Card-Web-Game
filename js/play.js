@@ -566,11 +566,10 @@ function prepareWebpageForAskBS(bool) {
 function callsBS() {
   prepareWebpageForAskBS(false);
   revealSubmittedCards(true);
-  announceCallBS();
 
   // Wait a second so that people can see the announcement
   setTimeout(function() {
-    resolveBSCall(wasBS)
+    resolveBSCall(announceCallBS())
     },
     1000);
 }
@@ -578,8 +577,8 @@ function callsBS() {
 /*
   @pre bs.currentPlayerIndex and bs.currentBSAskingIndex are correct
   @post the result of a player's calling BS has been announced
-  @hasTest no
-  @returns nothing
+  @hasTest no (because returns result of isBS(), which is tested)
+  @returns true if the current player was lying, false otherwise
   @throws nothing
 */
 function announceCallBS() {
@@ -595,6 +594,8 @@ function announceCallBS() {
       " wasn't lying! Player " + (bs.currentBSAskingIndex + 1) +
       " gets the center pile.");
   }
+
+  return wasBS;
 }
 
 /*
