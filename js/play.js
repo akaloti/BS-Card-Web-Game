@@ -560,18 +560,21 @@ function prepareWebpageForAskBS(bool) {
   timeout has been set before calling the function to continue the
   game logic
   @hasTest no
+  @param bool true if a player is calling BS, false otherwise
   @returns nothing
   @throws nothing
 */
-function callBS() {
-  prepareWebpageForAskBS(false);
-  revealSubmittedCards(true);
+function callBS(bool) {
+  if (bool) {
+    prepareWebpageForAskBS(false);
+    revealSubmittedCards(true);
 
-  // Make the announcement and wait so that people can see it
-  setTimeout(function() {
-    resolveBSCall(announceCallBS())
-    },
-    1000);
+    // Make the announcement and wait so that people can see it
+    setTimeout(function() {
+      resolveBSCall(announceCallBS())
+      },
+      1000);
+  }
 }
 
 /*
@@ -852,7 +855,12 @@ function createBSCallButtons(bool) {
     $("#bs-call-buttons").append(
       "<a id='bs-yes' href='#bs-call-buttons'>Yes</a><br>").
       append("<a id='bs-no' href='#bs-call-buttons'>No</a>");
-    $("a#bs-yes").click(callBS);
+    $("a#bs-yes").click(function() {
+      callBS(true);
+    });
+    $("a#bs-no").click(function() {
+      callBS(false);
+    });
   }
   else
     $("#bs-call-buttons").empty();
