@@ -751,7 +751,7 @@ function announceWinner() {
 function removeCardInteraction() {
   $("#game-indicators").remove();
   $("#card-display").remove();
-  createSubmitButton(false);
+  prepareWebpageForGaming(false);
 }
 
 /*
