@@ -341,6 +341,11 @@ function nextTurn() {
 */
 function waitForPlayer(playerIndex) {
   $("#game").addClass("invisible");
+
+  // disable key interaction
+
+  // set event handler that contains function to make webpage
+  // reappear and enable key interaction
 }
 
 /*
@@ -529,7 +534,7 @@ function askIfCallBS() {
 */
 function prepareWebpageForGaming(bool) {
   createSubmitButton(bool);
-  enableResponseToKeyPresses(bool);
+  enableGameResponseToKeyPresses(bool);
 }
 
 /*
@@ -839,7 +844,7 @@ function setUpGame() {
       addClass("hovered");
 
   createSubmitButton(true);
-  enableResponseToKeyPresses(true);
+  enableGameResponseToKeyPresses(true);
 }
 
 /*
@@ -865,11 +870,12 @@ function createSubmitButton(bool) {
   @pre none
   @post see @param
   @hasTest no
-  @param bool true to enable responses to key presses; false otherwise
+  @param bool true to enable game-affecting responses to key presses;
+  false otherwise
   @returns nothing
   @throws nothing
 */
-function enableResponseToKeyPresses(bool) {
+function enableGameResponseToKeyPresses(bool) {
   if (bool)
     $(document).on("keydown", function(e) {
       var keyCodeDown = 40;
