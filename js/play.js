@@ -563,11 +563,11 @@ function prepareWebpageForAskBS(bool) {
   @returns nothing
   @throws nothing
 */
-function callsBS() {
+function callBS() {
   prepareWebpageForAskBS(false);
   revealSubmittedCards(true);
 
-  // Wait a second so that people can see the announcement
+  // Make the announcement and wait so that people can see it
   setTimeout(function() {
     resolveBSCall(announceCallBS())
     },
@@ -852,7 +852,7 @@ function createBSCallButtons(bool) {
     $("#bs-call-buttons").append(
       "<a id='bs-yes' href='#bs-call-buttons'>Yes</a><br>").
       append("<a id='bs-no' href='#bs-call-buttons'>No</a>");
-    $("a#bs-yes").click(callsBS);
+    $("a#bs-yes").click(callBS);
   }
   else
     $("#bs-call-buttons").empty();
