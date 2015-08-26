@@ -34,6 +34,7 @@ Considerable:
 -CSS variables
 -consider performance issues (e.g. with function append())
 -modules for unit tests (e.g. based on which file each function is in)
+-AI
 
 For README:
 -note the use of the hook regarding trailing whitespace; include directions
