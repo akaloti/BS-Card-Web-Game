@@ -628,6 +628,18 @@ function resolveBSCall(wasLie) {
     giveCenterPileTo(bs.currentBSAskingIndex);
   }
 
+  continueGameFromBSPrompting();
+}
+
+/*
+  @pre none
+  @post the game is set up to continue, either by responding to victory
+  or by going on to the next turn
+  @hasTest no (because calls other functions only)
+  @returns nothing
+  @throws nothing
+*/
+function continueGameFromBSPrompting() {
   checkForWin();
   if (bs.isWinner) {
     updateWebpageForWinner();
