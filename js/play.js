@@ -321,10 +321,49 @@ function displayIndicators() {
 */
 function nextTurn() {
   updateIndicators();
-  displayIndicators();
-  updateDisplayedCards(bs.currentPlayerIndex);
-  bs.currentHoveredCardIndex = updateHoveredCard(
-    bs.currentHoveredCardIndex, "reset");
+  waitForPlayer(bs.currentPlayerIndex, function() {
+    displayIndicators();
+    updateDisplayedCards(bs.currentPlayerIndex);
+    bs.currentHoveredCardIndex = updateHoveredCard(
+      bs.currentHoveredCardIndex, "reset");
+  });
+}
+
+/*
+  @pre none
+  @post webpage is hidden, except for a message telling the demanded
+  player (indicatd by playerIndex) to press spacebar
+  @hasTest no (only webpage manipulation and jQuery functions
+  are used)
+  @param playerIndex the index in bs.players of the player who is
+  being waited for
+  @param endCallback code (e.g. function) specifying what to do
+  after the player indicated by playerIndex presses the key
+  @returns nothing
+  @throws nothing
+*/
+function waitForPlayer(playerIndex, endCallback) {
+  $("#game").addClass("invisible");
+
+  enableGameResponseToKeyPresses(false);
+
+  $("#between-turns-announcements").html(
+    "<p id='interim'>Please have player " + (playerIndex + 1) +
+    " press the spacebar. Everyone else should look away.</p>");
+
+  // set event handler that contains function to make webpage
+  // reappear and enable key interaction
+  $(document).on("keydown", function(e) {
+    var keyCodeSpace = 32;
+    if (e.which === keyCodeSpace) {
+      $(document).off("keydown");
+      $("#between-turns-announcements").html("");
+      $("#game").removeClass("invisible");
+      enableGameResponseToKeyPresses(true);
+
+      endCallback();
+    }
+  });
 }
 
 /*
@@ -495,10 +534,10 @@ function announceSubmission(numberOfCardsSubmitted) {
   @throws nothing
 */
 function askIfCallBS() {
-  // wait for player-to-prompt to confirm his presence
-
-  prepareWebpageForGaming(false);
-  prepareWebpageForAskBS(true);
+  waitForPlayer(bs.currentBSAskingIndex, function() {
+    prepareWebpageForGaming(false);
+    prepareWebpageForAskBS(true);
+  });
 }
 
 /*
@@ -513,7 +552,7 @@ function askIfCallBS() {
 */
 function prepareWebpageForGaming(bool) {
   createSubmitButton(bool);
-  enableResponseToKeyPresses(bool);
+  enableGameResponseToKeyPresses(bool);
 }
 
 /*
@@ -823,7 +862,7 @@ function setUpGame() {
       addClass("hovered");
 
   createSubmitButton(true);
-  enableResponseToKeyPresses(true);
+  enableGameResponseToKeyPresses(true);
 }
 
 /*
@@ -849,11 +888,12 @@ function createSubmitButton(bool) {
   @pre none
   @post see @param
   @hasTest no
-  @param bool true to enable responses to key presses; false otherwise
+  @param bool true to enable game-affecting responses to key presses;
+  false otherwise
   @returns nothing
   @throws nothing
 */
-function enableResponseToKeyPresses(bool) {
+function enableGameResponseToKeyPresses(bool) {
   if (bool)
     $(document).on("keydown", function(e) {
       var keyCodeDown = 40;

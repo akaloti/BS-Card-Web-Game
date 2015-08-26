@@ -11,31 +11,36 @@
 </head>
 <body>
 
-<div id="game-indicators">
-  <p>Current player: <span id="current-player"></span></p>
-  <p>Current rank: <span id="current-rank"></span></p>
+<div id="between-turns-announcements">
 </div>
 
-<!-- Elements that deal solely with prompting a player about
-  whether or not he wants to call BS -->
-<div id="prompting-for-call-bs">
-  <p id="call-bs-prompt"></p>
-  <div id="bs-call-buttons">
+<section id="game">
+  <div id="game-indicators">
+    <p>Current player: <span id="current-player"></span></p>
+    <p>Current rank: <span id="current-rank"></span></p>
   </div>
-</div>
 
-<p id="announcement"></p>
+  <!-- Elements that deal solely with prompting a player about
+    whether or not he wants to call BS -->
+  <div id="prompting-for-call-bs">
+    <p id="call-bs-prompt"></p>
+    <div id="bs-call-buttons">
+    </div>
+  </div>
 
-<div id="submission-display">
-</div>
+  <p id="announcement"></p>
 
-<div id="card-display">Your cards:
-  <ul id="displayed-cards">
-  </ul>
-</div>
+  <div id="submission-display">
+  </div>
 
-<div id="submit-button">
-</div>
+  <div id="card-display">Your cards:
+    <ul id="displayed-cards">
+    </ul>
+  </div>
+
+  <div id="submit-button">
+  </div>
+</section>
 
 <script>
   // To get around not being able to use PHP in a JavaScript file

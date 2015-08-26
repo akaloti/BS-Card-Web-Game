@@ -13,3 +13,11 @@
 #submission-display {
   background-color: yellow;
 }
+
+.invisible {
+  visibility: hidden;
+}
+
+#interim {
+  font-size: 2em;
+}
