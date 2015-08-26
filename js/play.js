@@ -505,10 +505,6 @@ function announceSubmission(numberOfCardsSubmitted) {
 function askIfCallBS() {
   // wait for player-to-prompt to confirm his presence
 
-  // replace the current turn's player's cards by the asked player's
-  // cards
-  updateDisplayedCards(bs.currentBSAskingIndex);
-
   // temporarily hide the submit button
   createSubmitButton(false);
 
@@ -537,6 +533,10 @@ function askIfCallBS() {
 */
 function prepareWebpageForAskBS(bool) {
   if (bool) {
+    // replace the current turn's player's cards by the asked player's
+    // cards
+    updateDisplayedCards(bs.currentBSAskingIndex);
+
     // generate the prompt
     $("#call-bs-prompt").html("Player " +
       (bs.currentBSAskingIndex + 1) + ", would you like to call BS?");
