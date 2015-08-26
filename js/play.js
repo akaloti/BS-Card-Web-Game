@@ -505,11 +505,7 @@ function announceSubmission(numberOfCardsSubmitted) {
 function askIfCallBS() {
   // wait for player-to-prompt to confirm his presence
 
-  // temporarily hide the submit button
-  createSubmitButton(false);
-
-  // temporarily disable event handlers
-  enableResponseToKeyPresses(false);
+  prepareWebpageForGaming(false);
 
   // add yes and no buttons;
   // if the yes button is clicked, the call of BS is checked and
@@ -520,6 +516,21 @@ function askIfCallBS() {
   // return the submit button, or to determine whether to call
   // this function again with the next index.
   prepareWebpageForAskBS(true);
+}
+
+/*
+  @pre none
+  @post see @param
+  @hasTest no
+  @param bool true to prepare webpage for continuing the game (i.e.
+  moving from the state of prompting players to call BS); false
+  to unprepare the webpage
+  @returns nothing
+  @throws nothing
+*/
+function prepareWebpageForGaming(bool) {
+  createSubmitButton(bool);
+  enableResponseToKeyPresses(bool);
 }
 
 /*
