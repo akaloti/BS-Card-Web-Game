@@ -1,6 +1,5 @@
 Next (in order of descending priority):
--interim between turns to allow switch of player looking at the screen
- (or use alerts)
+-make seen by everyone the announcements that everyone should see
 -cleanup comments
 -look into nth-child error that pops up in console in unit testing
 -write an application dictionary (as a webpage)
