@@ -555,12 +555,13 @@ function prepareWebpageForAskBS(bool) {
 }
 
 /*
-  @pre
-  @post
-  @hasTest
-  @param
-  @returns
-  @throws
+  @pre bs.currentPlayerIndex and bs.currentBSAskingIndex are correct
+  @post the result of a player's calling BS has been announced, and a
+  timeout has been set before calling the function to continue the
+  game logic
+  @hasTest no
+  @returns nothing
+  @throws nothing
 */
 function callsBS() {
   prepareWebpageForAskBS(false);
