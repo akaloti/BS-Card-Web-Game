@@ -498,15 +498,6 @@ function askIfCallBS() {
   // wait for player-to-prompt to confirm his presence
 
   prepareWebpageForGaming(false);
-
-  // add yes and no buttons;
-  // if the yes button is clicked, the call of BS is checked and
-  // evaluated, then a win is checked, and if there is no win, the
-  // game continues and the submit button is returned
-  // if the no button is called, the next player index is checked
-  // to determine whether to check for a win and (if there is no win)
-  // return the submit button, or to determine whether to call
-  // this function again with the next index.
   prepareWebpageForAskBS(true);
 }
 
@@ -556,11 +547,11 @@ function prepareWebpageForAskBS(bool) {
 
 /*
   @pre bs.currentPlayerIndex and bs.currentBSAskingIndex are correct
-  @post the result of a player's calling BS has been announced, and a
-  timeout has been set before calling the function to continue the
-  game logic
+  @post see @param
   @hasTest no
-  @param bool true if a player is calling BS, false otherwise
+  @param bool true if a player is calling BS, so the game will resolve
+  this call; false if player isn't calling BS, so the game will either
+  ask the next player, check for a win, or go to the next turn
   @returns nothing
   @throws nothing
 */
@@ -574,6 +565,28 @@ function callBS(bool) {
       resolveBSCall(announceCallBS())
       },
       1000);
+  }
+  else {
+    // if the no button is called, the next player index is checked
+    // to determine whether to check for a win and (if there is no win)
+    // return the submit button, or to determine whether to call
+    // this function again with the next index.
+
+    bs.currentBSAskingIndex =
+      getIncrementedPlayerIndex(bs.currentBSAskingIndex);
+
+    if (bs.currentBSAskingIndex === bs.currentPlayerIndex) {
+      // each of the applicable players have been asked if
+      // he/she wants to call BS
+
+      continueGameFromBSPrompting()
+    }
+    else {
+      // ask the next player if she wants to call BS;
+      // update the prompt
+      prepareWebpageForAskBS(false);
+      askIfCallBS();
+    }
   }
 }
 
@@ -640,6 +653,10 @@ function resolveBSCall(wasLie) {
   @throws nothing
 */
 function continueGameFromBSPrompting() {
+  // Fix the webpage
+  prepareWebpageForAskBS(false);
+  $("#announcement").html("");
+
   checkForWin();
   if (bs.isWinner) {
     updateWebpageForWinner();
