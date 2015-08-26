@@ -321,25 +321,28 @@ function displayIndicators() {
 */
 function nextTurn() {
   updateIndicators();
-  waitForPlayer(bs.currentPlayerIndex);
-  displayIndicators();
-  updateDisplayedCards(bs.currentPlayerIndex);
-  bs.currentHoveredCardIndex = updateHoveredCard(
-    bs.currentHoveredCardIndex, "reset");
+  waitForPlayer(bs.currentPlayerIndex, function() {
+    displayIndicators();
+    updateDisplayedCards(bs.currentPlayerIndex);
+    bs.currentHoveredCardIndex = updateHoveredCard(
+      bs.currentHoveredCardIndex, "reset");
+  });
 }
 
 /*
   @pre none
   @post webpage is hidden, except for a message telling the demanded
-  player (indicatd by playerIndex) to press Spacebar
+  player (indicatd by playerIndex) to press spacebar
   @hasTest no (only webpage manipulation and jQuery functions
   are used)
   @param playerIndex the index in bs.players of the player who is
   being waited for
+  @param endCallback code (e.g. function) specifying what to do
+  after the player indicated by playerIndex presses the key
   @returns nothing
   @throws nothing
 */
-function waitForPlayer(playerIndex) {
+function waitForPlayer(playerIndex, endCallback) {
   $("#game").addClass("invisible");
 
   enableGameResponseToKeyPresses(false);
@@ -357,6 +360,8 @@ function waitForPlayer(playerIndex) {
       $("#between-turns-announcements").html("");
       $("#game").removeClass("invisible");
       enableGameResponseToKeyPresses(true);
+
+      endCallback();
     }
   });
 }
@@ -529,10 +534,10 @@ function announceSubmission(numberOfCardsSubmitted) {
   @throws nothing
 */
 function askIfCallBS() {
-  // wait for player-to-prompt to confirm his presence
-
-  prepareWebpageForGaming(false);
-  prepareWebpageForAskBS(true);
+  waitForPlayer(bs.currentBSAskingIndex, function() {
+    prepareWebpageForGaming(false);
+    prepareWebpageForAskBS(true);
+  });
 }
 
 /*
