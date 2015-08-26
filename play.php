@@ -16,14 +16,26 @@
   <p>Current rank: <span id="current-rank"></span></p>
 </div>
 
+<!-- Elements that deal solely with prompting a player about
+  whether or not he wants to call BS -->
+<div id="prompting-for-call-bs">
+  <p id="call-bs-prompt"></p>
+  <div id="bs-call-buttons">
+  </div>
+</div>
+
 <p id="announcement"></p>
+
+<div id="submission-display">
+</div>
 
 <div id="card-display">Your cards:
   <ul id="displayed-cards">
   </ul>
 </div>
 
-<a id="submit" href="#submit">Submit</a>
+<div id="submit-button">
+</div>
 
 <script>
   // To get around not being able to use PHP in a JavaScript file

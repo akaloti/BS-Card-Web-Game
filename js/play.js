@@ -6,6 +6,8 @@ bs.centerPile = []; // players submit cards to this pile
 bs.DECK_LENGTH = 52;
 bs.players = [];
 bs.currentPlayerIndex = 0;
+bs.currentBSAskingIndex = 0; // current player whose being asked if
+                             // wishes to call BS
 bs.currentHoveredCardIndex = 0;
 bs.SUITS = {SPADE : 0, HEART : 1, CLUB : 2, DIAMOND : 3};
 bs.RANKS = {ACE : 1, TWO : 2, THREE : 3, FOUR : 4,
@@ -15,6 +17,7 @@ bs.currentRank = bs.RANKS.ACE;
 bs.isWinner = false;
 bs.NO_WINNER_INDEX = -1;
 bs.winningPlayerIndex = bs.NO_WINNER_INDEX;
+bs.numberOfCardsSubmitted = 0; // updated each turn
 
 /*
   @pre none
@@ -205,7 +208,8 @@ function randomizePlayerOrder() {
   @throws nothing
 */
 function updateIndicators() {
-  bs.currentPlayerIndex = updateCurrentPlayerIndex(bs.currentPlayerIndex);
+  bs.currentPlayerIndex =
+    getIncrementedPlayerIndex(bs.currentPlayerIndex);
   bs.currentRank = updateCurrentRank(bs.currentRank);
   bs.currentHoveredCardIndex = updateHoveredCard(
     bs.currentHoveredCardIndex, "reset");
@@ -269,7 +273,7 @@ function updateHoveredCard(index, action) {
   (with wrap around, if necessary)
   @throws nothing
 */
-function updateCurrentPlayerIndex(index) {
+function getIncrementedPlayerIndex(index) {
   // Wrap around, if necessary
   if (index + 1 === bs.players.length)
     return 0;
@@ -318,7 +322,7 @@ function displayIndicators() {
 function nextTurn() {
   updateIndicators();
   displayIndicators();
-  updateDisplayedCards();
+  updateDisplayedCards(bs.currentPlayerIndex);
   bs.currentHoveredCardIndex = updateHoveredCard(
     bs.currentHoveredCardIndex, "reset");
 }
@@ -327,15 +331,16 @@ function nextTurn() {
   @pre bs.currentPlayerIndex has been updated
   @post webpage displays list of current player's cards
   @hasTest yes
+  @param playerIndex index of the player whose cards to display
   @returns nothing
   @throws nothing
 */
-function updateDisplayedCards() {
+function updateDisplayedCards(playerIndex) {
   // Clear the previous list
   $("#displayed-cards").html("");
 
   // Create the current list
-  var cards = bs.players[bs.currentPlayerIndex].cards;
+  var cards = bs.players[playerIndex].cards;
   for (var cardIndex in cards) {
     $("#displayed-cards").append("<li>" +
       displayableRank(cards[cardIndex].rank) + " of " +
@@ -379,15 +384,20 @@ function displayableSuit(suit) {
 */
 function submitTurn() {
   if (isValidMove()) {
-    announceSubmission(submitCards());
-    // checkForCallsBS();
-    checkForWin();
+    bs.numberOfCardsSubmitted = submitCards();
+    announceSubmission(bs.numberOfCardsSubmitted);
 
-    if (bs.isWinner) {
-      updateWebpageForWinner();
-    }
-    else
-      nextTurn();
+    bs.currentBSAskingIndex =
+      getIncrementedPlayerIndex(bs.currentPlayerIndex);
+    askIfCallBS();
+
+    // checkForWin();
+
+    // if (bs.isWinner) {
+      // updateWebpageForWinner();
+    // }
+    // else
+      // nextTurn();
   }
   else
     alert("Invalid move: please pick at least one card");
@@ -469,6 +479,184 @@ function announceSubmission(numberOfCardsSubmitted) {
 }
 
 /*
+  @pre none besides the obvious (e.g. players exist)
+  @post each player (besides the current turn's player) has been
+  asked (in order) if she wants to call BS
+  @hasTest no
+  @returns none
+  @throws none
+*/
+// function checkForCallsBS() {
+  // for (var i = 0; i < bs.players.length; ++i) {
+    // if (i != bs.currentPlayerIndex) {
+      // askIfCallBS(i);
+    // }
+  // }
+// }
+
+/*
+  @pre bs.currentBSAskingIndex is correct
+  @post the player indicated by playerIndex has been shown his cards
+  and asked if he wants to call "BS" on the current player's move
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
+function askIfCallBS() {
+  // wait for player-to-prompt to confirm his presence
+
+  prepareWebpageForGaming(false);
+
+  // add yes and no buttons;
+  // if the yes button is clicked, the call of BS is checked and
+  // evaluated, then a win is checked, and if there is no win, the
+  // game continues and the submit button is returned
+  // if the no button is called, the next player index is checked
+  // to determine whether to check for a win and (if there is no win)
+  // return the submit button, or to determine whether to call
+  // this function again with the next index.
+  prepareWebpageForAskBS(true);
+}
+
+/*
+  @pre none
+  @post see @param
+  @hasTest no
+  @param bool true to prepare webpage for continuing the game (i.e.
+  moving from the state of prompting players to call BS); false
+  to unprepare the webpage
+  @returns nothing
+  @throws nothing
+*/
+function prepareWebpageForGaming(bool) {
+  createSubmitButton(bool);
+  enableResponseToKeyPresses(bool);
+}
+
+/*
+  @pre bs.currentBSAskingIndex is correct
+  @post see @param
+  @hasTest no
+  @param bool true to set up the webpage to ask a player if she wants
+  to call BS; false to remove those elements regarding that setup
+  @returns nothing
+  @throws nothing
+*/
+function prepareWebpageForAskBS(bool) {
+  if (bool) {
+    // replace the current turn's player's cards by the asked player's
+    // cards
+    updateDisplayedCards(bs.currentBSAskingIndex);
+
+    // generate the prompt
+    $("#call-bs-prompt").html("Player " +
+      (bs.currentBSAskingIndex + 1) + ", would you like to call BS?");
+
+    createBSCallButtons(true);
+  }
+  else {
+    // remove the prompt
+    $("#call-bs-prompt").html("");
+
+    createBSCallButtons(false);
+  }
+}
+
+/*
+  @pre
+  @post
+  @hasTest
+  @param
+  @returns
+  @throws
+*/
+function callsBS() {
+  prepareWebpageForAskBS(false);
+  revealSubmittedCards(true);
+
+  // if correct call
+    // announce this and wait for some time
+    // give center pile to lying player
+    // return to game
+  // if false call
+    // announce this and wait for some time
+    // give center pile to incorrect player
+    // prompt the next player to call BS, or check for win if no
+    // more players to ask
+}
+
+/*
+  @pre bs.currentRank, bs.numberOfCardsSubmitted, and bs.centerPile
+  are correct
+  @post n/a
+  @hasTest yes
+  @returns true if not all of the submitted cards are of the current
+  rank; false otherwise
+  @throws nothing
+*/
+function isBS() {
+  // Check a number of cards at the top of the center pile equal
+  // to the number of cards submitted
+  for (var i = 0; i < bs.numberOfCardsSubmitted; ++i) {
+    var cardToCheck = bs.centerPile[bs.centerPile.length - 1 - i];
+    if (cardToCheck.rank !== bs.currentRank)
+      return true;
+  }
+  return false;
+}
+
+/*
+  @pre bs.numberOfCardsSubmitted, bs.currentPlayerIndex, and
+  bs.centerPile are correct
+  @post the webpage displays the submitted cards
+  @hasTest no
+  @param bool true if wish to show submitted cards; false to remove
+  the display
+  @returns nothing
+  @throws nothing
+*/
+function revealSubmittedCards(bool) {
+  if (bool) {
+    $("#submission-display").append("<p>Player " +
+      (bs.currentPlayerIndex + 1) + " submitted the following:</p>");
+    $("#submission-display").append("<ul id='submitted-cards'></ul");
+    for (var i = 0; i < bs.numberOfCardsSubmitted; ++i) {
+      var cardToDisplay = bs.centerPile[bs.centerPile.length - 1 -i];
+      $("#submitted-cards").append("<li>" +
+        displayableRank(cardToDisplay.rank) + " of " +
+        displayableSuit(cardToDisplay.suit) + "</li>");
+    }
+  }
+  else
+    $("#submission-display").empty();
+}
+
+/*
+  @pre bs.centerPile is correct
+  @post all the cards in bs.centerPile have been transferred to the
+  player indicated by playerIndex, and that player's cards have
+  been sorted
+  @hasTest yes
+  @param playerIndex the index of the player in bs.players that will
+  receive the cards that are in bs.centerPile
+  @returns number of cards transferred
+  @throws nothing
+*/
+function giveCenterPileTo(playerIndex) {
+  var numberOfCardsTransferred = 0;
+
+  while (bs.centerPile.length > 0) {
+    bs.players[playerIndex].cards.push(bs.centerPile.pop());
+    ++numberOfCardsTransferred;
+  }
+
+  bs.players[playerIndex].cards =
+    sortCards(bs.players[playerIndex].cards);
+
+  return numberOfCardsTransferred;
+}
+
+/*
   @pre nothing significant (e.g. players exist); can't be more than
   one player with no cards (which would be impossible in the game)
   @post if a player has no cards left, he's marked as the winner
@@ -528,7 +716,7 @@ function announceWinner() {
 function removeCardInteraction() {
   $("#game-indicators").remove();
   $("#card-display").remove();
-  $("#submit").remove();
+  createSubmitButton(false);
 }
 
 /*
@@ -545,25 +733,78 @@ function setUpGame() {
   sortPlayersCards();
   randomizePlayerOrder();
   displayIndicators();
-  updateDisplayedCards();
+  updateDisplayedCards(bs.currentPlayerIndex);
   $("#displayed-cards li:first-child").
       addClass("hovered");
 
-  $("a[href='#submit']").click(submitTurn);
+  createSubmitButton(true);
+  enableResponseToKeyPresses(true);
+}
 
-  $(document).keydown(function(e) {
-    var keyCodeDown = 40;
-    var keyCodeUp = 38;
-    var keyCodeSpace = 32;
-    if (e.which === keyCodeDown)
-      bs.currentHoveredCardIndex = updateHoveredCard(
-        bs.currentHoveredCardIndex, "down");
-    else if (e.which === keyCodeUp)
-      bs.currentHoveredCardIndex = updateHoveredCard(
-        bs.currentHoveredCardIndex, "up");
-    else if (e.which === keyCodeSpace)
-      selectOrUnselectCard();
-  });
+/*
+  @pre none
+  @post see @param
+  @hasTest no
+  @param bool true if want to generate submit button and click handler;
+  false if want to remove it
+  @returns nothing
+  @throws nothing
+*/
+function createSubmitButton(bool) {
+  if (bool) {
+    $("#submit-button").append(
+      "<a href='#submit-button'>Submit</a>");
+    $("a[href='#submit-button']").click(submitTurn);
+  }
+  else
+    $("#submit-button").empty();
+}
+
+/*
+  @pre none
+  @post see @param
+  @hasTest no
+  @param bool true to enable responses to key presses; false otherwise
+  @returns nothing
+  @throws nothing
+*/
+function enableResponseToKeyPresses(bool) {
+  if (bool)
+    $(document).on("keydown", function(e) {
+      var keyCodeDown = 40;
+      var keyCodeUp = 38;
+      var keyCodeSpace = 32;
+      if (e.which === keyCodeDown)
+        bs.currentHoveredCardIndex = updateHoveredCard(
+          bs.currentHoveredCardIndex, "down");
+      else if (e.which === keyCodeUp)
+        bs.currentHoveredCardIndex = updateHoveredCard(
+          bs.currentHoveredCardIndex, "up");
+      else if (e.which === keyCodeSpace)
+        selectOrUnselectCard();
+    });
+  else
+    $(document).off("keydown");
+}
+
+/*
+  @pre none
+  @post see @param
+  @hasTest no
+  @param bool true if wish to generate "yes" and "no" buttons for
+  calling BS; false if wish to delete those buttons
+  @returns nothing
+  @throws nothing
+*/
+function createBSCallButtons(bool) {
+  if (bool) {
+    $("#bs-call-buttons").append(
+      "<a id='bs-yes' href='#bs-call-buttons'>Yes</a><br>").
+      append("<a id='bs-no' href='#bs-call-buttons'>No</a>");
+    $("a#bs-yes").click(callsBS);
+  }
+  else
+    $("#bs-call-buttons").empty();
 }
 
 /*

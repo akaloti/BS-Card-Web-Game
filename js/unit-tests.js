@@ -187,12 +187,12 @@ QUnit.test("updateHoveredCard()", function(assert) {
     "Can wrap around from first card to last card");
 });
 
-QUnit.test("updateCurrentPlayerIndex()", function(assert) {
+QUnit.test("getIncrementedPlayerIndex()", function(assert) {
   createArtificialPlayers(5);
 
-  assert.equal(updateCurrentPlayerIndex(1), 2,
+  assert.equal(getIncrementedPlayerIndex(1), 2,
     "Normal increment from 1 to 2 worked");
-  assert.equal(updateCurrentPlayerIndex(4), 0,
+  assert.equal(getIncrementedPlayerIndex(4), 0,
     "Wrap around from last player to first player worked");
 });
 
@@ -209,15 +209,21 @@ QUnit.test("updateDisplayedCards()", function(assert) {
   $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
 
   // Create artificial environment
-  createArtificialPlayers(1);
-  bs.currentPlayerIndex = 0;
-  var numberOfCards = 6;
-  createArtificialCards(numberOfCards, bs.currentPlayerIndex);
+  createArtificialPlayers(3);
+  var numberOfCards1 = 6;
+  var numberOfCards3 = 2;
+  createArtificialCards(numberOfCards1, 0);
+  createArtificialCards(numberOfCards3, 2);
 
-  updateDisplayedCards();
+  // Test display of the third artificial player's cards
+  updateDisplayedCards(2);
+  assert.equal($("#displayed-cards li").length, numberOfCards3,
+    "The correct player's cards are displayed");
 
-  assert.equal($("#displayed-cards li").length, numberOfCards,
-    "All of the current player's cards are displayed");
+  // Test display of the first artificial player's cards
+  updateDisplayedCards(0);
+  assert.equal($("#displayed-cards li").length, numberOfCards1,
+    "The correct player's cards are displayed");
 });
 
 QUnit.test("displayableRank()", function(assert) {
@@ -292,6 +298,77 @@ function testSubmitCards(assert, numberOfCards,
   // of submitCards()
   $("#qunit-fixture").empty();
 }
+
+/*
+  @pre bs.currentRank is correct
+  @post the requested artificial environment for testing the function
+  isBS has been created with three cards
+  @hasTest no
+  @param firstIsBS true if first card should be given the non-current
+  rank, false otherwise
+  @param secondIsBS same as firstIsBS, but for second card
+  @param thirdIsBS same as firstIsBS, but for third card
+  @returns nothing
+  @throws nothing
+*/
+function setUpTestIsBS(firstIsBS, secondIsBS, thirdIsBS) {
+  // Empty the center pile
+  bs.centerPile = [];
+
+  // Make sure the rank to give the BS cards is different from
+  // the current rank
+  var bsRank = bs.RANKS.JACK;
+  if (bs.currentRank === bs.RANKS.JACK)
+    bsRank = bs.RANKS.QUEEN;
+
+  var trivialSuit = bs.SUITS.HEART;
+
+  if (firstIsBS)
+    bs.centerPile.push(new Card(trivialSuit, bsRank));
+  else
+    bs.centerPile.push(new Card(trivialSuit, bs.currentRank));
+
+  if (secondIsBS)
+    bs.centerPile.push(new Card(trivialSuit, bsRank));
+  else
+    bs.centerPile.push(new Card(trivialSuit, bs.currentRank));
+
+  if (thirdIsBS)
+    bs.centerPile.push(new Card(trivialSuit, bsRank));
+  else
+    bs.centerPile.push(new Card(trivialSuit, bs.currentRank));
+}
+
+QUnit.test("isBS()", function(assert) {
+  // Create aritifical environment
+  bs.currentRank = bs.RANKS.JACK;
+  bs.numberOfCardsSubmitted = 3;
+  setUpTestIsBS(false, false, true);
+  assert.equal(isBS(), true, "BS due to one card was detected");
+  setUpTestIsBS(true, true, true);
+  assert.equal(isBS(), true, "BS due to all bad cards was detected");
+  setUpTestIsBS(false, false, false);
+  assert.equal(isBS(), false, "Lack of BS was detected");
+});
+
+QUnit.test("giveCenterPileTo()", function(assert) {
+  // Create artificial environment
+  bs.centerPile = [];
+  var numberOfCards = 5;
+  for (var i = 0; i < numberOfCards; ++i) {
+    bs.centerPile.push(new Card(bs.SUITS.HEART, bs.RANKS.ACE));
+  }
+  createArtificialPlayers(3);
+  var indexPlayerToTransferTo = 2;
+
+  assert.equal(giveCenterPileTo(indexPlayerToTransferTo),
+    numberOfCards, "Number of transferred cards is returned");
+  assert.equal(bs.centerPile.length, 0,
+    "The center pile has been emptied");
+  assert.equal(bs.players[indexPlayerToTransferTo].cards.length,
+    numberOfCards,
+    "The correct player has been given the correct number of cards");
+});
 
 QUnit.test("checkForWin()", function(assert) {
   // Create artificial environment in which there are three players
