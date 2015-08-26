@@ -390,14 +390,6 @@ function submitTurn() {
     bs.currentBSAskingIndex =
       getIncrementedPlayerIndex(bs.currentPlayerIndex);
     askIfCallBS();
-
-    // checkForWin();
-
-    // if (bs.isWinner) {
-      // updateWebpageForWinner();
-    // }
-    // else
-      // nextTurn();
   }
   else
     alert("Invalid move: please pick at least one card");
@@ -574,7 +566,10 @@ function callsBS() {
   prepareWebpageForAskBS(false);
   revealSubmittedCards(true);
 
-  if (isBS()) {
+  // The difference in verb tense is for the sake of avoiding
+  // conflicting names
+  var wasBS = isBS();
+  if (wasBS) {
     $("#announcement").html("Player " + (bs.currentPlayerIndex + 1) +
       " was lying! He/she gets the center pile.");
   }
@@ -585,7 +580,10 @@ function callsBS() {
   }
 
   // Wait a second so that people can see the announcement
-  setTimeout(resolveBSCall, 1000);
+  setTimeout(function() {
+    resolveBSCall(wasBS)
+    },
+    1000);
 }
 
 /*
@@ -598,9 +596,22 @@ function callsBS() {
 */
 function resolveBSCall(wasBS) {
   alert("resolveBSCall()");
-  // if wasBS
-    // give center pile to lying player
-    // return to game
+
+  // Adjust the webpage
+  $("#announcement").html("");
+  revealSubmittedCards(false);
+
+  if (wasBS) {
+    giveCenterPileTo(bs.currentPlayerIndex);
+    prepareWebpageForGaming(true);
+
+    checkForWin();
+    if (bs.isWinner) {
+      updateWebpageForWinner();
+    }
+    else
+      nextTurn();
+  }
   // else
     // give center pile to incorrect player
     // prompt the next player to call BS, or check for win if no
