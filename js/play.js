@@ -599,23 +599,27 @@ function announceCallBS() {
 }
 
 /*
-  @pre
-  @post
-  @hasTest
-  @param
-  @returns
-  @throws
+  @pre bs.currentPlayerIndex and bs.currentBSAskingIndex are correct
+  @post the center pile has been given to whoever deserves it based
+  on whether the call of BS was correct, and the game is set up to
+  continue, either by responding to a victory or going on to the next
+  turn
+  @hasTest no (because this function practically only calls other
+  functions)
+  @param wasLie true if the player who submitted cards was lying;
+  false if he was telling the truth
+  @returns nothing
+  @throws nothing
 */
-function resolveBSCall(wasBS) {
+function resolveBSCall(wasLie) {
   alert("resolveBSCall()");
 
   // Adjust the webpage
   $("#announcement").html("");
   revealSubmittedCards(false);
 
-  if (wasBS) {
+  if (wasLie) {
     giveCenterPileTo(bs.currentPlayerIndex);
-
   }
   else {
     giveCenterPileTo(bs.currentBSAskingIndex);
