@@ -20,7 +20,7 @@
 </div>
 
 <p id="announcement"></p>
-<p id="prompt"></p>
+<p id="call-bs-prompt"></p>
 
 <div id="card-display">Your cards:
   <ul id="displayed-cards">

@@ -17,6 +17,8 @@ After game functions without graphics:
 -Node.js
 
 Considerable:
+-precondition checks for functions with boolean argument (since an
+ undefined argument is neither true nor false)
 -use a saboteur (i.e. me) to test my testing (see p.244 of "The
  Pragmatic Programmer")
 -don't have functions use the value they're changing as parameters

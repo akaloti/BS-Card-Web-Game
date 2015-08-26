@@ -486,13 +486,13 @@ function announceSubmission(numberOfCardsSubmitted) {
   @returns none
   @throws none
 */
-function checkForCallsBS() {
-  for (var i = 0; i < bs.players.length; ++i) {
-    if (i != bs.currentPlayerIndex) {
-      askIfCallBS(i);
-    }
-  }
-}
+// function checkForCallsBS() {
+  // for (var i = 0; i < bs.players.length; ++i) {
+    // if (i != bs.currentPlayerIndex) {
+      // askIfCallBS(i);
+    // }
+  // }
+// }
 
 /*
   @pre none
@@ -509,10 +509,6 @@ function askIfCallBS(playerIndex) {
   // cards
   updateDisplayedCards(playerIndex);
 
-  // generate the prompt
-  $("#prompt").html("Player " + (playerIndex + 1) +
-    ", would you like to call BS?");
-
   // temporarily hide the submit button
   createSubmitButton(false);
 
@@ -527,7 +523,32 @@ function askIfCallBS(playerIndex) {
   // to determine whether to check for a win and (if there is no win)
   // return the submit button, or to determine whether to call
   // this function again with the next index.
-  createBSCallButtons(true);
+  prepareWebpageForAskBS(true);
+}
+
+/*
+  @pre bs.currentBSAskingIndex is correct
+  @post see @param
+  @hasTest no
+  @param bool true to set up the webpage to ask a player if she wants
+  to call BS; false to remove those elements regarding that setup
+  @returns nothing
+  @throws nothing
+*/
+function prepareWebpageForAskBS(bool) {
+  if (bool) {
+    // generate the prompt
+    $("#call-bs-prompt").html("Player " +
+      (bs.currentBSAskingIndex + 1) + ", would you like to call BS?");
+
+    createBSCallButtons(true);
+  }
+  else {
+    // remove the prompt
+    $("#call-bs-prompt").html("");
+
+    createBSCallButtons(false);
+  }
 }
 
 /*
@@ -540,8 +561,9 @@ function askIfCallBS(playerIndex) {
 */
 function callsBS() {
   // remove call bs prompt and yes and no buttons
-  // reveal cards
+
   revealSubmittedCards(true);
+
   // if correct call
     // give center pile to lying player
     // return to game
