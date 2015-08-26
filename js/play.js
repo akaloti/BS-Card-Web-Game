@@ -389,7 +389,7 @@ function submitTurn() {
 
     bs.currentBSAskingIndex =
       getIncrementedPlayerIndex(bs.currentPlayerIndex);
-    askIfCallBS(bs.currentBSAskingIndex);
+    askIfCallBS();
 
     // checkForWin();
 
@@ -495,21 +495,19 @@ function announceSubmission(numberOfCardsSubmitted) {
 // }
 
 /*
-  @pre none
+  @pre bs.currentBSAskingIndex is correct
   @post the player indicated by playerIndex has been shown his cards
   and asked if he wants to call "BS" on the current player's move
   @hasTest no
-  @param playerIndex the index in bs.players of the player to ask;
-  playerIndex != bs.currentPlayerIndex
   @returns nothing
   @throws nothing
 */
-function askIfCallBS(playerIndex) {
-  // wait for player marked by playerIndex to confirm himself
+function askIfCallBS() {
+  // wait for player-to-prompt to confirm his presence
 
   // replace the current turn's player's cards by the asked player's
   // cards
-  updateDisplayedCards(playerIndex);
+  updateDisplayedCards(bs.currentBSAskingIndex);
 
   // temporarily hide the submit button
   createSubmitButton(false);
