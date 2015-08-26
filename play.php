@@ -16,6 +16,9 @@
   <p>Current rank: <span id="current-rank"></span></p>
 </div>
 
+<div id="submission-display">
+</div>
+
 <p id="announcement"></p>
 <p id="prompt"></p>
 

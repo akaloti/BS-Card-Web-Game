@@ -539,7 +539,9 @@ function askIfCallBS(playerIndex) {
   @throws
 */
 function callsBS() {
+  // remove call bs prompt and yes and no buttons
   // reveal cards
+  revealSubmittedCards(true);
   // if correct call
     // give center pile to lying player
     // return to game
@@ -567,6 +569,32 @@ function isBS() {
       return true;
   }
   return false;
+}
+
+/*
+  @pre bs.numberOfCardsSubmitted, bs.currentPlayerIndex, and
+  bs.centerPile are correct
+  @post the webpage displays the submitted cards
+  @hasTest no
+  @param bool true if wish to show submitted cards; false to remove
+  the display
+  @returns nothing
+  @throws nothing
+*/
+function revealSubmittedCards(bool) {
+  if (bool) {
+    $("#submission-display").append("<p>Player " +
+      (bs.currentPlayerIndex + 1) + " submitted the following:</p>");
+    $("#submission-display").append("<ul id='submitted-cards'></ul");
+    for (var i = 0; i < bs.numberOfCardsSubmitted; ++i) {
+      var cardToDisplay = bs.centerPile[bs.centerPile.length - 1 -i];
+      $("#submitted-cards").append("<li>" +
+        displayableRank(cardToDisplay.rank) + " of " +
+        displayableSuit(cardToDisplay.suit) + "</li>");
+    }
+  }
+  else
+    $("#submission-display").empty();
 }
 
 /*
