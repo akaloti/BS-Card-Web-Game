@@ -11,6 +11,9 @@
 </head>
 <body>
 
+<div id="between-turns-announcements">
+</div>
+
 <section id="game">
   <div id="game-indicators">
     <p>Current player: <span id="current-player"></span></p>

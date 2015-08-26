@@ -342,10 +342,23 @@ function nextTurn() {
 function waitForPlayer(playerIndex) {
   $("#game").addClass("invisible");
 
-  // disable key interaction
+  enableGameResponseToKeyPresses(false);
+
+  $("#between-turns-announcements").html(
+    "<p id='interim'>Please have player " + (playerIndex + 1) +
+    " press the spacebar. Everyone else should look away.</p>");
 
   // set event handler that contains function to make webpage
   // reappear and enable key interaction
+  $(document).on("keydown", function(e) {
+    var keyCodeSpace = 32;
+    if (e.which === keyCodeSpace) {
+      $(document).off("keydown");
+      $("#between-turns-announcements").html("");
+      $("#game").removeClass("invisible");
+      enableGameResponseToKeyPresses(true);
+    }
+  });
 }
 
 /*
