@@ -575,10 +575,13 @@ function callsBS() {
   revealSubmittedCards(true);
 
   if (isBS()) {
-    // announce this and wait for some time
+    $("#announcement").html("Player " + (bs.currentPlayerIndex + 1) +
+      " was lying! He/she gets the center pile.");
   }
   else {
-    // announce this and wait for some time
+    $("#announcement").html("Player " + (bs.currentPlayerIndex + 1) +
+      " wasn't lying! Player " + (bs.currentBSAskingIndex + 1) +
+      " gets the center pile.");
   }
 
   // Wait a second so that people can see the announcement
