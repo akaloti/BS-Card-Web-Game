@@ -622,7 +622,8 @@ function revealSubmittedCards(bool) {
 /*
   @pre bs.centerPile is correct
   @post all the cards in bs.centerPile have been transferred to the
-  player indicated by playerIndex
+  player indicated by playerIndex, and that player's cards have
+  been sorted
   @hasTest yes
   @param playerIndex the index of the player in bs.players that will
   receive the cards that are in bs.centerPile
@@ -636,6 +637,9 @@ function giveCenterPileTo(playerIndex) {
     bs.players[playerIndex].cards.push(bs.centerPile.pop());
     ++numberOfCardsTransferred;
   }
+
+  bs.players[playerIndex].cards =
+    sortCards(bs.players[playerIndex].cards);
 
   return numberOfCardsTransferred;
 }
