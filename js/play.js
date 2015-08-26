@@ -560,11 +560,13 @@ function callBS(bool) {
     prepareWebpageForAskBS(false);
     revealSubmittedCards(true);
 
-    // Make the announcement and wait so that people can see it
+    var wasBS = announceCallBS();
+
+    // Wait so that people can see the announcement
     setTimeout(function() {
-      resolveBSCall(announceCallBS())
+      resolveBSCall(wasBS)
       },
-      1000);
+      3000);
   }
   else {
     // if the no button is called, the next player index is checked
@@ -602,13 +604,13 @@ function announceCallBS() {
   // conflicting names
   var wasBS = isBS();
   if (wasBS) {
-    $("#announcement").html("Player " + (bs.currentPlayerIndex + 1) +
-      " was lying! He/she gets the center pile.");
+    $("#announcement").html("<b>Player " + (bs.currentPlayerIndex + 1) +
+      " was lying! He/she gets the center pile.</b>");
   }
   else {
-    $("#announcement").html("Player " + (bs.currentPlayerIndex + 1) +
+    $("#announcement").html("<b>Player " + (bs.currentPlayerIndex + 1) +
       " wasn't lying! Player " + (bs.currentBSAskingIndex + 1) +
-      " gets the center pile.");
+      " gets the center pile.</b>");
   }
 
   return wasBS;
@@ -628,8 +630,6 @@ function announceCallBS() {
   @throws nothing
 */
 function resolveBSCall(wasLie) {
-  alert("resolveBSCall()");
-
   // Adjust the webpage
   $("#announcement").html("");
   revealSubmittedCards(false);
