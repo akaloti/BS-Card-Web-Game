@@ -604,11 +604,13 @@ function announceCallBS() {
   // conflicting names
   var wasBS = isBS();
   if (wasBS) {
-    $("#announcement").html("<b>Player " + (bs.currentPlayerIndex + 1) +
+    $("#announcement").html("<b style='background-color:yellow;'>" +
+      "Player " + (bs.currentPlayerIndex + 1) +
       " was lying! He/she gets the center pile.</b>");
   }
   else {
-    $("#announcement").html("<b>Player " + (bs.currentPlayerIndex + 1) +
+    $("#announcement").html("<b style='background-color:yellow;'>" +
+      "Player " + (bs.currentPlayerIndex + 1) +
       " wasn't lying! Player " + (bs.currentBSAskingIndex + 1) +
       " gets the center pile.</b>");
   }
