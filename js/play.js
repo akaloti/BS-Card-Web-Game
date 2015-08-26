@@ -603,19 +603,21 @@ function resolveBSCall(wasBS) {
 
   if (wasBS) {
     giveCenterPileTo(bs.currentPlayerIndex);
-    prepareWebpageForGaming(true);
 
-    checkForWin();
-    if (bs.isWinner) {
-      updateWebpageForWinner();
-    }
-    else
-      nextTurn();
   }
-  // else
-    // give center pile to incorrect player
-    // prompt the next player to call BS, or check for win if no
-    // more players to ask
+  else {
+    giveCenterPileTo(bs.currentBSAskingIndex);
+  }
+
+  checkForWin();
+  if (bs.isWinner) {
+    updateWebpageForWinner();
+  }
+  else {
+    // continue game
+    prepareWebpageForGaming(true);
+    nextTurn();
+  }
 }
 
 /*
