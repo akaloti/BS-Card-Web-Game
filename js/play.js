@@ -566,7 +566,23 @@ function prepareWebpageForAskBS(bool) {
 function callsBS() {
   prepareWebpageForAskBS(false);
   revealSubmittedCards(true);
+  announceCallBS();
 
+  // Wait a second so that people can see the announcement
+  setTimeout(function() {
+    resolveBSCall(wasBS)
+    },
+    1000);
+}
+
+/*
+  @pre bs.currentPlayerIndex and bs.currentBSAskingIndex are correct
+  @post the result of a player's calling BS has been announced
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
+function announceCallBS() {
   // The difference in verb tense is for the sake of avoiding
   // conflicting names
   var wasBS = isBS();
@@ -579,12 +595,6 @@ function callsBS() {
       " wasn't lying! Player " + (bs.currentBSAskingIndex + 1) +
       " gets the center pile.");
   }
-
-  // Wait a second so that people can see the announcement
-  setTimeout(function() {
-    resolveBSCall(wasBS)
-    },
-    1000);
 }
 
 /*
