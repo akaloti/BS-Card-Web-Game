@@ -574,16 +574,27 @@ function callsBS() {
   prepareWebpageForAskBS(false);
   revealSubmittedCards(true);
 
-  // if correct call
+  if (isBS()) {
     // announce this and wait for some time
-    // give center pile to lying player
-    // return to game
-  // if false call
+  }
+  else {
     // announce this and wait for some time
-    // give center pile to incorrect player
-    // prompt the next player to call BS, or check for win if no
-    // more players to ask
+  }
+
+  // Wait a second so that people can see the announcement
+  // setTimeout(resolveBSCall, 1000);
 }
+
+// <insert-contract>
+// function resolveBSCall(wasBS) {
+  // // if wasBS
+    // // give center pile to lying player
+    // // return to game
+  // // else
+    // // give center pile to incorrect player
+    // // prompt the next player to call BS, or check for win if no
+    // // more players to ask
+// }
 
 /*
   @pre bs.currentRank, bs.numberOfCardsSubmitted, and bs.centerPile
