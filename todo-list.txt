@@ -1,9 +1,11 @@
 Next (in order of descending priority):
 -finish gameplay (e.g. calling BS)
+-interim between turns to allow switch of player looking at the screen
+ (or use alerts)
+-cleanup comments
 -look into nth-child error that pops up in console in unit testing
 -write an application dictionary (as a webpage)
 --(e.g. define: contract, center pile, pick, hover)
--interim between turns to allow switch of player looking at the screen
 -fix acceptable number of players (can't have 1 player)
 -fix error messages (e.g. argument error vs. precondition error)
 -default values for Class parameters? (or exception?); unit tests

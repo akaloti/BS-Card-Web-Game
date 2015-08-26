@@ -390,14 +390,6 @@ function submitTurn() {
     bs.currentBSAskingIndex =
       getIncrementedPlayerIndex(bs.currentPlayerIndex);
     askIfCallBS();
-
-    // checkForWin();
-
-    // if (bs.isWinner) {
-      // updateWebpageForWinner();
-    // }
-    // else
-      // nextTurn();
   }
   else
     alert("Invalid move: please pick at least one card");
@@ -563,18 +555,37 @@ function prepareWebpageForAskBS(bool) {
 }
 
 /*
-  @pre
-  @post
-  @hasTest
-  @param
-  @returns
-  @throws
+  @pre bs.currentPlayerIndex and bs.currentBSAskingIndex are correct
+  @post the result of a player's calling BS has been announced, and a
+  timeout has been set before calling the function to continue the
+  game logic
+  @hasTest no
+  @returns nothing
+  @throws nothing
 */
 function callsBS() {
   prepareWebpageForAskBS(false);
   revealSubmittedCards(true);
 
-  if (isBS()) {
+  // Wait a second so that people can see the announcement
+  setTimeout(function() {
+    resolveBSCall(announceCallBS())
+    },
+    1000);
+}
+
+/*
+  @pre bs.currentPlayerIndex and bs.currentBSAskingIndex are correct
+  @post the result of a player's calling BS has been announced
+  @hasTest no (because returns result of isBS(), which is tested)
+  @returns true if the current player was lying, false otherwise
+  @throws nothing
+*/
+function announceCallBS() {
+  // The difference in verb tense is for the sake of avoiding
+  // conflicting names
+  var wasBS = isBS();
+  if (wasBS) {
     $("#announcement").html("Player " + (bs.currentPlayerIndex + 1) +
       " was lying! He/she gets the center pile.");
   }
@@ -584,20 +595,46 @@ function callsBS() {
       " gets the center pile.");
   }
 
-  // Wait a second so that people can see the announcement
-  // setTimeout(resolveBSCall, 1000);
+  return wasBS;
 }
 
-// <insert-contract>
-// function resolveBSCall(wasBS) {
-  // // if wasBS
-    // // give center pile to lying player
-    // // return to game
-  // // else
-    // // give center pile to incorrect player
-    // // prompt the next player to call BS, or check for win if no
-    // // more players to ask
-// }
+/*
+  @pre bs.currentPlayerIndex and bs.currentBSAskingIndex are correct
+  @post the center pile has been given to whoever deserves it based
+  on whether the call of BS was correct, and the game is set up to
+  continue, either by responding to a victory or going on to the next
+  turn
+  @hasTest no (because this function practically only calls other
+  functions)
+  @param wasLie true if the player who submitted cards was lying;
+  false if he was telling the truth
+  @returns nothing
+  @throws nothing
+*/
+function resolveBSCall(wasLie) {
+  alert("resolveBSCall()");
+
+  // Adjust the webpage
+  $("#announcement").html("");
+  revealSubmittedCards(false);
+
+  if (wasLie) {
+    giveCenterPileTo(bs.currentPlayerIndex);
+  }
+  else {
+    giveCenterPileTo(bs.currentBSAskingIndex);
+  }
+
+  checkForWin();
+  if (bs.isWinner) {
+    updateWebpageForWinner();
+  }
+  else {
+    // continue game
+    prepareWebpageForGaming(true);
+    nextTurn();
+  }
+}
 
 /*
   @pre bs.currentRank, bs.numberOfCardsSubmitted, and bs.centerPile
@@ -730,7 +767,7 @@ function announceWinner() {
 function removeCardInteraction() {
   $("#game-indicators").remove();
   $("#card-display").remove();
-  createSubmitButton(false);
+  prepareWebpageForGaming(false);
 }
 
 /*
