@@ -571,8 +571,7 @@ function prepareWebpageForAskBS(bool) {
   @throws
 */
 function callsBS() {
-  // remove call bs prompt and yes and no buttons
-
+  prepareWebpageForAskBS(false);
   revealSubmittedCards(true);
 
   // if correct call
