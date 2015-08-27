@@ -607,7 +607,7 @@ function callBS(bool) {
     setTimeout(function() {
       resolveBSCall(wasBS)
       },
-      3000);
+      1000);
   }
   else {
     // if the no button is called, the next player index is checked
