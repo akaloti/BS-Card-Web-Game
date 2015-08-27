@@ -11,6 +11,9 @@
 </head>
 <body>
 
+<!-- So the page can scroll to the top after a button is clicked. -->
+<div id="top"></div>
+
 <div id="for-everyone">
   <div id="everyone-announcement">
   </div>

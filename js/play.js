@@ -354,7 +354,6 @@ function promptPickCards() {
 */
 function waitForPlayer(playerIndex, purpose, endCallback) {
   $("#game").addClass("invisible");
-
   enableGameResponseToKeyPresses(false);
 
   try {
@@ -898,8 +897,8 @@ function setUpGame() {
 function createSubmitButton(bool) {
   if (bool) {
     $("#submit-button").append(
-      "<a href='#submit-button'>Submit</a>");
-    $("a[href='#submit-button']").click(submitTurn);
+      "<a href='#top'>Submit</a>");
+    $("#submit-button a[href='#top']").click(submitTurn);
   }
   else
     $("#submit-button").empty();
@@ -945,12 +944,12 @@ function enableGameResponseToKeyPresses(bool) {
 function createBSCallButtons(bool) {
   if (bool) {
     $("#bs-call-buttons").append(
-      "<a id='bs-yes' href='#bs-call-buttons'>Yes</a><br>").
-      append("<a id='bs-no' href='#bs-call-buttons'>No</a>");
-    $("a#bs-yes").click(function() {
+      "<a id='bs-yes' href='#top'>Yes</a><br>").
+      append("<a id='bs-no' href='#top'>No</a>");
+    $("#bs-yes").click(function() {
       callBS(true);
     });
-    $("a#bs-no").click(function() {
+    $("#bs-no").click(function() {
       callBS(false);
     });
   }
