@@ -6,6 +6,7 @@
 
 var shared = {};
 shared.PRECONDITION_ERROR = "precondition error";
+shared.PARAMETER_ERROR = "parameter error";
 shared.bs = {};
 shared.bs.MIN_NUMBER_OF_PLAYERS = 2;
 shared.bs.MAX_NUMBER_OF_PLAYERS = 6;
@@ -26,7 +27,7 @@ shared.isUnitTesting = function() {
   @pre none
   @post errorMessage has been printed to console
   @hasTest true
-  @param errorMessage to print
+  @param errorMessage to print in the console
   @returns constant indicating the precondition error (mostly for unit
   testing purposes)
   @throws nothing
@@ -34,4 +35,18 @@ shared.isUnitTesting = function() {
 shared.preconditionError = function(errorMessage) {
   console.log(errorMessage);
   return shared.PRECONDITION_ERROR;
+}
+
+/*
+  @pre none
+  @post errorMessage has been printed to console
+  @hasTest true
+  @param errorMessage to print in the console
+  @returns constant indicating the parameter error (mostly for unit
+  testing purposes)
+  @throws nothing
+*/
+shared.parameterError = function(errorMessage) {
+  console.log(errorMessage);
+  return shared.PARAMETER_ERROR;
 }

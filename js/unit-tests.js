@@ -54,6 +54,11 @@ QUnit.test("shared.preconditionError()", function(assert) {
     shared.PRECONDITION_ERROR, "Correct value is returned");
 });
 
+QUnit.test("shared.parameterError()", function(assert) {
+  assert.equal(shared.parameterError("This is a test"),
+    shared.PARAMETER_ERROR, "Correct value is returned");
+});
+
 QUnit.test("generateDeck()", function(assert) {
   generateDeck();
 
