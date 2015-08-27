@@ -349,7 +349,8 @@ function waitForPlayer(playerIndex, endCallback) {
 
   $("#between-turns-announcements").html(
     "<p id='interim'>Please have player " + (playerIndex + 1) +
-    " press the spacebar. Everyone else should look away.</p>");
+    " press the spacebar. Everyone else should look away once" +
+    " he/she does this.</p>");
 
   // set event handler that contains function to make webpage
   // reappear and enable key interaction
