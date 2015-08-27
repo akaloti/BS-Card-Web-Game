@@ -324,9 +324,21 @@ function nextTurn() {
   waitForPlayer(bs.currentPlayerIndex, function() {
     displayIndicators();
     updateDisplayedCards(bs.currentPlayerIndex);
+    promptPickCards();
     bs.currentHoveredCardIndex = updateHoveredCard(
       bs.currentHoveredCardIndex, "reset");
   });
+}
+
+/*
+  @pre none
+  @post the webpage informs the player to pick cards
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
+function promptPickCards() {
+  $("#announcement").html("Please pick cards and hit Submit.");
 }
 
 /*
@@ -861,11 +873,11 @@ function setUpGame() {
   randomizePlayerOrder();
   displayIndicators();
   updateDisplayedCards(bs.currentPlayerIndex);
-  $("#displayed-cards li:first-child").
-      addClass("hovered");
+  $("#displayed-cards li:first-child").addClass("hovered");
 
   createSubmitButton(true);
   enableGameResponseToKeyPresses(true);
+  promptPickCards();
 }
 
 /*
