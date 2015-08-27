@@ -854,6 +854,7 @@ function announceWinner() {
   @throws nothing
 */
 function removeCardInteraction() {
+  $("h1").html("");
   $("#game-indicators").remove();
   $("#card-display").remove();
   prepareWebpageForGaming(false);

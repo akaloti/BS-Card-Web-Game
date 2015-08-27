@@ -1,5 +1,4 @@
 Next (in order of descending priority):
--include directions on how to play the game
 -release v0.1
 
 After release v0.1:
