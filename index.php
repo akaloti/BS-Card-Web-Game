@@ -1,4 +1,10 @@
 <!doctype html>
+
+<!--
+  Author: Aaron Kaloti
+  Release number: 0.1
+-->
+
 <html>
 <head>
 <script
