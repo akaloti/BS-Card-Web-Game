@@ -342,8 +342,7 @@ function promptPickCards() {
   @pre none
   @post webpage is hidden, except for a message telling the demanded
   player (indicatd by playerIndex) to press spacebar
-  @hasTest no (only webpage manipulation and jQuery functions
-  are used)
+  @hasTest yes (but only for parameter enforcement)
   @param playerIndex the index in bs.players of the player who is
   being waited for
   @param purpose "pick" if purpose is to let the player pick cards;
@@ -358,20 +357,29 @@ function waitForPlayer(playerIndex, purpose, endCallback) {
 
   enableGameResponseToKeyPresses(false);
 
-  if (purpose === "pick") {
-    $("#between-turns-announcements").html(
-      "<p id='interim'>Please have player " + (playerIndex + 1) +
-      " press the spacebar so he/she can pick cards. " +
-      "Everyone else should look away once" +
-      " he/she presses this key.</p>");
+  try {
+    if (purpose === "pick") {
+      $("#between-turns-announcements").html(
+        "<p id='interim'>Please have player " + (playerIndex + 1) +
+        " press the spacebar so he/she can pick cards. " +
+        "Everyone else should look away once" +
+        " he/she presses this key.</p>");
+    }
+    else if (purpose === "ask") {
+      $("#between-turns-announcements").html(
+        "<p id='interim'>Please have player " + (playerIndex + 1) +
+        " press the spacebar so he/she can decide whether" +
+        " or not to call BS. " +
+        "Everyone else should look away once" +
+        " he/she presses this key.</p>");
+    }
+    else {
+      throw "Exception: Invalid value for parameter purpose in" +
+        " waitForPlayer()";
+    }
   }
-  else if (purpose === "ask") {
-    $("#between-turns-announcements").html(
-      "<p id='interim'>Please have player " + (playerIndex + 1) +
-      " press the spacebar so he/she can decide whether" +
-      " or not to call BS. " +
-      "Everyone else should look away once" +
-      " he/she presses this key.</p>");
+  catch(err) {
+    return shared.parameterError(err);
   }
 
   // set event handler that contains function to make webpage

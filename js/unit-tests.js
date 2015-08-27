@@ -210,6 +210,11 @@ QUnit.test("updateCurrentRank()", function(assert) {
     "Wrap around 'increment' from King to Ace worked");
 });
 
+QUnit.test("waitForPlayer()", function(assert) {
+  assert.equal(waitForPlayer(0, "invalidPurpose", function() {}),
+    shared.PARAMETER_ERROR, "Enforcement of valid parameter");
+});
+
 QUnit.test("updateDisplayedCards()", function(assert) {
   $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
 
