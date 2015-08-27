@@ -361,6 +361,7 @@ function waitForPlayer(playerIndex, endCallback) {
       $("#game").removeClass("invisible");
       enableGameResponseToKeyPresses(true);
 
+      $("#everyone-announcement").html("");
       endCallback();
     }
   });
@@ -643,12 +644,14 @@ function announceCallBS() {
   // conflicting names
   var wasBS = isBS();
   if (wasBS) {
-    $("#announcement").html("<b style='background-color:yellow;'>" +
+    $("#everyone-announcement").html(
+      "<b style='background-color:yellow;'>" +
       "Player " + (bs.currentPlayerIndex + 1) +
       " was lying! He/she gets the center pile.</b>");
   }
   else {
-    $("#announcement").html("<b style='background-color:yellow;'>" +
+    $("#everyone-announcement").html(
+      "<b style='background-color:yellow;'>" +
       "Player " + (bs.currentPlayerIndex + 1) +
       " wasn't lying! Player " + (bs.currentBSAskingIndex + 1) +
       " gets the center pile.</b>");
@@ -672,7 +675,6 @@ function announceCallBS() {
 */
 function resolveBSCall(wasLie) {
   // Adjust the webpage
-  $("#announcement").html("");
   revealSubmittedCards(false);
 
   if (wasLie) {
