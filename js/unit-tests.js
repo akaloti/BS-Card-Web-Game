@@ -123,13 +123,13 @@ QUnit.test("createPlayers()", function(assert) {
   // Create an artificial environment that obeys the preconditions
   bs.players = [];
 
-  // check enforcement of (some) preconditions
-  assert.equal(createPlayers(-1), shared.PRECONDITION_ERROR,
+  // check enforcement of (some) parameter requirements
+  assert.equal(createPlayers(-1), shared.PARAMETER_ERROR,
     "-1 should be a rejected parameter");
-  assert.equal(createPlayers(0), shared.PRECONDITION_ERROR,
+  assert.equal(createPlayers(0), shared.PARAMETER_ERROR,
     "0 should be a rejected parameter");
   assert.equal(createPlayers(shared.bs.MAX_NUMBER_OF_PLAYERS + 1),
-    shared.PRECONDITION_ERROR,
+    shared.PARAMETER_ERROR,
     "Any value above shared.bs.MAX_NUMBER_OF_PLAYERS" +
     " should be rejected parameter");
 
@@ -172,9 +172,9 @@ QUnit.test("determineHigherRank()", function(assert) {
 });
 
 QUnit.test("updateHoveredCard()", function(assert) {
-  // Check precondition enforcement
+  // Check valid parameter enforcement
   assert.equal(updateHoveredCard("invalidArgument"),
-    shared.PRECONDITION_ERROR, "Enforcement of valid parameter");
+    shared.PARAMETER_ERROR, "Enforcement of valid parameter");
 
   // Create artificial environment
   createArtificialPlayers(1);

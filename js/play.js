@@ -97,10 +97,7 @@ function dealOutCards() {
           bs.players[j].cards.push(bs.deck.splice(randomCardIndex, 1).pop());
         }
         else
-        {
-          // console.log("deck emptied")
           break;
-        }
       }
     }
   }
@@ -115,7 +112,7 @@ function dealOutCards() {
   @hasTest yes
   @param numberOfPlayers to create
   bs.MAX_NUMBER_OF_PLAYERS > numberOfPlayers > 0.
-  @returns return value of shared.preconditionError()
+  @returns return value of shared.parameterError()
   if precondition error
   @throws (caught) exception if invalid number of players
 */
@@ -133,7 +130,7 @@ function createPlayers(numberOfPlayers) {
     }
   }
   catch(err) {
-    return shared.preconditionError(err);
+    return shared.parameterError(err);
   }
 }
 
@@ -225,7 +222,7 @@ function updateIndicators() {
   @returns if "reset", then 0; if "up", then
   bs.currentHoveredCardIndex - 1; if "down", then
   bs.currentHoveredCardIndex + 1 (wrap around if necessary); if invalid
-  value for action, return value of shared.preconditionError()
+  value for action, return value of shared.parameterError()
   @throws (caught) exception if invalid vlaue of action
 */
 function updateHoveredCard(index, action) {
@@ -260,7 +257,7 @@ function updateHoveredCard(index, action) {
     return newIndex;
   }
   catch(err) {
-    return shared.preconditionError(err);
+    return shared.parameterError(err);
   }
 }
 
