@@ -1,6 +1,11 @@
 "use strict";
 
 /*
+  Author: Aaron Kaloti
+  Release number: 0.1
+*/
+
+/*
   @pre none
   @post bs.players.length = numberOfPlayers
   @hasTest true

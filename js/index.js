@@ -1,6 +1,11 @@
 "use strict";
 
 /*
+  Author: Aaron Kaloti
+  Release number: 0.1
+*/
+
+/*
   @pre main menu hasn't been set up
   @post a form requesting settings appears if the user selects "Play"
   @hasTest no

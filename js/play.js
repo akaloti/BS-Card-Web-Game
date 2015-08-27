@@ -1,5 +1,10 @@
 "use strict";
 
+/*
+  Author: Aaron Kaloti
+  Release number: 0.1
+*/
+
 var bs = {};
 bs.deck = [];
 bs.centerPile = []; // players submit cards to this pile
