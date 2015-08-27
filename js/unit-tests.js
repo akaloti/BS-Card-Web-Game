@@ -54,6 +54,11 @@ QUnit.test("shared.preconditionError()", function(assert) {
     shared.PRECONDITION_ERROR, "Correct value is returned");
 });
 
+QUnit.test("shared.parameterError()", function(assert) {
+  assert.equal(shared.parameterError("This is a test"),
+    shared.PARAMETER_ERROR, "Correct value is returned");
+});
+
 QUnit.test("generateDeck()", function(assert) {
   generateDeck();
 
@@ -118,13 +123,13 @@ QUnit.test("createPlayers()", function(assert) {
   // Create an artificial environment that obeys the preconditions
   bs.players = [];
 
-  // check enforcement of (some) preconditions
-  assert.equal(createPlayers(-1), shared.PRECONDITION_ERROR,
+  // check enforcement of (some) parameter requirements
+  assert.equal(createPlayers(-1), shared.PARAMETER_ERROR,
     "-1 should be a rejected parameter");
-  assert.equal(createPlayers(0), shared.PRECONDITION_ERROR,
+  assert.equal(createPlayers(0), shared.PARAMETER_ERROR,
     "0 should be a rejected parameter");
   assert.equal(createPlayers(shared.bs.MAX_NUMBER_OF_PLAYERS + 1),
-    shared.PRECONDITION_ERROR,
+    shared.PARAMETER_ERROR,
     "Any value above shared.bs.MAX_NUMBER_OF_PLAYERS" +
     " should be rejected parameter");
 
@@ -167,9 +172,9 @@ QUnit.test("determineHigherRank()", function(assert) {
 });
 
 QUnit.test("updateHoveredCard()", function(assert) {
-  // Check precondition enforcement
+  // Check valid parameter enforcement
   assert.equal(updateHoveredCard("invalidArgument"),
-    shared.PRECONDITION_ERROR, "Enforcement of valid parameter");
+    shared.PARAMETER_ERROR, "Enforcement of valid parameter");
 
   // Create artificial environment
   createArtificialPlayers(1);
@@ -203,6 +208,11 @@ QUnit.test("updateCurrentRank()", function(assert) {
     "Normal increment from Ten to Jack worked");
   assert.equal(updateCurrentRank(bs.RANKS.KING), bs.RANKS.ACE,
     "Wrap around 'increment' from King to Ace worked");
+});
+
+QUnit.test("waitForPlayer()", function(assert) {
+  assert.equal(waitForPlayer(0, "invalidPurpose", function() {}),
+    shared.PARAMETER_ERROR, "Enforcement of valid parameter");
 });
 
 QUnit.test("updateDisplayedCards()", function(assert) {

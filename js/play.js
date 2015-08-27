@@ -97,10 +97,7 @@ function dealOutCards() {
           bs.players[j].cards.push(bs.deck.splice(randomCardIndex, 1).pop());
         }
         else
-        {
-          // console.log("deck emptied")
           break;
-        }
       }
     }
   }
@@ -115,7 +112,7 @@ function dealOutCards() {
   @hasTest yes
   @param numberOfPlayers to create
   bs.MAX_NUMBER_OF_PLAYERS > numberOfPlayers > 0.
-  @returns return value of shared.preconditionError()
+  @returns return value of shared.parameterError()
   if precondition error
   @throws (caught) exception if invalid number of players
 */
@@ -133,7 +130,7 @@ function createPlayers(numberOfPlayers) {
     }
   }
   catch(err) {
-    return shared.preconditionError(err);
+    return shared.parameterError(err);
   }
 }
 
@@ -225,7 +222,7 @@ function updateIndicators() {
   @returns if "reset", then 0; if "up", then
   bs.currentHoveredCardIndex - 1; if "down", then
   bs.currentHoveredCardIndex + 1 (wrap around if necessary); if invalid
-  value for action, return value of shared.preconditionError()
+  value for action, return value of shared.parameterError()
   @throws (caught) exception if invalid vlaue of action
 */
 function updateHoveredCard(index, action) {
@@ -260,7 +257,7 @@ function updateHoveredCard(index, action) {
     return newIndex;
   }
   catch(err) {
-    return shared.preconditionError(err);
+    return shared.parameterError(err);
   }
 }
 
@@ -345,8 +342,7 @@ function promptPickCards() {
   @pre none
   @post webpage is hidden, except for a message telling the demanded
   player (indicatd by playerIndex) to press spacebar
-  @hasTest no (only webpage manipulation and jQuery functions
-  are used)
+  @hasTest yes (but only for parameter enforcement)
   @param playerIndex the index in bs.players of the player who is
   being waited for
   @param purpose "pick" if purpose is to let the player pick cards;
@@ -361,20 +357,29 @@ function waitForPlayer(playerIndex, purpose, endCallback) {
 
   enableGameResponseToKeyPresses(false);
 
-  if (purpose === "pick") {
-    $("#between-turns-announcements").html(
-      "<p id='interim'>Please have player " + (playerIndex + 1) +
-      " press the spacebar so he/she can pick cards. " +
-      "Everyone else should look away once" +
-      " he/she presses this key.</p>");
+  try {
+    if (purpose === "pick") {
+      $("#between-turns-announcements").html(
+        "<p id='interim'>Please have player " + (playerIndex + 1) +
+        " press the spacebar so he/she can pick cards. " +
+        "Everyone else should look away once" +
+        " he/she presses this key.</p>");
+    }
+    else if (purpose === "ask") {
+      $("#between-turns-announcements").html(
+        "<p id='interim'>Please have player " + (playerIndex + 1) +
+        " press the spacebar so he/she can decide whether" +
+        " or not to call BS. " +
+        "Everyone else should look away once" +
+        " he/she presses this key.</p>");
+    }
+    else {
+      throw "Exception: Invalid value for parameter purpose in" +
+        " waitForPlayer()";
+    }
   }
-  else if (purpose === "ask") {
-    $("#between-turns-announcements").html(
-      "<p id='interim'>Please have player " + (playerIndex + 1) +
-      " press the spacebar so he/she can decide whether" +
-      " or not to call BS. " +
-      "Everyone else should look away once" +
-      " he/she presses this key.</p>");
+  catch(err) {
+    return shared.parameterError(err);
   }
 
   // set event handler that contains function to make webpage

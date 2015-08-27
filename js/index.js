@@ -42,7 +42,7 @@ function validatePlaySettingsForm() {
     return false;
   }
   // Check that the number is within the appropriate range
-  else if (numberOfPlayers < 2) {
+  else if (numberOfPlayers < shared.bs.MIN_NUMBER_OF_PLAYERS) {
     alert("Not enough players");
     return false;
   }
