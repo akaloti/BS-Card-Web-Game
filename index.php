@@ -14,8 +14,9 @@
 <h1>BS</h1>
 
 <ul id="main-menu-options">
-  <li><a href="#main-menu-options">Play</a></li><br>
-  <li><a href="settings.html">Settings</a></li><br>
+  <li><a href="#main-menu-options">Play (Shared Computer)</a></li><br>
+  <li><a>Play (Wireless Connection) (Coming Eventually)</a></li><br>
+  <li><a href="settings.html">Settings (Coming Eventually)</a></li><br>
 </ul>
 
 <script src="js/shared.js"></script>
