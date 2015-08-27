@@ -1,2 +1,143 @@
 # BS-Card-Web-Game
-According to Wikipedia, the card game "BS" is also known as "Cheat", "Bull****", and "I Doubt It." Because this project is in rather early stages of development, there isn't much to say about it yet, which is why the README.md is rather brief. However, if I keep working on this project, it will eventually have a good readme, at least one release, a demonstrative YouTube video, and unit tests.
+
+(According to Wikipedia, the card game "BS" is also known as "Cheat",
+"Bull****", and "I Doubt It.")
+
+About
+-----
+
+This is an application that I programmed during the summer before my
+freshman year in college (that is, during the summer of 2015). In
+programming this application, to challenge myself,
+I wanted to avoid using any frameworks
+given to me by books, and I successfully did that. (Usually, I have
+some framework to start with that may be from, for example, a book's
+supplied source code, but I didn't have that this time.)
+
+Regarding languages, I used HTML5, CSS, JavaScript,
+and a little bit of PHP.
+
+Regarding other people's software, I used jQuery and QUnit.
+
+Features
+--------
+
+As of the latest release, only clicking the first main menu option
+does anything significant, and there is no GUI yet.
+
+However, the application allows much of what is expected in a typical
+game of BS. Each player has to claim to play cards of a certain rank.
+Another player can call "BS" in response, risking that he/she will take
+the center pile of cards, but also potentially forcing a lying player
+to take his/her cards back along with the center pile. Each player is
+shown a list of his/her cards when he/she does his turn and when
+he/she decides whether or not to call "BS". Victory is achieved by the
+player who successfully empties his/her hand without anyone's being
+correct in calling "BS".
+
+Yet, as of the latest release, the game only works if everyone plays
+on the same computer. Thus, most of the time, the players cannot all
+look at the screen at the same time, otherwise they would see each
+other's cards. However, the game does warn the players about who
+should look at the screen next. Admittedly, this does make the game
+significantly less playable, but if I get to implement multiplayer
+through a server with Node.js, then these problems will be resolved.
+
+With each defined function is a contract explaining things such as
+the function's preconditions, its postconditions, whether or not it
+has a unit test, its parameters (if any), what it returns (if anything),
+and what it throws (e.g. exceptions) (if anything).
+
+With the unit tests,
+I mainly tested postconditions and return values. I also tested that
+the functions that I coded to throw exceptions threw those exceptions.
+
+I used exceptions to verify that some crucial requirements were met
+regarding preconditions and parameters.
+
+I used alerts to inform the user of when he/she is trying to do
+something illegal, such as submitting zero cards on his/her turn.
+
+The todo list is in todo-list.txt.
+
+Releases
+--------
+
+The latest release is: v0.1
+
+Please see the releases section under this repository on GitHub
+to download the latest release.
+
+How to Run the Game
+-------------------
+
+Download the source code (preferably from the releases section of
+this repository on GitHub) and run index.php. Because the application
+uses PHP, you'll need to use something that supports PHP. For example,
+I used Microsoft WebMatrix to run the project. Given that the
+application has no animations or use of CSS3 yet, it should work on
+any browser (e.g. Chrome, Safari, Internet Explorer, Opera, Firefox).
+
+How to Run the Unit Tests
+-------------------------
+
+Run unit-tests.html. The tests use QUnit. They don't use PHP, so you
+don't need any PHP-supporting software to run the tests. (The tests
+use artificial "form data" where form data read with PHP would
+normally be needed.)
+
+How to Use the Included Batch and Shell Scripts
+-----------------------------------------------
+
+The batch and shell scripts can be run from a console window (e.g. I
+used Git Bash). I used these scripts to perform certain tasks more
+quickly.
+
+My only batch file, open-my-files.bat, opens with Notepad++ each of
+the files that I tended to edit. (As I programmed this application,
+I would edit in Notepad++, refresh the project in WebMatrix, and run
+the project from WebMatrix.)
+
+Each of the shell scripts comes from another one of my
+repositories: Useful-Shell-Scripts. Each shell script contains comments
+regarding what each does and what arguments each needs. Some of them
+create a Git commit.
+
+How to Use the Application Dictionary
+-------------------------------------
+
+Run dictionary.html. It doesn't use PHP, so you don't need any
+PHP-supporting software to run it.
+
+Use of Git Hooks
+----------------
+
+The only Git hook I used was the pre-commit one that is supplied to
+every Git repository. The only reason I used this hook was to prevent
+myself from committing files that contained trailing whitespace. To
+enable this hook, after downloading the source code, from the top of
+the directory, go into the .git folder. After, go into the hooks
+folder. In there, rename "pre-commit.sample" to "pre-commit".
+
+Author
+------
+
+That is me, Aaron Kaloti.
+
+Contact Information
+-------------------
+
+My email address: aarons.7007@gmail.com
+
+My YouTube channel (in which I demonstrate my finished applications):
+https://www.youtube.com/channel/UCHhcIcXErjijtAI9TWy7wNw/videos
+
+Acknowledgements
+----------------
+
+The following books helped teach me skills that helped me program this
+application:
+"HTML5 Games Development by Example" by Makzan and
+"The Pragmatic Programmer" by Andy Hunt and Dave Thomas.
+
+W3Schools.com and the jQuery API also helped.

@@ -1,0 +1,28 @@
+/*
+  Author: Aaron Kaloti
+  Release number: 0.1
+*/
+
+#main-menu-options {
+  list-style-type: none;
+}
+
+.hovered {
+  background-color: yellow;
+}
+
+.picked {
+  font-style: italic;
+}
+
+#submission-display {
+  background-color: yellow;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+#interim {
+  font-size: 2em;
+}
