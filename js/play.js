@@ -869,9 +869,9 @@ function removeCardInteraction() {
 function setUpGame() {
   generateDeck();
   createPlayers(formData.numberOfPlayers);
+  randomizePlayerOrder();
   dealOutCards();
   sortPlayersCards();
-  randomizePlayerOrder();
   displayIndicators();
 
   // Note that waitForPlayer() calls a function to bind functions
