@@ -1,7 +1,7 @@
 Next (in order of descending priority):
 
 After game functions without graphics:
--make readme
+-include directions on how to play the game
 -release v0.1
 -in settings, player can choose whether to use GUI or not
  --store result in either local or session storage
@@ -28,12 +28,3 @@ Considerable:
 -AI
 -applying stepwise refinement in more areas
 -play a sound when a player is asked to check in
-
-For README:
--note the use of the hook regarding trailing whitespace; include directions
- on how to enable that hook
--include directions for the shell scripts and batch file(s)
--include directions regarding unit tests
--include directions for running the project (on WebMatrix)
--note how contracts are enforced (unit tests, exceptions and alerts, etc.)
--mention the application dictionary
