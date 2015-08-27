@@ -7,6 +7,7 @@
 var shared = {};
 shared.PRECONDITION_ERROR = "precondition error";
 shared.bs = {};
+shared.bs.MIN_NUMBER_OF_PLAYERS = 2;
 shared.bs.MAX_NUMBER_OF_PLAYERS = 6;
 
 /*
