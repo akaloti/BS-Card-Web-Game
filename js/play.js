@@ -321,7 +321,7 @@ function displayIndicators() {
 */
 function nextTurn() {
   updateIndicators();
-  waitForPlayer(bs.currentPlayerIndex, function() {
+  waitForPlayer(bs.currentPlayerIndex, "pick", function() {
     displayIndicators();
     updateDisplayedCards(bs.currentPlayerIndex);
     promptPickCards();
@@ -349,20 +349,33 @@ function promptPickCards() {
   are used)
   @param playerIndex the index in bs.players of the player who is
   being waited for
+  @param purpose "pick" if purpose is to let the player pick cards;
+  "ask" if purpose is to ask if the player wants to call BS
   @param endCallback code (e.g. function) specifying what to do
   after the player indicated by playerIndex presses the key
   @returns nothing
   @throws nothing
 */
-function waitForPlayer(playerIndex, endCallback) {
+function waitForPlayer(playerIndex, purpose, endCallback) {
   $("#game").addClass("invisible");
 
   enableGameResponseToKeyPresses(false);
 
-  $("#between-turns-announcements").html(
-    "<p id='interim'>Please have player " + (playerIndex + 1) +
-    " press the spacebar. Everyone else should look away once" +
-    " he/she does this.</p>");
+  if (purpose === "pick") {
+    $("#between-turns-announcements").html(
+      "<p id='interim'>Please have player " + (playerIndex + 1) +
+      " press the spacebar so he/she can pick cards. " +
+      "Everyone else should look away once" +
+      " he/she presses this key.</p>");
+  }
+  else if (purpose === "ask") {
+    $("#between-turns-announcements").html(
+      "<p id='interim'>Please have player " + (playerIndex + 1) +
+      " press the spacebar so he/she can decide whether" +
+      " or not to call BS. " +
+      "Everyone else should look away once" +
+      " he/she presses this key.</p>");
+  }
 
   // set event handler that contains function to make webpage
   // reappear and enable key interaction
@@ -551,7 +564,7 @@ function announceSubmission(numberOfCardsSubmitted) {
   @throws nothing
 */
 function askIfCallBS() {
-  waitForPlayer(bs.currentBSAskingIndex, function() {
+  waitForPlayer(bs.currentBSAskingIndex, "ask", function() {
     prepareWebpageForGaming(false);
     prepareWebpageForAskBS(true);
   });
@@ -876,7 +889,7 @@ function setUpGame() {
   // Note that waitForPlayer() calls a function to bind functions
   // to certain key presses, allowing continuation of the game
   // from here
-  waitForPlayer(bs.currentPlayerIndex, function() {
+  waitForPlayer(bs.currentPlayerIndex, "pick", function() {
     updateDisplayedCards(bs.currentPlayerIndex);
     $("#displayed-cards li:first-child").addClass("hovered");
     createSubmitButton(true);

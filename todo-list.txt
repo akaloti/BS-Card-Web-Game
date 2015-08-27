@@ -6,6 +6,7 @@ Next (in order of descending priority):
 --(e.g. define: contract, center pile, pick, hover)
 -fix acceptable number of players (can't have 1 player)
 -fix error messages (e.g. argument error vs. precondition error)
+ --for waitForPlayer(), etc.
 -default values for Class parameters? (or exception?); unit tests
 -determine who goes first based on the order in which the cards
  were dealt (for fairness)
