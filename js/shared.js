@@ -1,7 +1,12 @@
 "use strict";
 
 /*
-  Contains JavaScript that many files need
+  Author: Aaron Kaloti
+  Release number: 0.1
+*/
+
+/*
+  This file contains JavaScript that many files need
 */
 
 var shared = {};
