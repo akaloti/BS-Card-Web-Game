@@ -9,6 +9,7 @@ Next (in order of descending priority):
 -default values for Class parameters? (or exception?); unit tests
 -determine who goes first based on the order in which the cards
  were dealt (for fairness)
+-do something about the settings menu option
 
 After game functions without graphics:
 -make readme
