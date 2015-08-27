@@ -872,12 +872,16 @@ function setUpGame() {
   sortPlayersCards();
   randomizePlayerOrder();
   displayIndicators();
-  updateDisplayedCards(bs.currentPlayerIndex);
-  $("#displayed-cards li:first-child").addClass("hovered");
 
-  createSubmitButton(true);
-  enableGameResponseToKeyPresses(true);
-  promptPickCards();
+  // Note that waitForPlayer() calls a function to bind functions
+  // to certain key presses, allowing continuation of the game
+  // from here
+  waitForPlayer(bs.currentPlayerIndex, function() {
+    updateDisplayedCards(bs.currentPlayerIndex);
+    $("#displayed-cards li:first-child").addClass("hovered");
+    createSubmitButton(true);
+    promptPickCards();
+  });
 }
 
 /*
