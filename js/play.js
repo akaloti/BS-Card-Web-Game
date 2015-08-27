@@ -362,7 +362,10 @@ function waitForPlayer(playerIndex, endCallback) {
       $("#game").removeClass("invisible");
       enableGameResponseToKeyPresses(true);
 
+      // Remove the BS announcement
       $("#everyone-announcement").html("");
+      revealSubmittedCards(false);
+
       endCallback();
     }
   });
@@ -675,9 +678,6 @@ function announceCallBS() {
   @throws nothing
 */
 function resolveBSCall(wasLie) {
-  // Adjust the webpage
-  revealSubmittedCards(false);
-
   if (wasLie) {
     giveCenterPileTo(bs.currentPlayerIndex);
   }

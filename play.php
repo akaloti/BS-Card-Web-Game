@@ -11,10 +11,12 @@
 </head>
 <body>
 
-<div id="everyone-announcement">
-</div>
+<div id="for-everyone">
+  <div id="everyone-announcement">
+  </div>
 
-<div id="submission-display">
+  <div id="submission-display">
+  </div>
 </div>
 
 <div id="between-turns-announcements">
