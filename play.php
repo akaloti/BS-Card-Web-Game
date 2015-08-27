@@ -12,7 +12,7 @@
 <body>
 
 <!-- So the page can scroll to the top after a button is clicked. -->
-<div id="top"></div>
+<h1 id="top">Use arrow keys and spacebar to pick cards.</h1>
 
 <div id="for-everyone">
   <div id="everyone-announcement">
