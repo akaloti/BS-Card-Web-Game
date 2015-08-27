@@ -11,6 +11,14 @@
 </head>
 <body>
 
+<div id="for-everyone">
+  <div id="everyone-announcement">
+  </div>
+
+  <div id="submission-display">
+  </div>
+</div>
+
 <div id="between-turns-announcements">
 </div>
 
@@ -29,9 +37,6 @@
   </div>
 
   <p id="announcement"></p>
-
-  <div id="submission-display">
-  </div>
 
   <div id="card-display">Your cards:
     <ul id="displayed-cards">

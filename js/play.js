@@ -349,7 +349,8 @@ function waitForPlayer(playerIndex, endCallback) {
 
   $("#between-turns-announcements").html(
     "<p id='interim'>Please have player " + (playerIndex + 1) +
-    " press the spacebar. Everyone else should look away.</p>");
+    " press the spacebar. Everyone else should look away once" +
+    " he/she does this.</p>");
 
   // set event handler that contains function to make webpage
   // reappear and enable key interaction
@@ -360,6 +361,10 @@ function waitForPlayer(playerIndex, endCallback) {
       $("#between-turns-announcements").html("");
       $("#game").removeClass("invisible");
       enableGameResponseToKeyPresses(true);
+
+      // Remove the BS announcement
+      $("#everyone-announcement").html("");
+      revealSubmittedCards(false);
 
       endCallback();
     }
@@ -605,7 +610,7 @@ function callBS(bool) {
     setTimeout(function() {
       resolveBSCall(wasBS)
       },
-      3000);
+      1000);
   }
   else {
     // if the no button is called, the next player index is checked
@@ -643,12 +648,14 @@ function announceCallBS() {
   // conflicting names
   var wasBS = isBS();
   if (wasBS) {
-    $("#announcement").html("<b style='background-color:yellow;'>" +
+    $("#everyone-announcement").html(
+      "<b style='background-color:yellow;'>" +
       "Player " + (bs.currentPlayerIndex + 1) +
       " was lying! He/she gets the center pile.</b>");
   }
   else {
-    $("#announcement").html("<b style='background-color:yellow;'>" +
+    $("#everyone-announcement").html(
+      "<b style='background-color:yellow;'>" +
       "Player " + (bs.currentPlayerIndex + 1) +
       " wasn't lying! Player " + (bs.currentBSAskingIndex + 1) +
       " gets the center pile.</b>");
@@ -671,10 +678,6 @@ function announceCallBS() {
   @throws nothing
 */
 function resolveBSCall(wasLie) {
-  // Adjust the webpage
-  $("#announcement").html("");
-  revealSubmittedCards(false);
-
   if (wasLie) {
     giveCenterPileTo(bs.currentPlayerIndex);
   }
