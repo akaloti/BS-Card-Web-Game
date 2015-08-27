@@ -58,6 +58,8 @@ regarding preconditions and parameters.
 I used alerts to inform the user of when he/she is trying to do
 something illegal, such as submitting zero cards on his/her turn.
 
+The todo list is in todo-list.txt.
+
 Releases
 --------
 
