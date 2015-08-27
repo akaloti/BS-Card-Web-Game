@@ -1,6 +1,4 @@
 Next (in order of descending priority):
--write an application dictionary (as a webpage)
---(e.g. define: contract, center pile, pick, hover)
 
 (cleanup)
 -look into nth-child error that pops up in console in unit testing
@@ -46,3 +44,4 @@ For README:
 -include directions regarding unit tests
 -include directions for running the project (on WebMatrix)
 -note how contracts are enforced (unit tests, exceptions and alerts, etc.)
+-mention the application dictionary
