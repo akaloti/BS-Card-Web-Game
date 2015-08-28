@@ -8,6 +8,6 @@ start Notepad++ unit-tests.html
 start Notepad++ js/unit-tests.js
 start Notepad++ js/play.js
 start Notepad++ js/shared.js
-start Notepad++ dictionary.html
+start Notepad++ glossary.html
 start Notepad++ README.md
 exit
