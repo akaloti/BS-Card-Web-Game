@@ -1,5 +1,6 @@
 Next (in order of descending priority):
 -look into Angular.js (e.g. for making tables in dictionary)
+ --mention in readme
 -applying stepwise refinement in more areas
 -in settings, player can choose whether to use GUI or not
  --store result in either local or session storage
