@@ -17,7 +17,10 @@ supplied source code, but I didn't have that this time.)
 Regarding languages, I used HTML5, CSS, JavaScript,
 and a little bit of PHP.
 
-Regarding other people's software, I used jQuery and QUnit.
+Regarding other people's software, I used jQuery and QUnit. Also,
+for the project glossary, I used AngularJS. I downloaded the QUnit
+(JavaScript and CSS) files, but I included both jQuery and AngularJS
+with the Google CDN (Content Delivery Network).
 
 Features
 --------
