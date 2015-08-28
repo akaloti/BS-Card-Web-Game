@@ -1,6 +1,8 @@
 Next (in order of descending priority):
 -look into Angular.js (e.g. for making tables in dictionary)
- --mention in readme
+ --mention in readme: use of Angular.js and how to edit dictionary
+ --also consider using PHP to read text file
+-use strict equal in QUnit
 -applying stepwise refinement in more areas
 -in settings, player can choose whether to use GUI or not
  --store result in either local or session storage
