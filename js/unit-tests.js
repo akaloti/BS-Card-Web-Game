@@ -5,6 +5,8 @@
   Release number: 0.1
 */
 
+QUnit.module("unit-tests.js");
+
 /*
   @pre none
   @post bs.players.length = numberOfPlayers
@@ -54,6 +56,8 @@ QUnit.test("createArtificialCards()", function(assert) {
   assert.ok(bs.players[0].cards.length === 10, "Correct number of cards created");
 });
 
+QUnit.module("shared.js");
+
 QUnit.test("shared.preconditionError()", function(assert) {
   assert.equal(shared.preconditionError("This is a test"),
     shared.PRECONDITION_ERROR, "Correct value is returned");
@@ -63,6 +67,8 @@ QUnit.test("shared.parameterError()", function(assert) {
   assert.equal(shared.parameterError("This is a test"),
     shared.PARAMETER_ERROR, "Correct value is returned");
 });
+
+QUnit.module("play.js");
 
 QUnit.test("generateDeck()", function(assert) {
   generateDeck();
