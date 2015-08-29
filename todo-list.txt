@@ -1,7 +1,9 @@
 Next (in order of descending priority):
--graphics (CSS and images)
-  --applying stepwise refinement in more areas
-    (perhaps a function for changing the webpage that takes the context)
+-have the submission display show cards' sprites
+-change the buttons as necessary
+-applying stepwise refinement in more areas
+ (perhaps a function for changing the webpage that takes the context)
+-make everything look nice
 -play a sound when a player is asked to check in
 
 After the above:
