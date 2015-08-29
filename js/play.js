@@ -45,6 +45,20 @@ function Card(suit, rank) {
 
 /*
   @pre none
+  @post see @returns
+  @hasTest yes
+  @param suit of the card
+  @param rank of the card
+  @returns the appropriate HTML id for the card specified by the
+  suit and rank (e.g. "s0r1" for ace of spades)
+  @throws nothing
+*/
+function getCardId(suit, rank) {
+  return 's' + suit + 'r' + rank;
+}
+
+/*
+  @pre none
   @post instance of class Positions created
   @hasTest no
   @param x x-coordinate of the position (with suffix (e.g. 'px') at

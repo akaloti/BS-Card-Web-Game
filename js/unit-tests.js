@@ -70,6 +70,18 @@ QUnit.test("shared.parameterError()", function(assert) {
 
 QUnit.module("play.js");
 
+QUnit.test("getCardId()", function(assert) {
+  assert.deepEqual(getCardId(bs.SUITS.SPADE, bs.RANKS.ACE),
+    "s" + bs.SUITS.SPADE + "r" + bs.RANKS.ACE,
+    "Correct id for ace of spades");
+  assert.deepEqual(getCardId(bs.SUITS.HEART, bs.RANKS.SIX),
+    "s" + bs.SUITS.HEART + "r" + bs.RANKS.SIX,
+    "Correct id for six of hearts");
+  assert.deepEqual(getCardId(bs.SUITS.DIAMOND, bs.RANKS.KING),
+    "s" + bs.SUITS.DIAMOND + "r" + bs.RANKS.KING,
+    "Correct id for king of diamonds");
+});
+
 QUnit.test("initializeCardBackgroundPositions()", function(assert) {
   bs.positions = [];
   initializeCardBackgroundPositions();
