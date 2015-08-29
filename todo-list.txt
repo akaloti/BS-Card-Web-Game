@@ -1,7 +1,7 @@
 Next (in order of descending priority):
--use strict equal in QUnit
 -graphics (CSS and images)
-  ---applying stepwise refinement in more areas
+  --applying stepwise refinement in more areas
+    (perhaps a function for changing the webpage that takes the context)
 -play a sound when a player is asked to check in
 
 After the above:
