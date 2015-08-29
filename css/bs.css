@@ -26,3 +26,9 @@
 #interim {
   font-size: 2em;
 }
+
+.card {
+  background: url(../images/deck.png);
+  width: 80px;
+  height: 120px;
+}

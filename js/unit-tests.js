@@ -70,6 +70,21 @@ QUnit.test("shared.parameterError()", function(assert) {
 
 QUnit.module("play.js");
 
+QUnit.test("initializeCardBackgroundPositions()", function(assert) {
+  bs.positions = [];
+  initializeCardBackgroundPositions();
+
+  // Confirm that some of the cards' coordinates are correct
+  assert.deepEqual(bs.positions[bs.SUITS.SPADE][bs.RANKS.JACK],
+    new Position('-800px', '0px'), "Correct position: jack of spades");
+  assert.deepEqual(bs.positions[bs.SUITS.HEART][bs.RANKS.KING],
+    new Position('-960px', '-120px'), "Correct position: king of hearts");
+  assert.deepEqual(bs.positions[bs.SUITS.CLUB][bs.RANKS.THREE],
+    new Position('-160px', '-240px'), "Correct position: three of clubs");
+  assert.deepEqual(bs.positions[bs.SUITS.DIAMOND][bs.RANKS.EIGHT],
+    new Position('-560px', '-360px'), "Correct position: eight of diamond");
+});
+
 QUnit.test("generateDeck()", function(assert) {
   generateDeck();
 

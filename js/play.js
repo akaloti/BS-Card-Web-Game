@@ -9,6 +9,7 @@ var bs = {};
 bs.deck = [];
 bs.centerPile = []; // players submit cards to this pile
 bs.DECK_LENGTH = 52;
+bs.positions = [];
 bs.players = [];
 bs.currentPlayerIndex = 0;
 bs.currentBSAskingIndex = 0; // current player whose being asked if
@@ -44,6 +45,21 @@ function Card(suit, rank) {
 
 /*
   @pre none
+  @post instance of class Positions created
+  @hasTest no
+  @param x x-coordinate of the position (with suffix (e.g. 'px') at
+  end if needed)
+  @param y y-coordinate of the position (with suffix at end if needed)
+  @returns nothing
+  @throws nothing
+*/
+function Position(x, y) {
+  this.x = x;
+  this.y = y;
+}
+
+/*
+  @pre none
   @post instance of class Player created
   @hasTest no
   @returns nothing
@@ -53,6 +69,33 @@ function Player() {
   // this.name = name;
 
   this.cards = [];
+}
+
+/*
+  @pre bs.positions is an empty array
+  @post bs.positions has coordinates of sprite for each
+  card in spritesheet
+  @hasTest yes
+  @returns nothing
+  @throws nothing
+*/
+function initializeCardBackgroundPositions() {
+  var y = 0;
+  var CARD_HEIGHT = 120;
+  var x = 0;
+  var CARD_WIDTH = 80;
+
+  for (var s in bs.SUITS) {
+    bs.positions[bs.SUITS[s]] = [];
+    x = 0;
+
+    for (var r in bs.RANKS) {
+      bs.positions[bs.SUITS[s]][bs.RANKS[r]] =
+        new Position(x + 'px', y + 'px');
+      x -= CARD_WIDTH;
+    }
+    y -= CARD_HEIGHT;
+  }
 }
 
 /*
@@ -420,7 +463,7 @@ function updateDisplayedCards(playerIndex) {
   // Create the current list
   var cards = bs.players[playerIndex].cards;
   for (var cardIndex in cards) {
-    $("#displayed-cards").append("<li>" +
+    $("#displayed-cards").append("<li class='card'>" +
       displayableRank(cards[cardIndex].rank) + " of " +
       displayableSuit(cards[cardIndex].suit) + "</li>");
   }
@@ -989,6 +1032,7 @@ function selectOrUnselectCard() {
 
 $(document).ready(function(){
   if (!shared.isUnitTesting()) {
+    initializeCardBackgroundPositions();
     setUpGame();
   }
 });
