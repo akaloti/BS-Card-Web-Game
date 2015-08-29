@@ -474,8 +474,12 @@ function updateDisplayedCards(playerIndex) {
   // Clear the previous list
   $("#displayed-cards").html("");
 
-  // Create the current list
   var cards = bs.players[playerIndex].cards;
+  var HORIZONTAL_GAP = 100; // horizontal distance between cards
+  var left = HORIZONTAL_GAP;
+  var VERTICAL_GAP = 150; // vertical distance between cards
+  var top = 0;
+
   for (var cardIndex in cards) {
     var suit = cards[cardIndex].suit;
     var rank = cards[cardIndex].rank;
@@ -486,7 +490,14 @@ function updateDisplayedCards(playerIndex) {
     $("#displayed-cards").append("<li class='card' id=" +
       id + ">" + displayableRank(rank) + " of " +
       displayableSuit(suit) + "</li>");
-    $("#" + id).css("background-position", spriteBackgroundPosition);
+    $("#" + id).css({"background-position" : spriteBackgroundPosition,
+      "left" : (left + "px"), "top" : (top + "px")});
+
+    left += HORIZONTAL_GAP;
+    if ((left + 80 + HORIZONTAL_GAP) > $(window).width()) {
+      left = HORIZONTAL_GAP;
+      top += VERTICAL_GAP;
+    }
   }
 }
 

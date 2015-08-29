@@ -19,6 +19,14 @@
   background-color: yellow;
 }
 
+#displayed-cards {
+  position: relative;
+}
+
+#displayed-cards li {
+  position: absolute;
+}
+
 .invisible {
   visibility: hidden;
 }
