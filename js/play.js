@@ -463,9 +463,15 @@ function updateDisplayedCards(playerIndex) {
   // Create the current list
   var cards = bs.players[playerIndex].cards;
   for (var cardIndex in cards) {
-    $("#displayed-cards").append("<li class='card'>" +
-      displayableRank(cards[cardIndex].rank) + " of " +
-      displayableSuit(cards[cardIndex].suit) + "</li>");
+    var suit = cards[cardIndex].suit;
+    var rank = cards[cardIndex].rank;
+    var spriteBackgroundPosition = bs.positions[suit][rank].x +
+      ' ' + bs.positions[suit][rank].y;
+
+    $("#displayed-cards").append("<li class='card' style=" +
+      "'background-position : " + spriteBackgroundPosition +
+      "'>" + displayableRank(rank) + " of " +
+      displayableSuit(suit) + "</li>");
   }
 }
 
