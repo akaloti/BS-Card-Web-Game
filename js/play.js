@@ -481,11 +481,12 @@ function updateDisplayedCards(playerIndex) {
     var rank = cards[cardIndex].rank;
     var spriteBackgroundPosition = bs.positions[suit][rank].x +
       ' ' + bs.positions[suit][rank].y;
+    var id = getCardId(suit, rank);
 
-    $("#displayed-cards").append("<li class='card' style=" +
-      "'background-position : " + spriteBackgroundPosition +
-      "'>" + displayableRank(rank) + " of " +
+    $("#displayed-cards").append("<li class='card' id=" +
+      id + ">" + displayableRank(rank) + " of " +
       displayableSuit(suit) + "</li>");
+    $("#" + id).css("background-position", spriteBackgroundPosition);
   }
 }
 
