@@ -209,36 +209,6 @@ QUnit.test("determineHigherRank()", function(assert) {
     0), "Rank Five should equal Rank Five");
 });
 
-QUnit.test("updateHoveredCard()", function(assert) {
-  // Check valid parameter enforcement
-  assert.deepEqual(updateHoveredCard("invalidArgument"),
-    shared.PARAMETER_ERROR, "Enforcement of valid parameter");
-
-  // Create artificial environment
-  createArtificialPlayers(1);
-  createArtificialCards(5, 0);
-
-  bs.currentPlayerIndex = 0;
-
-  assert.deepEqual(updateHoveredCard(1, "reset"), 0,
-    "Resetting hovered card works");
-  assert.deepEqual(updateHoveredCard(1, "down"), 2, "Hovering down works");
-  assert.deepEqual(updateHoveredCard(1, "up"), 0, "Hovering up works");
-  assert.deepEqual(updateHoveredCard(4, "down"), 0,
-    "Can wrap around from last card to first card");
-  assert.deepEqual(updateHoveredCard(0, "up"), 4,
-    "Can wrap around from first card to last card");
-});
-
-QUnit.test("getIncrementedPlayerIndex()", function(assert) {
-  createArtificialPlayers(5);
-
-  assert.deepEqual(getIncrementedPlayerIndex(1), 2,
-    "Normal increment from 1 to 2 worked");
-  assert.deepEqual(getIncrementedPlayerIndex(4), 0,
-    "Wrap around from last player to first player worked");
-});
-
 QUnit.test("updateCurrentRank()", function(assert) {
   assert.deepEqual(updateCurrentRank(bs.RANKS.ACE), bs.RANKS.TWO,
     "Normal increment from Ace to Two worked");

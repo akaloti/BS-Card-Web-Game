@@ -271,57 +271,6 @@ function updateIndicators() {
   bs.currentPlayerIndex =
     getIncrementedPlayerIndex(bs.currentPlayerIndex);
   bs.currentRank = updateCurrentRank(bs.currentRank);
-  bs.currentHoveredCardIndex = updateHoveredCard(
-    bs.currentHoveredCardIndex, "reset");
-}
-
-/*
-  @pre none
-  @post correct card is hovered over by user's selector
-  @hasTest yes
-  @param index array index of currently selected card
-  @param action indicates what to do and has any of the
-  following values: "reset", "up", "down"
-  @returns if "reset", then 0; if "up", then
-  bs.currentHoveredCardIndex - 1; if "down", then
-  bs.currentHoveredCardIndex + 1 (wrap around if necessary); if invalid
-  value for action, return value of shared.parameterError()
-  @throws (caught) exception if invalid vlaue of action
-*/
-function updateHoveredCard(index, action) {
-  try {
-    $("#displayed-cards div:nth-child(" + (index + 1) + ')').
-      removeClass("hovered");
-    var newIndex = 0;
-
-    if (action === "reset") {
-      newIndex = 0;
-    }
-    else if (action === "up") {
-      // Wrap around, if necessary
-      if (index === 0)
-        newIndex = bs.players[bs.currentPlayerIndex].cards.length - 1;
-      else
-        newIndex = (index - 1);
-    }
-    else if (action === "down") {
-      // Wrap around, if necessary
-      if (index + 1 === bs.players[bs.currentPlayerIndex].cards.length)
-        newIndex = 0;
-      else
-        newIndex = (index + 1);
-    }
-    else {
-      throw "Exception: Invalid argument for updateHoveredCard()";
-    }
-
-    $("#displayed-cards div:nth-child(" + (newIndex + 1) + ')').
-      addClass("hovered");
-    return newIndex;
-  }
-  catch(err) {
-    return shared.parameterError(err);
-  }
 }
 
 /*
@@ -386,8 +335,6 @@ function nextTurn() {
     displayCards("displayed-cards",
       bs.players[bs.currentPlayerIndex].cards);
     promptPickCards();
-    bs.currentHoveredCardIndex = updateHoveredCard(
-      bs.currentHoveredCardIndex, "reset");
   });
 }
 
@@ -971,7 +918,6 @@ function setUpGame() {
   waitForPlayer(bs.currentPlayerIndex, "pick", function() {
     displayCards("displayed-cards",
       bs.players[bs.currentPlayerIndex].cards);
-    $("#displayed-cards div:first-child").addClass("hovered");
     createSubmitButton(true);
     promptPickCards();
   });
@@ -1007,21 +953,6 @@ function createSubmitButton(bool) {
 */
 function enableGameResponseToKeyPresses(bool) {
   bs.canSelectCards = bool;
-
-  if (bool)
-    $(document).on("keydown", function(e) {
-      var keyCodeDown = 40;
-      var keyCodeUp = 38;
-      var keyCodeSpace = 32;
-      if (e.which === keyCodeDown)
-        bs.currentHoveredCardIndex = updateHoveredCard(
-          bs.currentHoveredCardIndex, "down");
-      else if (e.which === keyCodeUp)
-        bs.currentHoveredCardIndex = updateHoveredCard(
-          bs.currentHoveredCardIndex, "up");
-    });
-  else
-    $(document).off("keydown");
 }
 
 /*
