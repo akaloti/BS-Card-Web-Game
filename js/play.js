@@ -846,13 +846,16 @@ function revealSubmittedCards(bool) {
   if (bool) {
     $("#submission-display").append("<p>Player " +
       (bs.currentPlayerIndex + 1) + " submitted the following:</p>");
+    var cardsToDisplay = bs.centerPile.slice(
+      (bs.centerPile.length - bs.numberOfCardsSubmitted));
+    displayCards("submission-display", cardsToDisplay);
     $("#submission-display").append("<ul id='submitted-cards'></ul");
-    for (var i = 0; i < bs.numberOfCardsSubmitted; ++i) {
+    /*for (var i = 0; i < bs.numberOfCardsSubmitted; ++i) {
       var cardToDisplay = bs.centerPile[bs.centerPile.length - 1 -i];
       $("#submitted-cards").append("<li>" +
         displayableRank(cardToDisplay.rank) + " of " +
         displayableSuit(cardToDisplay.suit) + "</li>");
-    }
+    }*/
   }
   else
     $("#submission-display").empty();
