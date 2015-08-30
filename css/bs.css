@@ -3,14 +3,26 @@
   Release number: 0.1
 */
 
+/*
+  For all webpages
+*/
+
 /* body {
   background: black;
   url(../images/deck.png);
 } */
 
+/*
+  For index.php
+*/
+
 #main-menu-options {
   list-style-type: none;
 }
+
+/*
+  For play.php
+*/
 
 .card {
   background: url(../images/deck.png);
