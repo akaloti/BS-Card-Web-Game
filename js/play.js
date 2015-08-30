@@ -493,7 +493,7 @@ function displayCards(divId, arrayOfCards) {
       ' ' + bs.positions[suit][rank].y;
     var id = getCardId(suit, rank);
 
-    $('#' + divId).append("<li class='card' id=" +
+    $('#' + divId).append("<div class='card' id=" +
       id + ">" + displayableRank(rank) + " of " +
       displayableSuit(suit) + "</li>");
     $("#" + id).css({"background-position" : spriteBackgroundPosition,
@@ -848,14 +848,8 @@ function revealSubmittedCards(bool) {
       (bs.currentPlayerIndex + 1) + " submitted the following:</p>");
     var cardsToDisplay = bs.centerPile.slice(
       (bs.centerPile.length - bs.numberOfCardsSubmitted));
-    displayCards("submission-display", cardsToDisplay);
-    $("#submission-display").append("<ul id='submitted-cards'></ul");
-    /*for (var i = 0; i < bs.numberOfCardsSubmitted; ++i) {
-      var cardToDisplay = bs.centerPile[bs.centerPile.length - 1 -i];
-      $("#submitted-cards").append("<li>" +
-        displayableRank(cardToDisplay.rank) + " of " +
-        displayableSuit(cardToDisplay.suit) + "</li>");
-    }*/
+    $("#submission-display").append("<div id='submitted-cards'></div>");
+    displayCards("submission-cards", cardsToDisplay);
   }
   else
     $("#submission-display").empty();
@@ -873,12 +867,11 @@ function revealSubmittedCards(bool) {
   @throws nothing
 */
 function giveCenterPileTo(playerIndex) {
-  var numberOfCardsTransferred = 0;
+  var numberOfCardsTransferred = bs.centerPile.length;
 
-  while (bs.centerPile.length > 0) {
-    bs.players[playerIndex].cards.push(bs.centerPile.pop());
-    ++numberOfCardsTransferred;
-  }
+  // Transfer the cards
+  bs.players[playerIndex].cards = bs.players[playerIndex].cards.concat(
+    bs.centerPile.splice(0, bs.centerPile.length));
 
   bs.players[playerIndex].cards =
     sortCards(bs.players[playerIndex].cards);
