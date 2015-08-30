@@ -1,6 +1,6 @@
 Next (in order of descending priority):
--change the way cards look when they're selected; remove the text on
- the cards
+-remove the text on the cards
+-get gradients to work on Safari
 -with PHP and different stylesheet, allow user to choose style
  --choose background(s)
 -change the buttons (e.g. Submit) as necessary

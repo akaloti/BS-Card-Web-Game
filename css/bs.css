@@ -3,12 +3,24 @@
   Release number: 0.1
 */
 
+/* body {
+  background: black;
+  url(../images/deck.png);
+} */
+
 #main-menu-options {
   list-style-type: none;
 }
 
-.picked {
-  font-style: italic;
+.card {
+  background: url(../images/deck.png);
+  width: 80px;
+  height: 120px;
+}
+
+.card.picked {
+  background: linear-gradient(rgba(255, 0, 0, 0.45),
+    rgba(255, 0, 0, 0.45)), url(../images/deck.png);
 }
 
 #submission-display {
@@ -29,10 +41,4 @@
 
 #interim {
   font-size: 2em;
-}
-
-.card {
-  background: url(../images/deck.png);
-  width: 80px;
-  height: 120px;
 }
