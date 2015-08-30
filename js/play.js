@@ -471,23 +471,40 @@ function waitForPlayer(playerIndex, purpose, endCallback) {
   @throws nothing
 */
 function updateDisplayedCards(playerIndex) {
-  // Clear the previous list
-  $("#displayed-cards").html("");
+  displayCards("displayed-cards", bs.players[playerIndex].cards);
+}
 
-  var cards = bs.players[playerIndex].cards;
+/*
+  @pre bs.positions is correct
+  @post elements have been appended to the element noted by divId
+  so that each card in arrayOfCards is graphically displayed in
+  that noted element
+  @hasTest no (because, for the most part, only other functions
+  are called)
+  @param divId id (without the '#') of the element to attach the
+  cards to
+  @param arrayOfCards the cards to display
+  @returns nothing
+  @throws nothing
+*/
+function displayCards(divId, arrayOfCards) {
+  // Clear any already existing display
+  $('#' + divId).html("");
+
+  // variables for positioning each sprite
   var HORIZONTAL_GAP = 100; // horizontal distance between cards
   var left = HORIZONTAL_GAP;
   var VERTICAL_GAP = 150; // vertical distance between cards
   var top = 0;
 
-  for (var cardIndex in cards) {
-    var suit = cards[cardIndex].suit;
-    var rank = cards[cardIndex].rank;
+  for (var cardIndex in arrayOfCards) {
+    var suit = arrayOfCards[cardIndex].suit;
+    var rank = arrayOfCards[cardIndex].rank;
     var spriteBackgroundPosition = bs.positions[suit][rank].x +
       ' ' + bs.positions[suit][rank].y;
     var id = getCardId(suit, rank);
 
-    $("#displayed-cards").append("<li class='card' id=" +
+    $('#' + divId).append("<li class='card' id=" +
       id + ">" + displayableRank(rank) + " of " +
       displayableSuit(suit) + "</li>");
     $("#" + id).css({"background-position" : spriteBackgroundPosition,
