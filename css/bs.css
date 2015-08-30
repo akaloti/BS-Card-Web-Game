@@ -19,11 +19,11 @@
   background-color: yellow;
 }
 
-#displayed-cards {
+#submission-display, #displayed-cards {
   position: relative;
 }
 
-#displayed-cards li {
+#submission-display li, #displayed-cards li {
   position: absolute;
 }
 
