@@ -447,9 +447,7 @@ function displayCards(divId, arrayOfCards) {
     var onclickValue = "selectOrUnselectCard('" + id + "')";
 
     $('#' + divId).append("<div class='card' onclick=" +
-      onclickValue + " id=" +
-      id + ">" + displayableRank(rank) + " of " +
-      displayableSuit(suit) + "</div>");
+      onclickValue + " id=" + id + "></div>");
     $("#" + id).css({"background-position" : spriteBackgroundPosition,
       "left" : (left + "px"), "top" : (top + "px")});
 
