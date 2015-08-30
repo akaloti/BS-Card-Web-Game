@@ -379,21 +379,25 @@ QUnit.test("isBS()", function(assert) {
 });
 
 QUnit.test("giveCenterPileTo()", function(assert) {
-  // Create artificial environment
+  // Create artificial center pile
   bs.centerPile = [];
-  var numberOfCards = 5;
-  for (var i = 0; i < numberOfCards; ++i) {
+  var numberOfCardsToTransfer = 5;
+  for (var i = 0; i < numberOfCardsToTransfer; ++i) {
     bs.centerPile.push(new Card(bs.SUITS.HEART, bs.RANKS.ACE));
   }
+
+  // Create artificial players
   createArtificialPlayers(3);
   var indexPlayerToTransferTo = 2;
+  var originalNumberOfCards = 4;
+  createArtificialCards(originalNumberOfCards, indexPlayerToTransferTo);
 
   assert.deepEqual(giveCenterPileTo(indexPlayerToTransferTo),
-    numberOfCards, "Number of transferred cards is returned");
+    numberOfCardsToTransfer, "Number of transferred cards is returned");
   assert.deepEqual(bs.centerPile.length, 0,
     "The center pile has been emptied");
   assert.deepEqual(bs.players[indexPlayerToTransferTo].cards.length,
-    numberOfCards,
+    (numberOfCardsToTransfer + originalNumberOfCards),
     "The correct player has been given the correct number of cards");
 });
 

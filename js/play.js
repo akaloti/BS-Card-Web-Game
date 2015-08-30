@@ -867,12 +867,11 @@ function revealSubmittedCards(bool) {
   @throws nothing
 */
 function giveCenterPileTo(playerIndex) {
-  var numberOfCardsTransferred = 0;
+  var numberOfCardsTransferred = bs.centerPile.length;
 
-  while (bs.centerPile.length > 0) {
-    bs.players[playerIndex].cards.push(bs.centerPile.pop());
-    ++numberOfCardsTransferred;
-  }
+  // Transfer the cards
+  bs.players[playerIndex].cards = bs.players[playerIndex].cards.concat(
+    bs.centerPile.splice(0, bs.centerPile.length));
 
   bs.players[playerIndex].cards =
     sortCards(bs.players[playerIndex].cards);
