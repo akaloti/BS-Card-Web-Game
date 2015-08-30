@@ -1056,6 +1056,9 @@ function createBSCallButtons(bool) {
   @throws nothing
 */
 function selectOrUnselectCard(divId) {
+  if (!bs.canSelectCards)
+    return;
+
   var cardToAffect = $('#' + divId);
   var cssClassPicked = "picked";
 

@@ -1,6 +1,5 @@
 Next (in order of descending priority):
 -fix submission display
--figure out why cards are selectable when players are prompted to call BS
 -organize functions handling user interaction (e.g. remove the
  enableResponsesToKeyPresses function); remove hovering up and down
 -change the buttons (e.g. Submit) as necessary
