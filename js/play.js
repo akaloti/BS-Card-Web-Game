@@ -9,12 +9,13 @@ var bs = {};
 bs.deck = [];
 bs.centerPile = []; // players submit cards to this pile
 bs.DECK_LENGTH = 52;
-bs.positions = [];
+bs.positions = []; // of each card on sprite sheet
 bs.players = [];
 bs.currentPlayerIndex = 0;
 bs.currentBSAskingIndex = 0; // current player whose being asked if
                              // wishes to call BS
 bs.currentHoveredCardIndex = 0;
+bs.canSelectCards = false;
 bs.SUITS = {SPADE : 0, HEART : 1, CLUB : 2, DIAMOND : 3};
 bs.RANKS = {ACE : 1, TWO : 2, THREE : 3, FOUR : 4,
   FIVE : 5, SIX : 6, SEVEN : 7, EIGHT : 8, NINE : 9,
@@ -492,8 +493,10 @@ function displayCards(divId, arrayOfCards) {
     var spriteBackgroundPosition = bs.positions[suit][rank].x +
       ' ' + bs.positions[suit][rank].y;
     var id = getCardId(suit, rank);
+    var onclickValue = "selectOrUnselectCard('" + id + "')";
 
-    $('#' + divId).append("<div class='card' id=" +
+    $('#' + divId).append("<div class='card' onclick=" +
+      onclickValue + " id=" +
       id + ">" + displayableRank(rank) + " of " +
       displayableSuit(suit) + "</div>");
     $("#" + id).css({"background-position" : spriteBackgroundPosition,
@@ -999,6 +1002,8 @@ function createSubmitButton(bool) {
   @throws nothing
 */
 function enableGameResponseToKeyPresses(bool) {
+  bs.canSelectCards = bool;
+
   if (bool)
     $(document).on("keydown", function(e) {
       var keyCodeDown = 40;
@@ -1010,8 +1015,6 @@ function enableGameResponseToKeyPresses(bool) {
       else if (e.which === keyCodeUp)
         bs.currentHoveredCardIndex = updateHoveredCard(
           bs.currentHoveredCardIndex, "up");
-      else if (e.which === keyCodeSpace)
-        selectOrUnselectCard();
     });
   else
     $(document).off("keydown");
@@ -1043,26 +1046,26 @@ function createBSCallButtons(bool) {
 }
 
 /*
-  @pre bs.currentHoveredCardIndex is updated
-  @post if user can select the card marked by
-  bs.currentHoveredCardIndex, the card will be selected; if the card
-  was already selected, it will be unselected
+  @pre bs.currentHoveredCardIndex and bs.canSelectCards are updated
+  @post if selecting cards is allowed, the card marked by divId
+  will be selected (or unselected if it is already selected); if
+  selecting cards isn't allowed, nothing will happen
   @hasTest no
+  @param divId id of the card to affect (without the '#')
   @returns nothing
   @throws nothing
 */
-function selectOrUnselectCard() {
-  var cardToAffect = "#displayed-cards li:nth-child(" + (
-    bs.currentHoveredCardIndex + 1) + ')';
+function selectOrUnselectCard(divId) {
+  var cardToAffect = $('#' + divId);
   var cssClassPicked = "picked";
 
-  if ($(cardToAffect).hasClass(cssClassPicked)) {
+  if (cardToAffect.hasClass(cssClassPicked)) {
     // deselect if card already is picked
-    $(cardToAffect).removeClass(cssClassPicked);
+    cardToAffect.removeClass(cssClassPicked);
   }
   else {
     // select an unselected card
-    $(cardToAffect).addClass(cssClassPicked);
+    cardToAffect.addClass(cssClassPicked);
   }
 }
 
