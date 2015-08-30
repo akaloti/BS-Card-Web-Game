@@ -23,7 +23,7 @@
   position: relative;
 }
 
-#submission-display li, #displayed-cards li {
+#submission-display div, #displayed-cards div {
   position: absolute;
 }
 

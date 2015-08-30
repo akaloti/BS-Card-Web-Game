@@ -495,7 +495,7 @@ function displayCards(divId, arrayOfCards) {
 
     $('#' + divId).append("<div class='card' id=" +
       id + ">" + displayableRank(rank) + " of " +
-      displayableSuit(suit) + "</li>");
+      displayableSuit(suit) + "</div>");
     $("#" + id).css({"background-position" : spriteBackgroundPosition,
       "left" : (left + "px"), "top" : (top + "px")});
 
