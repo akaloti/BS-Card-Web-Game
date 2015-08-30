@@ -253,27 +253,6 @@ QUnit.test("waitForPlayer()", function(assert) {
     shared.PARAMETER_ERROR, "Enforcement of valid parameter");
 });
 
-QUnit.test("updateDisplayedCards()", function(assert) {
-  $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
-
-  // Create artificial environment
-  createArtificialPlayers(3);
-  var numberOfCards1 = 6;
-  var numberOfCards3 = 2;
-  createArtificialCards(numberOfCards1, 0);
-  createArtificialCards(numberOfCards3, 2);
-
-  // Test display of the third artificial player's cards
-  updateDisplayedCards(2);
-  assert.deepEqual($("#displayed-cards li").length, numberOfCards3,
-    "The correct player's cards are displayed");
-
-  // Test display of the first artificial player's cards
-  updateDisplayedCards(0);
-  assert.deepEqual($("#displayed-cards li").length, numberOfCards1,
-    "The correct player's cards are displayed");
-});
-
 QUnit.test("displayableRank()", function(assert) {
   assert.deepEqual(displayableRank(bs.RANKS.SEVEN), "SEVEN",
     "Rank 7 is properly converted");

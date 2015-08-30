@@ -382,7 +382,8 @@ function nextTurn() {
   updateIndicators();
   waitForPlayer(bs.currentPlayerIndex, "pick", function() {
     displayIndicators();
-    updateDisplayedCards(bs.currentPlayerIndex);
+    displayCards("displayed-cards",
+      bs.players[bs.currentPlayerIndex].cards);
     promptPickCards();
     bs.currentHoveredCardIndex = updateHoveredCard(
       bs.currentHoveredCardIndex, "reset");
@@ -460,18 +461,6 @@ function waitForPlayer(playerIndex, purpose, endCallback) {
       endCallback();
     }
   });
-}
-
-/*
-  @pre bs.currentPlayerIndex has been updated
-  @post webpage displays list of current player's cards
-  @hasTest yes
-  @param playerIndex index of the player whose cards to display
-  @returns nothing
-  @throws nothing
-*/
-function updateDisplayedCards(playerIndex) {
-  displayCards("displayed-cards", bs.players[playerIndex].cards);
 }
 
 /*
@@ -683,7 +672,8 @@ function prepareWebpageForAskBS(bool) {
   if (bool) {
     // replace the current turn's player's cards by the asked player's
     // cards
-    updateDisplayedCards(bs.currentBSAskingIndex);
+    displayCards("displayed-cards",
+      bs.players[bs.currentBSAskingIndex].cards);
 
     // generate the prompt
     $("#call-bs-prompt").html("Player " +
@@ -976,7 +966,8 @@ function setUpGame() {
   // to certain key presses, allowing continuation of the game
   // from here
   waitForPlayer(bs.currentPlayerIndex, "pick", function() {
-    updateDisplayedCards(bs.currentPlayerIndex);
+    displayCards("displayed-cards",
+      bs.players[bs.currentPlayerIndex].cards);
     $("#displayed-cards li:first-child").addClass("hovered");
     createSubmitButton(true);
     promptPickCards();
