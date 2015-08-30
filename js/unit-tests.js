@@ -70,6 +70,33 @@ QUnit.test("shared.parameterError()", function(assert) {
 
 QUnit.module("play.js");
 
+QUnit.test("getCardId()", function(assert) {
+  assert.deepEqual(getCardId(bs.SUITS.SPADE, bs.RANKS.ACE),
+    "s" + bs.SUITS.SPADE + "r" + bs.RANKS.ACE,
+    "Correct id for ace of spades");
+  assert.deepEqual(getCardId(bs.SUITS.HEART, bs.RANKS.SIX),
+    "s" + bs.SUITS.HEART + "r" + bs.RANKS.SIX,
+    "Correct id for six of hearts");
+  assert.deepEqual(getCardId(bs.SUITS.DIAMOND, bs.RANKS.KING),
+    "s" + bs.SUITS.DIAMOND + "r" + bs.RANKS.KING,
+    "Correct id for king of diamonds");
+});
+
+QUnit.test("initializeCardBackgroundPositions()", function(assert) {
+  bs.positions = [];
+  initializeCardBackgroundPositions();
+
+  // Confirm that some of the cards' coordinates are correct
+  assert.deepEqual(bs.positions[bs.SUITS.SPADE][bs.RANKS.JACK],
+    new Position('-800px', '0px'), "Correct position: jack of spades");
+  assert.deepEqual(bs.positions[bs.SUITS.HEART][bs.RANKS.KING],
+    new Position('-960px', '-120px'), "Correct position: king of hearts");
+  assert.deepEqual(bs.positions[bs.SUITS.CLUB][bs.RANKS.THREE],
+    new Position('-160px', '-240px'), "Correct position: three of clubs");
+  assert.deepEqual(bs.positions[bs.SUITS.DIAMOND][bs.RANKS.EIGHT],
+    new Position('-560px', '-360px'), "Correct position: eight of diamond");
+});
+
 QUnit.test("generateDeck()", function(assert) {
   generateDeck();
 
@@ -224,27 +251,6 @@ QUnit.test("updateCurrentRank()", function(assert) {
 QUnit.test("waitForPlayer()", function(assert) {
   assert.deepEqual(waitForPlayer(0, "invalidPurpose", function() {}),
     shared.PARAMETER_ERROR, "Enforcement of valid parameter");
-});
-
-QUnit.test("updateDisplayedCards()", function(assert) {
-  $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
-
-  // Create artificial environment
-  createArtificialPlayers(3);
-  var numberOfCards1 = 6;
-  var numberOfCards3 = 2;
-  createArtificialCards(numberOfCards1, 0);
-  createArtificialCards(numberOfCards3, 2);
-
-  // Test display of the third artificial player's cards
-  updateDisplayedCards(2);
-  assert.deepEqual($("#displayed-cards li").length, numberOfCards3,
-    "The correct player's cards are displayed");
-
-  // Test display of the first artificial player's cards
-  updateDisplayedCards(0);
-  assert.deepEqual($("#displayed-cards li").length, numberOfCards1,
-    "The correct player's cards are displayed");
 });
 
 QUnit.test("displayableRank()", function(assert) {

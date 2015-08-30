@@ -9,6 +9,7 @@ var bs = {};
 bs.deck = [];
 bs.centerPile = []; // players submit cards to this pile
 bs.DECK_LENGTH = 52;
+bs.positions = [];
 bs.players = [];
 bs.currentPlayerIndex = 0;
 bs.currentBSAskingIndex = 0; // current player whose being asked if
@@ -44,6 +45,35 @@ function Card(suit, rank) {
 
 /*
   @pre none
+  @post see @returns
+  @hasTest yes
+  @param suit of the card
+  @param rank of the card
+  @returns the appropriate HTML id for the card specified by the
+  suit and rank (e.g. "s0r1" for ace of spades)
+  @throws nothing
+*/
+function getCardId(suit, rank) {
+  return 's' + suit + 'r' + rank;
+}
+
+/*
+  @pre none
+  @post instance of class Positions created
+  @hasTest no
+  @param x x-coordinate of the position (with suffix (e.g. 'px') at
+  end if needed)
+  @param y y-coordinate of the position (with suffix at end if needed)
+  @returns nothing
+  @throws nothing
+*/
+function Position(x, y) {
+  this.x = x;
+  this.y = y;
+}
+
+/*
+  @pre none
   @post instance of class Player created
   @hasTest no
   @returns nothing
@@ -53,6 +83,33 @@ function Player() {
   // this.name = name;
 
   this.cards = [];
+}
+
+/*
+  @pre bs.positions is an empty array
+  @post bs.positions has coordinates of sprite for each
+  card in spritesheet
+  @hasTest yes
+  @returns nothing
+  @throws nothing
+*/
+function initializeCardBackgroundPositions() {
+  var y = 0;
+  var CARD_HEIGHT = 120;
+  var x = 0;
+  var CARD_WIDTH = 80;
+
+  for (var s in bs.SUITS) {
+    bs.positions[bs.SUITS[s]] = [];
+    x = 0;
+
+    for (var r in bs.RANKS) {
+      bs.positions[bs.SUITS[s]][bs.RANKS[r]] =
+        new Position(x + 'px', y + 'px');
+      x -= CARD_WIDTH;
+    }
+    y -= CARD_HEIGHT;
+  }
 }
 
 /*
@@ -325,7 +382,8 @@ function nextTurn() {
   updateIndicators();
   waitForPlayer(bs.currentPlayerIndex, "pick", function() {
     displayIndicators();
-    updateDisplayedCards(bs.currentPlayerIndex);
+    displayCards("displayed-cards",
+      bs.players[bs.currentPlayerIndex].cards);
     promptPickCards();
     bs.currentHoveredCardIndex = updateHoveredCard(
       bs.currentHoveredCardIndex, "reset");
@@ -406,23 +464,46 @@ function waitForPlayer(playerIndex, purpose, endCallback) {
 }
 
 /*
-  @pre bs.currentPlayerIndex has been updated
-  @post webpage displays list of current player's cards
-  @hasTest yes
-  @param playerIndex index of the player whose cards to display
+  @pre bs.positions is correct
+  @post elements have been appended to the element noted by divId
+  so that each card in arrayOfCards is graphically displayed in
+  that noted element
+  @hasTest no (because, for the most part, only other functions
+  are called)
+  @param divId id (without the '#') of the element to attach the
+  cards to
+  @param arrayOfCards the cards to display
   @returns nothing
   @throws nothing
 */
-function updateDisplayedCards(playerIndex) {
-  // Clear the previous list
-  $("#displayed-cards").html("");
+function displayCards(divId, arrayOfCards) {
+  // Clear any already existing display
+  $('#' + divId).html("");
 
-  // Create the current list
-  var cards = bs.players[playerIndex].cards;
-  for (var cardIndex in cards) {
-    $("#displayed-cards").append("<li>" +
-      displayableRank(cards[cardIndex].rank) + " of " +
-      displayableSuit(cards[cardIndex].suit) + "</li>");
+  // variables for positioning each sprite
+  var HORIZONTAL_GAP = 100; // horizontal distance between cards
+  var left = HORIZONTAL_GAP;
+  var VERTICAL_GAP = 150; // vertical distance between cards
+  var top = 0;
+
+  for (var cardIndex in arrayOfCards) {
+    var suit = arrayOfCards[cardIndex].suit;
+    var rank = arrayOfCards[cardIndex].rank;
+    var spriteBackgroundPosition = bs.positions[suit][rank].x +
+      ' ' + bs.positions[suit][rank].y;
+    var id = getCardId(suit, rank);
+
+    $('#' + divId).append("<li class='card' id=" +
+      id + ">" + displayableRank(rank) + " of " +
+      displayableSuit(suit) + "</li>");
+    $("#" + id).css({"background-position" : spriteBackgroundPosition,
+      "left" : (left + "px"), "top" : (top + "px")});
+
+    left += HORIZONTAL_GAP;
+    if ((left + 80 + HORIZONTAL_GAP) > $(window).width()) {
+      left = HORIZONTAL_GAP;
+      top += VERTICAL_GAP;
+    }
   }
 }
 
@@ -591,7 +672,8 @@ function prepareWebpageForAskBS(bool) {
   if (bool) {
     // replace the current turn's player's cards by the asked player's
     // cards
-    updateDisplayedCards(bs.currentBSAskingIndex);
+    displayCards("displayed-cards",
+      bs.players[bs.currentBSAskingIndex].cards);
 
     // generate the prompt
     $("#call-bs-prompt").html("Player " +
@@ -764,13 +846,16 @@ function revealSubmittedCards(bool) {
   if (bool) {
     $("#submission-display").append("<p>Player " +
       (bs.currentPlayerIndex + 1) + " submitted the following:</p>");
+    var cardsToDisplay = bs.centerPile.slice(
+      (bs.centerPile.length - bs.numberOfCardsSubmitted));
+    displayCards("submission-display", cardsToDisplay);
     $("#submission-display").append("<ul id='submitted-cards'></ul");
-    for (var i = 0; i < bs.numberOfCardsSubmitted; ++i) {
+    /*for (var i = 0; i < bs.numberOfCardsSubmitted; ++i) {
       var cardToDisplay = bs.centerPile[bs.centerPile.length - 1 -i];
       $("#submitted-cards").append("<li>" +
         displayableRank(cardToDisplay.rank) + " of " +
         displayableSuit(cardToDisplay.suit) + "</li>");
-    }
+    }*/
   }
   else
     $("#submission-display").empty();
@@ -884,7 +969,8 @@ function setUpGame() {
   // to certain key presses, allowing continuation of the game
   // from here
   waitForPlayer(bs.currentPlayerIndex, "pick", function() {
-    updateDisplayedCards(bs.currentPlayerIndex);
+    displayCards("displayed-cards",
+      bs.players[bs.currentPlayerIndex].cards);
     $("#displayed-cards li:first-child").addClass("hovered");
     createSubmitButton(true);
     promptPickCards();
@@ -989,6 +1075,7 @@ function selectOrUnselectCard() {
 
 $(document).ready(function(){
   if (!shared.isUnitTesting()) {
+    initializeCardBackgroundPositions();
     setUpGame();
   }
 });
