@@ -493,6 +493,10 @@ function displayCards(divId, arrayOfCards) {
     var spriteBackgroundPosition = bs.positions[suit][rank].x +
       ' ' + bs.positions[suit][rank].y;
     var id = getCardId(suit, rank);
+
+    // It's okay for submitted cards to have this onclick attribute
+    // because whether or not a player can select cards is stored
+    // in bs.canSelectCards, which is checked by selectOrUnselectCard()
     var onclickValue = "selectOrUnselectCard('" + id + "')";
 
     $('#' + divId).append("<div class='card' onclick=" +
@@ -852,7 +856,7 @@ function revealSubmittedCards(bool) {
     var cardsToDisplay = bs.centerPile.slice(
       (bs.centerPile.length - bs.numberOfCardsSubmitted));
     $("#submission-display").append("<div id='submitted-cards'></div>");
-    displayCards("submission-cards", cardsToDisplay);
+    displayCards("submitted-cards", cardsToDisplay);
   }
   else
     $("#submission-display").empty();
