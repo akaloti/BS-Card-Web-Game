@@ -1,16 +1,26 @@
 Next (in order of descending priority):
--organize functions handling user interaction (e.g. remove the
- enableResponsesToKeyPresses function); remove hovering up and down
+-with PHP and different stylesheet, allow user to choose style
+ --choose background(s)
+ --perhaps include styles that allow browsers that don't allow the
+   gradients to be used
 -change the buttons (e.g. Submit) as necessary
 -applying stepwise refinement in more areas
  (perhaps a function for changing the webpage that takes the context)
  --consider the phases of the webpage
+  ---consider using objects to manage these phases
+ --organize functions handling user interaction (e.g. remove the
+ enableResponsesToKeyPresses function)
 -make everything look nice
+ --option to choose which (css) style for game
 -play a sound when a player is asked to check in
+-background music (e.g. "Barrel Blast"); choice
 
 After the above:
 -release 1.0
+-basic (perhaps, stupid) AI
+-release 2.0
 -Node.js
+-YouTube video
 
 Considerable:
 -precondition checks for functions with boolean argument (since an
@@ -23,4 +33,3 @@ Considerable:
  tests (as opposed to solely with exceptions)
 -look into generating tests automatically
 -CSS variables
--AI
