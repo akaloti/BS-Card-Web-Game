@@ -1,5 +1,4 @@
 Next (in order of descending priority):
--change the unordered lists to div elements
 -consider using splice() in giveCenterPileTo()
 -allow clicking for selecting cards
 -change the buttons (e.g. Submit) as necessary

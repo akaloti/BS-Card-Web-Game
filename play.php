@@ -48,8 +48,8 @@
   <p id="announcement"></p>
 
   <div id="card-display">Your cards:
-    <ul id="displayed-cards">
-    </ul>
+    <div id="displayed-cards">
+    </div>
   </div>
 
   <div id="submit-button">
