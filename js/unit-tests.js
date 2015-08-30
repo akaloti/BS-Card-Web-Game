@@ -309,9 +309,9 @@ function testSubmitCards(assert, numberOfCards,
   createArtificialCards(numberOfCards, bs.currentPlayerIndex);
 
   // Create the illusion that some of the player's cards are selected
-  $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
+  $("#qunit-fixture").append("<div id='displayed-cards'></div>");
   for (var i = 0; i < numberOfCardsToSubmit; ++i)
-    $("#displayed-cards").append("<li class='picked'></li>");
+    $("#displayed-cards").append("<div class='picked'></div>");
 
   assert.deepEqual(submitCards(), numberOfCardsToSubmit,
     "Function successfully returned the number of selected cards");

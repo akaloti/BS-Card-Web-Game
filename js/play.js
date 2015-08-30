@@ -289,7 +289,7 @@ function updateIndicators() {
 */
 function updateHoveredCard(index, action) {
   try {
-    $("#displayed-cards li:nth-child(" + (index + 1) + ')').
+    $("#displayed-cards div:nth-child(" + (index + 1) + ')').
       removeClass("hovered");
     var newIndex = 0;
 
@@ -314,7 +314,7 @@ function updateHoveredCard(index, action) {
       throw "Exception: Invalid argument for updateHoveredCard()";
     }
 
-    $("#displayed-cards li:nth-child(" + (newIndex + 1) + ')').
+    $("#displayed-cards div:nth-child(" + (newIndex + 1) + ')').
       addClass("hovered");
     return newIndex;
   }
@@ -563,7 +563,7 @@ function submitTurn() {
   @throws nothing
 */
 function isValidMove() {
-  if ($("#displayed-cards li.picked").length === 0)
+  if ($("#displayed-cards div.picked").length === 0)
     return false;
   else
     return true;
@@ -588,7 +588,7 @@ function submitCards() {
   for (var i = 0; i < bs.players[bs.currentPlayerIndex].cards.length;
     ++i)
   {
-    var cardToTest = "#displayed-cards li:nth-child(" + (
+    var cardToTest = "#displayed-cards div:nth-child(" + (
       i + 1) + ')';
     if ($(cardToTest).hasClass(cssClassPicked)) {
       // mark the index of the card to remove from the player
@@ -964,7 +964,7 @@ function setUpGame() {
   waitForPlayer(bs.currentPlayerIndex, "pick", function() {
     displayCards("displayed-cards",
       bs.players[bs.currentPlayerIndex].cards);
-    $("#displayed-cards li:first-child").addClass("hovered");
+    $("#displayed-cards div:first-child").addClass("hovered");
     createSubmitButton(true);
     promptPickCards();
   });
