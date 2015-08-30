@@ -1,7 +1,8 @@
 Next (in order of descending priority):
--get gradients to work on Safari
 -with PHP and different stylesheet, allow user to choose style
  --choose background(s)
+ --perhaps include styles that allow browsers that don't allow the
+   gradients to be used
 -change the buttons (e.g. Submit) as necessary
 -applying stepwise refinement in more areas
  (perhaps a function for changing the webpage that takes the context)

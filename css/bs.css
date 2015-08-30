@@ -19,7 +19,23 @@
 }
 
 .card.picked {
+  /* For Internet Explorer 10.0 and up, and for versions
+    of Chrome, Firefox, Safari, and Opera above the range of
+    versions covered below */
   background: linear-gradient(rgba(255, 0, 0, 0.45),
+    rgba(255, 0, 0, 0.45)), url(../images/deck.png);
+
+  /* For Chrome 10.0 up to before 26.0, and for Safari 5.1 up to
+    before 6.1 */
+  background: -webkit-linear-gradient(rgba(255, 0, 0, 0.45),
+    rgba(255, 0, 0, 0.45)), url(../images/deck.png);
+
+  /* For Firefox 3.6 up to before 16.0 */
+  background: -moz-linear-gradient(rgba(255, 0, 0, 0.45),
+    rgba(255, 0, 0, 0.45)), url(../images/deck.png);
+
+  /* For Opera 11.1 up to before 12.1 */
+  background: -o-linear-gradient(rgba(255, 0, 0, 0.45),
     rgba(255, 0, 0, 0.45)), url(../images/deck.png);
 }
 
