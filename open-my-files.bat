@@ -10,4 +10,5 @@ start Notepad++ js/play.js
 start Notepad++ js/shared.js
 start Notepad++ glossary.html
 start Notepad++ README.md
+start Notepad++ bs2.css
 exit
