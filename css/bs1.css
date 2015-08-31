@@ -3,14 +3,34 @@
   Release number: 0.1
 */
 
+/*
+  Not webpage-specific
+*/
+
 /* body {
   background: black;
   url(../images/deck.png);
 } */
 
+.not-displayed {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+/*
+  For index.php
+*/
+
 #main-menu-options {
   list-style-type: none;
 }
+
+/*
+  For play.php
+*/
 
 .card {
   background: url(../images/deck.png);
@@ -49,10 +69,6 @@
 
 #submission-display div, #displayed-cards div {
   position: absolute;
-}
-
-.invisible {
-  visibility: hidden;
 }
 
 #interim {
