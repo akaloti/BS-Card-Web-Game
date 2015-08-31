@@ -37,7 +37,6 @@
       <input type='submit' value='Play' />
     </form>
   <li><a>Play (Wireless Connection) (Coming Eventually)</a></li><br>
-  <li><a href="settings.html">Settings (Coming Eventually)</a></li><br>
 </ul>
 
 <script src="js/shared.js"></script>
