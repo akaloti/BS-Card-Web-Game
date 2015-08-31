@@ -20,37 +20,15 @@ function switchStylesheet(nameOfFile) {
 
 /*
   @pre main menu hasn't been set up
-  @post a form requesting settings appears if the user selects "Play"
+  @post the form requesting settings appears if the user selects "Play"
   @hasTest no
   @returns nothing
   @throws nothing
 */
 function setUpMenu() {
-  // $("a[href='#main-menu-options']").click(function() {
-    // // Create the form
-    // $(this).after("");
-    // var form = $("form[name='playSettings']");
-
-    // // Create text field for typing number of players
-    // $(form).append("");
-
-    // // Create radio buttons for choosing stylesheet
-    // var numberOfStylesheets = 2;
-    // for (var i = 1; i <= numberOfStylesheets; ++i) {
-      // // var onclickAttribute = "switchStylesheet($(this).data('file'));";
-      // var onclickAttribute = "'alert('teehee')'";
-      // $(form).append("<input type='radio' name='style' value='style" +
-        // i + "' data-file='css/bs" + i + ".css' " +
-        // "onclick=" + onclickAttribute + " " +
-        // "/>Style " + i + "<br>");
-    // }
-
-    // // Create play button
-    // $(form).append("");
-
-    // // don't let the user keep generating the text field
-    // $("a[href='#main-menu-options']").off('click');
-  // });
+  $("a[href='#main-menu-options']").click(function() {
+    $("form.not-displayed").removeClass('not-displayed');
+  });
 }
 
 /*

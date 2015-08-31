@@ -4,13 +4,21 @@
 */
 
 /*
-  For all webpages
+  Not webpage-specific
 */
 
 /* body {
   background: black;
   url(../images/deck.png);
 } */
+
+.not-displayed {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
 
 /*
   For index.php
@@ -61,10 +69,6 @@
 
 #submission-display div, #displayed-cards div {
   position: absolute;
-}
-
-.invisible {
-  visibility: hidden;
 }
 
 #interim {

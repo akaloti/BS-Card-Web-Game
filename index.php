@@ -21,14 +21,14 @@
 
 <ul id="main-menu-options">
   <li><a href="#main-menu-options">Play (Shared Computer)</a></li><br>
-    <form name='playSettings' action='play.php'
+    <form class='not-displayed' name='playSettings' action='play.php'
       onsubmit='return validatePlaySettingsForm()' method='post'>
 
       Number of Players: <input type='text' name='number-of-players' />
       <br>
 
       <input type='radio' name='style' value='style1'
-        onclick="switchStylesheet('css/bs1.css');" />
+        onclick="switchStylesheet('css/bs1.css');" checked />
         Style 1<br>
       <input type='radio' name='style' value='style2'
         onclick="switchStylesheet('css/bs2.css');" />
