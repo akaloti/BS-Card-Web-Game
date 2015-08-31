@@ -1,8 +1,14 @@
 Next (in order of descending priority):
--with PHP and different stylesheet, allow user to choose style
- --choose background(s)
- --perhaps include styles that allow browsers that don't allow the
-   gradients to be used
+-make the play settings invisible at the start
+-clean up (e.g. with stepwise refinement) the code used in the main
+ menu
+-consider removing the settings webpage
+-make at least four different styles
+-perhaps include styles that allow browsers that don't allow the
+ gradients to be used (mention on readme)
+-consider using Angular to generate radio button for each stylesheet
+ in main menu
+-look into bootstrap
 -change the buttons (e.g. Submit) as necessary
 -applying stepwise refinement in more areas
  (perhaps a function for changing the webpage that takes the context)
