@@ -27,10 +27,10 @@
       Number of Players: <input type='text' name='number-of-players' />
       <br>
 
-      <input type='radio' name='style' value='style1'
+      <input type='radio' name='style' value='css/bs1.css'
         onclick="switchStylesheet('css/bs1.css');" checked />
         Style 1<br>
-      <input type='radio' name='style' value='style2'
+      <input type='radio' name='style' value='css/bs2.css'
         onclick="switchStylesheet('css/bs2.css');" />
         Style 2<br>
 

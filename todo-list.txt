@@ -1,5 +1,4 @@
 Next (in order of descending priority):
--use PHP to apply the chosen style to the game
 -consider removing the settings webpage
 -make at least four different styles
  --perhaps include styles that allow browsers that don't allow the
