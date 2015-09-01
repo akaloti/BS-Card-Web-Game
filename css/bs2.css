@@ -59,6 +59,10 @@ a {
   opacity: 0.7;
 }
 
+#game-indicators p {
+  margin: 0px;
+}
+
 #everyone-announcement, #submission-display {
   background-color: white;
   color: black;
@@ -75,7 +79,7 @@ a {
 #bs-call-buttons a, #submit-button a {
   background-color: black;
   border-radius: 10px;
-  border: 1px solid white;
+  border: 2px solid white;
   padding: 5px;
   text-decoration: none;
 }

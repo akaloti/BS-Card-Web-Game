@@ -62,6 +62,10 @@ form.not-displayed {
   opacity: 0.5;
 }
 
+#game-indicators p {
+  margin: 0px;
+}
+
 #everyone-announcement, #submission-display {
   background-color: yellow;
 }
