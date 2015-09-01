@@ -7,6 +7,10 @@
   For all webpages
 */
 
+body {
+  font-size: 1.2em;
+}
+
 a {
   color: black;
 }
