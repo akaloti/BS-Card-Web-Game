@@ -701,13 +701,13 @@ function announceCallBS() {
   var wasBS = isBS();
   if (wasBS) {
     $("#everyone-announcement").html(
-      "<b style='background-color:yellow;'>" +
+      "<b>" +
       "Player " + (bs.currentPlayerIndex + 1) +
       " was lying! He/she gets the center pile.</b>");
   }
   else {
     $("#everyone-announcement").html(
-      "<b style='background-color:yellow;'>" +
+      "<b>" +
       "Player " + (bs.currentPlayerIndex + 1) +
       " wasn't lying! Player " + (bs.currentBSAskingIndex + 1) +
       " gets the center pile.</b>");

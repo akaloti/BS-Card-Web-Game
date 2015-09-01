@@ -51,7 +51,7 @@ body {
     rgba(255, 0, 0, 0.75)), url(../images/deck.png);
 }
 
-#submission-display {
+#everyone-announcement, #submission-display {
   background-color: white;
   color: black;
 }

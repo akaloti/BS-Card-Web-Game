@@ -55,7 +55,7 @@ form.not-displayed {
     rgba(255, 0, 0, 0.45)), url(../images/deck.png);
 }
 
-#submission-display {
+#everyone-announcement, #submission-display {
   background-color: yellow;
 }
 
