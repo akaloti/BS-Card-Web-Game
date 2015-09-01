@@ -658,11 +658,7 @@ function callBS(bool) {
 
     var wasBS = announceCallBS();
 
-    // Wait so that people can see the announcement
-    setTimeout(function() {
-      resolveBSCall(wasBS)
-      },
-      1000);
+    resolveBSCall(wasBS);
   }
   else {
     // if the no button is called, the next player index is checked
