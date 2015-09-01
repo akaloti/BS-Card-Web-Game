@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<h1>BS</h1>
+<h1 id="main-menu-header">BS</h1>
 
 <ul id="main-menu-options">
   <li><a href="#main-menu-options">Play (Shared Computer)</a></li><br>

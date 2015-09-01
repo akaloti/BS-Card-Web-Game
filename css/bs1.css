@@ -22,8 +22,13 @@ form.not-displayed {
   display: none;
 }
 
+#main-menu-header {
+  text-align: center;
+}
+
 #main-menu-options {
   list-style-type: none;
+  text-align: center;
 }
 
 /*
