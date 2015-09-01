@@ -1,13 +1,13 @@
 Next (in order of descending priority):
--first main style
- --center the menu; put game title at top
- --make your own background graphics/textiles (e.g. with Microsoft Word)
- --make at least four different styles
+-see if there is a better way to organize the parts of a stylesheet
+ by which file they affect (e.g. through document-wrapping id's)
 -consider using Angular to generate radio button for each stylesheet
  in main menu (is this efficient?)
 -make everything look nice
  --consider dealing with the formerly problematic overlap regarding the
    submission display
+ --consider making at least four different styles (e.g. perhaps one
+   that uses bg.jpg)
 -readme
 -release 1.0
 -look into bootstrap
