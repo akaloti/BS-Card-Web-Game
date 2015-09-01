@@ -1,6 +1,5 @@
 Next (in order of descending priority):
 -make everything look nice
- --make a style that uses bg.jpg
  --consider having style previews in the main menu (e.g. of how a
    card and a button are affected)
 -readme
