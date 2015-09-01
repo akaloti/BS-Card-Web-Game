@@ -4,7 +4,7 @@
 */
 
 /*
-  Not webpage-specific
+  For all webpages
 */
 
 a {
@@ -23,12 +23,12 @@ form.not-displayed {
 }
 
 #main-menu-header {
-  text-align: center;
+  /* text-align: center; */
 }
 
 #main-menu-options {
   list-style-type: none;
-  text-align: center;
+  /* text-align: center; */
 }
 
 /*
