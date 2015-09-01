@@ -12,17 +12,13 @@
   url(../images/deck.png);
 } */
 
-.not-displayed {
-  display: none;
-}
-
-.invisible {
-  visibility: hidden;
-}
-
 /*
   For index.php
 */
+
+form.not-displayed {
+  display: none;
+}
 
 #main-menu-options {
   list-style-type: none;
@@ -73,4 +69,8 @@
 
 #interim {
   font-size: 2em;
+}
+
+.invisible {
+  visibility: hidden;
 }
