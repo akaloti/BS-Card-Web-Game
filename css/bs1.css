@@ -7,9 +7,9 @@
   Not webpage-specific
 */
 
-/* body {
-  background: black;
-} */
+a {
+  color: black;
+}
 
 /*
   For index.php
