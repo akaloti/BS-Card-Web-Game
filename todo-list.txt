@@ -1,13 +1,13 @@
 Next (in order of descending priority):
 -make at least four different styles
- --remove overlap of submission display
  --perhaps include styles that allow browsers that don't allow the
   gradients to be used (mention on readme)
  --look into bootstrap
 -consider using Angular to generate radio button for each stylesheet
  in main menu
 -make everything look nice
- --option to choose which (css) style for game
+ --consider dealing with the formerly problematic overlap regarding the
+   submission display
 -readme
 -release 1.0
 -play a sound when a player is asked to check in
