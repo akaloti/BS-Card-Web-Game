@@ -1,9 +1,7 @@
 Next (in order of descending priority):
 -make everything look nice
- --consider dealing with the formerly problematic overlap regarding the
-   submission display
- --consider making at least four different styles (e.g. perhaps one
-   that uses bg.jpg)
+ --consider having style previews in the main menu (e.g. of how a
+   card and a button are affected)
 -readme
 -release 1.0
 -look into bootstrap

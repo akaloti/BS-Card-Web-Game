@@ -7,18 +7,17 @@
 
 <html>
 <head>
+<title>Play: BS</title>
 <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 </script>
 <link rel="stylesheet" type="text/css" href="<?php echo $_POST['style']; ?>">
 
-<title>Play: BS</title>
-
 </head>
 <body>
 
 <!-- So the page can scroll to the top after a button is clicked. -->
-<h1 id="top">Use arrow keys and spacebar to pick cards.</h1>
+<div id="top"></div>
 
 <div id="for-everyone">
   <div id="between-turns-announcements">
@@ -47,12 +46,13 @@
 
   <p id="announcement"></p>
 
-  <div id="card-display">Your cards:
-    <div id="displayed-cards">
-    </div>
+  <div id="submit-button">
   </div>
 
-  <div id="submit-button">
+  <div id="card-display">
+    <p>Your cards:</p>
+    <div id="displayed-cards">
+    </div>
   </div>
 </section>
 

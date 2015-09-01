@@ -147,4 +147,8 @@ application:
 "HTML5 Games Development by Example" by Makzan and
 "The Pragmatic Programmer" by Andy Hunt and Dave Thomas.
 
+The spritesheet of the cards and the background image of the third
+selectable style came from the source code of the book "HTML5 Games
+Development by Example" by Makzan.
+
 W3Schools.com and the jQuery API also helped.

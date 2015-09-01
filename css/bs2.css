@@ -10,6 +10,7 @@
 body {
   background: black;
   color: white;
+  font-size: 1.2em;
 }
 
 a {
@@ -38,25 +39,29 @@ a {
   /* For Internet Explorer 10.0 and up, and for versions
     of Chrome, Firefox, Safari, and Opera above the range of
     versions covered below */
-  background: linear-gradient(rgba(255, 0, 0, 0.75),
-    rgba(255, 0, 0, 0.75)), url(../images/deck.png);
+  background: linear-gradient(rgba(0, 0, 255, 0.75),
+    rgba(0, 0, 255, 0.75)), url(../images/deck.png);
 
   /* For Chrome 10.0 up to before 26.0, and for Safari 5.1 up to
     before 6.1 */
-  background: -webkit-linear-gradient(rgba(255, 0, 0, 0.75),
-    rgba(255, 0, 0, 0.75)), url(../images/deck.png);
+  background: -webkit-linear-gradient(rgba(0, 0, 255, 0.75),
+    rgba(0, 0, 255, 0.75)), url(../images/deck.png);
 
   /* For Firefox 3.6 up to before 16.0 */
-  background: -moz-linear-gradient(rgba(255, 0, 0, 0.75),
-    rgba(255, 0, 0, 0.75)), url(../images/deck.png);
+  background: -moz-linear-gradient(rgba(0, 0, 255, 0.75),
+    rgba(0, 0, 255, 0.75)), url(../images/deck.png);
 
   /* For Opera 11.1 up to before 12.1 */
-  background: -o-linear-gradient(rgba(255, 0, 0, 0.75),
-    rgba(255, 0, 0, 0.75)), url(../images/deck.png);
+  background: -o-linear-gradient(rgba(0, 0, 255, 0.75),
+    rgba(0, 0, 255, 0.75)), url(../images/deck.png);
 
   /* So users of older browsers, who won't see any gradients,
     can tell which cards they've picked */
   opacity: 0.7;
+}
+
+#game-indicators p {
+  margin: 0px;
 }
 
 #everyone-announcement, #submission-display {
@@ -70,6 +75,14 @@ a {
 
 #submission-display div, #displayed-cards div {
   position: absolute;
+}
+
+#bs-call-buttons a, #submit-button a {
+  background-color: black;
+  border-radius: 10px;
+  border: 2px solid white;
+  padding: 5px;
+  text-decoration: none;
 }
 
 #interim {

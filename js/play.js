@@ -658,11 +658,7 @@ function callBS(bool) {
 
     var wasBS = announceCallBS();
 
-    // Wait so that people can see the announcement
-    setTimeout(function() {
-      resolveBSCall(wasBS)
-      },
-      1000);
+    resolveBSCall(wasBS);
   }
   else {
     // if the no button is called, the next player index is checked
@@ -965,7 +961,7 @@ function enableGameResponseToKeyPresses(bool) {
 function createBSCallButtons(bool) {
   if (bool) {
     $("#bs-call-buttons").append(
-      "<a id='bs-yes' href='#top'>Yes</a><br>").
+      "<a id='bs-yes' href='#top'>Yes</a> ").
       append("<a id='bs-no' href='#top'>No</a>");
     $("#bs-yes").click(function() {
       callBS(true);

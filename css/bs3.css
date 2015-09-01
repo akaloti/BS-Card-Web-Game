@@ -7,9 +7,15 @@
   Not webpage-specific
 */
 
-/* body {
-  background: black;
-} */
+body {
+  background-image: url(../images/bg.jpg);
+  color: #ccc;
+  font-size: 1.3em;
+}
+
+a {
+  color: #ccc;
+}
 
 /*
   For index.php
@@ -37,11 +43,15 @@ form.not-displayed {
 }
 
 .card.picked {
-  opacity: 0.7;
+  opacity: 0.5;
+}
+
+#game-indicators p {
+  margin: 0px;
 }
 
 #everyone-announcement, #submission-display {
-  background-color: yellow;
+  /* background-color: black; */
 }
 
 #submission-display, #displayed-cards {
@@ -52,8 +62,13 @@ form.not-displayed {
   position: absolute;
 }
 
-#interim {
-  font-size: 2em;
+#bs-call-buttons a, #submit-button a {
+  background-color: #ccc;
+  color: black;
+  border-radius: 10px;
+  border: 3px solid black;
+  padding: 5px;
+  text-decoration: none;
 }
 
 .invisible {

@@ -7,6 +7,10 @@
   For all webpages
 */
 
+body {
+  font-size: 1.2em;
+}
+
 a {
   color: black;
 }
@@ -22,13 +26,8 @@ form.not-displayed {
   display: none;
 }
 
-#main-menu-header {
-  /* text-align: center; */
-}
-
 #main-menu-options {
   list-style-type: none;
-  /* text-align: center; */
 }
 
 /*
@@ -39,6 +38,7 @@ form.not-displayed {
   background-image: url(../images/deck.png);
   width: 80px;
   height: 120px;
+  border: 5px solid red;
 }
 
 .card.picked {
@@ -66,6 +66,10 @@ form.not-displayed {
   opacity: 0.5;
 }
 
+#game-indicators p {
+  margin: 0px;
+}
+
 #everyone-announcement, #submission-display {
   background-color: yellow;
 }
@@ -76,6 +80,14 @@ form.not-displayed {
 
 #submission-display div, #displayed-cards div {
   position: absolute;
+}
+
+#bs-call-buttons a, #submit-button a {
+  background-color: red;
+  border-radius: 10px;
+  border: 5px solid black;
+  padding: 5px;
+  text-decoration: none;
 }
 
 #interim {
