@@ -9,20 +9,18 @@
 
 /* body {
   background: black;
-  url(../images/deck.png);
 } */
-
-.not-displayed {
-  display: none;
-}
-
-.invisible {
-  visibility: hidden;
-}
 
 /*
   For index.php
 */
+
+/* This isn't needed in every stylesheet because the form needs to
+  be displayed before the user can pick a different stylesheet. Thus,
+  this sytle is only needed in the default stylesheet. */
+form.not-displayed {
+  display: none;
+}
 
 #main-menu-options {
   list-style-type: none;
@@ -33,7 +31,7 @@
 */
 
 .card {
-  background: url(../images/deck.png);
+  background-image: url(../images/deck.png);
   width: 80px;
   height: 120px;
 }
@@ -57,9 +55,13 @@
   /* For Opera 11.1 up to before 12.1 */
   background: -o-linear-gradient(rgba(255, 0, 0, 0.45),
     rgba(255, 0, 0, 0.45)), url(../images/deck.png);
+
+  /* So users of older browsers, who won't see any gradients,
+    can tell which cards they've picked */
+  opacity: 0.5;
 }
 
-#submission-display {
+#everyone-announcement, #submission-display {
   background-color: yellow;
 }
 
@@ -73,4 +75,8 @@
 
 #interim {
   font-size: 2em;
+}
+
+.invisible {
+  visibility: hidden;
 }

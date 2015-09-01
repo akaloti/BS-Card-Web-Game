@@ -33,6 +33,9 @@
       <input type='radio' name='style' value='css/bs2.css'
         onclick="switchStylesheet('css/bs2.css');" />
         Style 2<br>
+      <input type='radio' name='style' value='css/bs3.css'
+        onclick="switchStylesheet('css/bs3.css');" />
+        Style 3<br>
 
       <input type='submit' value='Play' />
     </form>

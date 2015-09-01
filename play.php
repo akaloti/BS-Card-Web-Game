@@ -21,14 +21,14 @@
 <h1 id="top">Use arrow keys and spacebar to pick cards.</h1>
 
 <div id="for-everyone">
+  <div id="between-turns-announcements">
+  </div>
+
   <div id="everyone-announcement">
   </div>
 
   <div id="submission-display">
   </div>
-</div>
-
-<div id="between-turns-announcements">
 </div>
 
 <section id="game">

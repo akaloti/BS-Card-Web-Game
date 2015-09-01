@@ -1,0 +1,61 @@
+/*
+  Author: Aaron Kaloti
+  Release number: 0.1
+*/
+
+/*
+  Not webpage-specific
+*/
+
+/* body {
+  background: black;
+} */
+
+/*
+  For index.php
+*/
+
+/* This isn't needed in every stylesheet because the form needs to
+  be displayed before the user can pick a different stylesheet. Thus,
+  this sytle is only needed in the default stylesheet. */
+form.not-displayed {
+  display: none;
+}
+
+#main-menu-options {
+  list-style-type: none;
+}
+
+/*
+  For play.php
+*/
+
+.card {
+  background-image: url(../images/deck.png);
+  width: 80px;
+  height: 120px;
+}
+
+.card.picked {
+  opacity: 0.7;
+}
+
+#everyone-announcement, #submission-display {
+  background-color: yellow;
+}
+
+#submission-display, #displayed-cards {
+  position: relative;
+}
+
+#submission-display div, #displayed-cards div {
+  position: absolute;
+}
+
+#interim {
+  font-size: 2em;
+}
+
+.invisible {
+  visibility: hidden;
+}
