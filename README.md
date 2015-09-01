@@ -78,8 +78,12 @@ Download the source code (preferably from the releases section of
 this repository on GitHub) and run index.php. Because the application
 uses PHP, you'll need to use something that supports PHP. For example,
 I used Microsoft WebMatrix to run the project. Given that the
-application has no animations or use of CSS3 yet, it should work on
-any browser (e.g. Chrome, Safari, Internet Explorer, Opera, Firefox).
+application has no animations or crucial use of CSS3, it should
+work on any browser (e.g. Chrome, Safari, Internet Explorer,
+Opera, Firefox). Users of older browsers that don't support gradients,
+a CSS3 feature, must be able to identify which cards they've picked
+based on the transparency of the cards; users of browsers that do
+support gradients will notice the tint of picked cards.
 
 How to Run the Unit Tests
 -------------------------
