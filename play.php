@@ -49,9 +49,9 @@
 
   <div id="submit-button">
   </div>
-  <br>
 
-  <div id="card-display">Your cards:
+  <div id="card-display">
+    <p>Your cards:</p>
     <div id="displayed-cards">
     </div>
   </div>
