@@ -961,7 +961,7 @@ function enableGameResponseToKeyPresses(bool) {
 function createBSCallButtons(bool) {
   if (bool) {
     $("#bs-call-buttons").append(
-      "<a id='bs-yes' href='#top'>Yes</a><br>").
+      "<a id='bs-yes' href='#top'>Yes</a> ").
       append("<a id='bs-no' href='#top'>No</a>");
     $("#bs-yes").click(function() {
       callBS(true);

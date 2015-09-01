@@ -47,12 +47,13 @@
 
   <p id="announcement"></p>
 
+  <div id="submit-button">
+  </div>
+  <br>
+
   <div id="card-display">Your cards:
     <div id="displayed-cards">
     </div>
-  </div>
-
-  <div id="submit-button">
   </div>
 </section>
 
