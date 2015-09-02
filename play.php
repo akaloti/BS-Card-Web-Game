@@ -1,17 +1,19 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 
 <!--
   Author: Aaron Kaloti
-  Release number: 1.0
+  Release number: 2.0
 -->
 
+<meta charset="utf-8">
 <title>Play: BS</title>
 <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 </script>
-<link rel="stylesheet" type="text/css" href="<?php echo $_POST['style']; ?>">
+<link rel="stylesheet" type="text/css"
+  href="<?php echo $_POST['style']; ?>" />
 
 </head>
 <body>
@@ -55,6 +57,15 @@
     </div>
   </div>
 </section>
+
+<?php
+$desiredAudio = $_POST['audio'];
+if ($desiredAudio != "none") {
+  echo "<audio id='background-music'>";
+  echo "<source src='$desiredAudio' ?> />";
+  echo "</audio>";
+}
+?>
 
 <script>
   // To get around not being able to use PHP in a JavaScript file

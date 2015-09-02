@@ -2,12 +2,15 @@
 
 /*
   Author: Aaron Kaloti
-  Release number: 1.0
+  Release number: 2.0
 */
+
+var mainMenu = {};
+mainMenu.currentAudioTrack = 1;
 
 /*
   @pre the stylesheet indicated by nameOfFile exists
-  @post the stylesheet used by index.html has been switched to the
+  @post the stylesheet used by index.php has been switched to the
   one indicated by nameOfFile
   @hasTest no (only a jQuery function is used)
   @param nameOfFile the stylesheet to apply to the webpage
@@ -19,8 +22,31 @@ function switchStylesheet(nameOfFile) {
 }
 
 /*
+  @pre the audio track represented by audioNumber exists
+  @post the audio track currently played by index.php has been
+  paused; the audio track indicated by audioNumber has been played
+  one represented by audioNumber; mainMenu.currentAudioTrack has
+  been updated
+  @hasTest no
+  @param audioNumber the number of the audio track to play, or
+  has value "none" to indicate no background music
+  @returns nothing
+  @throws nothing
+*/
+function switchAudio(audioNumber) {
+  document.getElementById("background-music-" +
+    mainMenu.currentAudioTrack).pause();
+
+  if (audioNumber !== "none") {
+    document.getElementById("background-music-" + audioNumber).play();
+    mainMenu.currentAudioTrack = audioNumber;
+  }
+}
+
+/*
   @pre main menu hasn't been set up
-  @post the form requesting settings appears if the user selects "Play"
+  @post the form requesting settings appears if the user selects "Play";
+  the default background music is playing
   @hasTest no
   @returns nothing
   @throws nothing
@@ -29,6 +55,8 @@ function setUpMenu() {
   $("a[href='#main-menu-options']").click(function() {
     $("form.not-displayed").removeClass('not-displayed');
   });
+
+  document.getElementById("background-music-1").play();
 }
 
 /*
