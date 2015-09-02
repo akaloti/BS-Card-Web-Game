@@ -20,7 +20,8 @@ function switchStylesheet(nameOfFile) {
 
 /*
   @pre main menu hasn't been set up
-  @post the form requesting settings appears if the user selects "Play"
+  @post the form requesting settings appears if the user selects "Play";
+  the default background music is playing
   @hasTest no
   @returns nothing
   @throws nothing
@@ -29,6 +30,8 @@ function setUpMenu() {
   $("a[href='#main-menu-options']").click(function() {
     $("form.not-displayed").removeClass('not-displayed');
   });
+
+  document.getElementById("background-music").play();
 }
 
 /*
