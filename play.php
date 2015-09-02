@@ -1,34 +1,33 @@
 <!doctype html>
+<html>
+<head>
 
 <!--
   Author: Aaron Kaloti
-  Release number: 0.1
+  Release number: 1.0
 -->
 
-<html>
-<head>
+<title>Play: BS</title>
 <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 </script>
-<link rel="stylesheet" type="text/css" href="css/bs.css">
-
-<title>Play: BS</title>
+<link rel="stylesheet" type="text/css" href="<?php echo $_POST['style']; ?>">
 
 </head>
 <body>
 
 <!-- So the page can scroll to the top after a button is clicked. -->
-<h1 id="top">Use arrow keys and spacebar to pick cards.</h1>
+<div id="top"></div>
 
 <div id="for-everyone">
+  <div id="between-turns-announcements">
+  </div>
+
   <div id="everyone-announcement">
   </div>
 
   <div id="submission-display">
   </div>
-</div>
-
-<div id="between-turns-announcements">
 </div>
 
 <section id="game">
@@ -47,12 +46,13 @@
 
   <p id="announcement"></p>
 
-  <div id="card-display">Your cards:
-    <ul id="displayed-cards">
-    </ul>
+  <div id="submit-button">
   </div>
 
-  <div id="submit-button">
+  <div id="card-display">
+    <p>Your cards:</p>
+    <div id="displayed-cards">
+    </div>
   </div>
 </section>
 

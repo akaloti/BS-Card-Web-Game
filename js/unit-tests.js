@@ -2,8 +2,10 @@
 
 /*
   Author: Aaron Kaloti
-  Release number: 0.1
+  Release number: 1.0
 */
+
+QUnit.module("unit-tests.js");
 
 /*
   @pre none
@@ -54,20 +56,51 @@ QUnit.test("createArtificialCards()", function(assert) {
   assert.ok(bs.players[0].cards.length === 10, "Correct number of cards created");
 });
 
+QUnit.module("shared.js");
+
 QUnit.test("shared.preconditionError()", function(assert) {
-  assert.equal(shared.preconditionError("This is a test"),
+  assert.deepEqual(shared.preconditionError("This is a test"),
     shared.PRECONDITION_ERROR, "Correct value is returned");
 });
 
 QUnit.test("shared.parameterError()", function(assert) {
-  assert.equal(shared.parameterError("This is a test"),
+  assert.deepEqual(shared.parameterError("This is a test"),
     shared.PARAMETER_ERROR, "Correct value is returned");
+});
+
+QUnit.module("play.js");
+
+QUnit.test("getCardId()", function(assert) {
+  assert.deepEqual(getCardId(bs.SUITS.SPADE, bs.RANKS.ACE),
+    "s" + bs.SUITS.SPADE + "r" + bs.RANKS.ACE,
+    "Correct id for ace of spades");
+  assert.deepEqual(getCardId(bs.SUITS.HEART, bs.RANKS.SIX),
+    "s" + bs.SUITS.HEART + "r" + bs.RANKS.SIX,
+    "Correct id for six of hearts");
+  assert.deepEqual(getCardId(bs.SUITS.DIAMOND, bs.RANKS.KING),
+    "s" + bs.SUITS.DIAMOND + "r" + bs.RANKS.KING,
+    "Correct id for king of diamonds");
+});
+
+QUnit.test("initializeCardBackgroundPositions()", function(assert) {
+  bs.positions = [];
+  initializeCardBackgroundPositions();
+
+  // Confirm that some of the cards' coordinates are correct
+  assert.deepEqual(bs.positions[bs.SUITS.SPADE][bs.RANKS.JACK],
+    new Position('-800px', '0px'), "Correct position: jack of spades");
+  assert.deepEqual(bs.positions[bs.SUITS.HEART][bs.RANKS.KING],
+    new Position('-960px', '-120px'), "Correct position: king of hearts");
+  assert.deepEqual(bs.positions[bs.SUITS.CLUB][bs.RANKS.THREE],
+    new Position('-160px', '-240px'), "Correct position: three of clubs");
+  assert.deepEqual(bs.positions[bs.SUITS.DIAMOND][bs.RANKS.EIGHT],
+    new Position('-560px', '-360px'), "Correct position: eight of diamond");
 });
 
 QUnit.test("generateDeck()", function(assert) {
   generateDeck();
 
-  assert.equal(bs.deck.length, bs.DECK_LENGTH,
+  assert.deepEqual(bs.deck.length, bs.DECK_LENGTH,
     "bs.deck contains 52 cards");
 });
 
@@ -78,7 +111,7 @@ QUnit.test("dealOutCards()", function(assert) {
 
   // Check the enforcement of the bs.players.length precondition
   bs.players = [];
-  assert.equal(dealOutCards(), shared.PRECONDITION_ERROR,
+  assert.deepEqual(dealOutCards(), shared.PRECONDITION_ERROR,
     "Function throws exception if no players");
 });
 
@@ -121,7 +154,7 @@ function testDealOutCards(assert, numberOfArtificialPlayers) {
   assert.ok(toleranceSatisfied,
     "Cards distributed as equally as possible between " +
     numberOfArtificialPlayers + " players");
-  assert.equal(bs.deck.length, 0, "All cards were dealt");
+  assert.deepEqual(bs.deck.length, 0, "All cards were dealt");
 }
 
 QUnit.test("createPlayers()", function(assert) {
@@ -129,11 +162,11 @@ QUnit.test("createPlayers()", function(assert) {
   bs.players = [];
 
   // check enforcement of (some) parameter requirements
-  assert.equal(createPlayers(-1), shared.PARAMETER_ERROR,
+  assert.deepEqual(createPlayers(-1), shared.PARAMETER_ERROR,
     "-1 should be a rejected parameter");
-  assert.equal(createPlayers(0), shared.PARAMETER_ERROR,
+  assert.deepEqual(createPlayers(0), shared.PARAMETER_ERROR,
     "0 should be a rejected parameter");
-  assert.equal(createPlayers(shared.bs.MAX_NUMBER_OF_PLAYERS + 1),
+  assert.deepEqual(createPlayers(shared.bs.MAX_NUMBER_OF_PLAYERS + 1),
     shared.PARAMETER_ERROR,
     "Any value above shared.bs.MAX_NUMBER_OF_PLAYERS" +
     " should be rejected parameter");
@@ -143,7 +176,7 @@ QUnit.test("createPlayers()", function(assert) {
 
   var testValue = 5;
   createPlayers(testValue);
-  assert.equal(bs.players.length, testValue,
+  assert.deepEqual(bs.players.length, testValue,
     "Correct number of players created");
 });
 
@@ -176,82 +209,31 @@ QUnit.test("determineHigherRank()", function(assert) {
     0), "Rank Five should equal Rank Five");
 });
 
-QUnit.test("updateHoveredCard()", function(assert) {
-  // Check valid parameter enforcement
-  assert.equal(updateHoveredCard("invalidArgument"),
-    shared.PARAMETER_ERROR, "Enforcement of valid parameter");
-
-  // Create artificial environment
-  createArtificialPlayers(1);
-  createArtificialCards(5, 0);
-
-  bs.currentPlayerIndex = 0;
-
-  assert.equal(updateHoveredCard(1, "reset"), 0,
-    "Resetting hovered card works");
-  assert.equal(updateHoveredCard(1, "down"), 2, "Hovering down works");
-  assert.equal(updateHoveredCard(1, "up"), 0, "Hovering up works");
-  assert.equal(updateHoveredCard(4, "down"), 0,
-    "Can wrap around from last card to first card");
-  assert.equal(updateHoveredCard(0, "up"), 4,
-    "Can wrap around from first card to last card");
-});
-
-QUnit.test("getIncrementedPlayerIndex()", function(assert) {
-  createArtificialPlayers(5);
-
-  assert.equal(getIncrementedPlayerIndex(1), 2,
-    "Normal increment from 1 to 2 worked");
-  assert.equal(getIncrementedPlayerIndex(4), 0,
-    "Wrap around from last player to first player worked");
-});
-
 QUnit.test("updateCurrentRank()", function(assert) {
-  assert.equal(updateCurrentRank(bs.RANKS.ACE), bs.RANKS.TWO,
+  assert.deepEqual(updateCurrentRank(bs.RANKS.ACE), bs.RANKS.TWO,
     "Normal increment from Ace to Two worked");
-  assert.equal(updateCurrentRank(bs.RANKS.TEN), bs.RANKS.JACK,
+  assert.deepEqual(updateCurrentRank(bs.RANKS.TEN), bs.RANKS.JACK,
     "Normal increment from Ten to Jack worked");
-  assert.equal(updateCurrentRank(bs.RANKS.KING), bs.RANKS.ACE,
+  assert.deepEqual(updateCurrentRank(bs.RANKS.KING), bs.RANKS.ACE,
     "Wrap around 'increment' from King to Ace worked");
 });
 
 QUnit.test("waitForPlayer()", function(assert) {
-  assert.equal(waitForPlayer(0, "invalidPurpose", function() {}),
+  assert.deepEqual(waitForPlayer(0, "invalidPurpose", function() {}),
     shared.PARAMETER_ERROR, "Enforcement of valid parameter");
 });
 
-QUnit.test("updateDisplayedCards()", function(assert) {
-  $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
-
-  // Create artificial environment
-  createArtificialPlayers(3);
-  var numberOfCards1 = 6;
-  var numberOfCards3 = 2;
-  createArtificialCards(numberOfCards1, 0);
-  createArtificialCards(numberOfCards3, 2);
-
-  // Test display of the third artificial player's cards
-  updateDisplayedCards(2);
-  assert.equal($("#displayed-cards li").length, numberOfCards3,
-    "The correct player's cards are displayed");
-
-  // Test display of the first artificial player's cards
-  updateDisplayedCards(0);
-  assert.equal($("#displayed-cards li").length, numberOfCards1,
-    "The correct player's cards are displayed");
-});
-
 QUnit.test("displayableRank()", function(assert) {
-  assert.equal(displayableRank(bs.RANKS.SEVEN), "SEVEN",
+  assert.deepEqual(displayableRank(bs.RANKS.SEVEN), "SEVEN",
     "Rank 7 is properly converted");
-  assert.equal(displayableRank(bs.RANKS.QUEEN), "QUEEN",
+  assert.deepEqual(displayableRank(bs.RANKS.QUEEN), "QUEEN",
     "Rank Queen is properly converted");
 });
 
 QUnit.test("displayableSuit()", function(assert) {
-  assert.equal(displayableSuit(bs.SUITS.SPADE), "SPADE",
+  assert.deepEqual(displayableSuit(bs.SUITS.SPADE), "SPADE",
     "Suit Spade is properly converted");
-  assert.equal(displayableSuit(bs.SUITS.DIAMOND), "DIAMOND",
+  assert.deepEqual(displayableSuit(bs.SUITS.DIAMOND), "DIAMOND",
     "Rank Diamond is properly converted");
 });
 
@@ -261,7 +243,7 @@ QUnit.test("isValidMove()", function(assert) {
   bs.currentPlayerIndex = 0;
   createArtificialCards(3, bs.currentPlayerIndex);
 
-  assert.equal(isValidMove(), false,
+  assert.deepEqual(isValidMove(), false,
     "Requirement that at least one card be selected works");
 
   // The tested function checks if the user's cards have a certain
@@ -297,16 +279,16 @@ function testSubmitCards(assert, numberOfCards,
   createArtificialCards(numberOfCards, bs.currentPlayerIndex);
 
   // Create the illusion that some of the player's cards are selected
-  $("#qunit-fixture").append("<ul id='displayed-cards'></ul>");
+  $("#qunit-fixture").append("<div id='displayed-cards'></div>");
   for (var i = 0; i < numberOfCardsToSubmit; ++i)
-    $("#displayed-cards").append("<li class='picked'></li>");
+    $("#displayed-cards").append("<div class='picked'></div>");
 
-  assert.equal(submitCards(), numberOfCardsToSubmit,
+  assert.deepEqual(submitCards(), numberOfCardsToSubmit,
     "Function successfully returned the number of selected cards");
-  assert.equal(bs.players[bs.currentPlayerIndex].cards.length,
+  assert.deepEqual(bs.players[bs.currentPlayerIndex].cards.length,
     (numberOfCards - numberOfCardsToSubmit),
     "Correct number of cards were still left to the player");
-  assert.equal(bs.centerPile.length, numberOfCardsToSubmit,
+  assert.deepEqual(bs.centerPile.length, numberOfCardsToSubmit,
     "Correct number of cards were given to center pile");
 
   // So these tests of submitCards() don't affect the next tests
@@ -359,29 +341,33 @@ QUnit.test("isBS()", function(assert) {
   bs.currentRank = bs.RANKS.JACK;
   bs.numberOfCardsSubmitted = 3;
   setUpTestIsBS(false, false, true);
-  assert.equal(isBS(), true, "BS due to one card was detected");
+  assert.deepEqual(isBS(), true, "BS due to one card was detected");
   setUpTestIsBS(true, true, true);
-  assert.equal(isBS(), true, "BS due to all bad cards was detected");
+  assert.deepEqual(isBS(), true, "BS due to all bad cards was detected");
   setUpTestIsBS(false, false, false);
-  assert.equal(isBS(), false, "Lack of BS was detected");
+  assert.deepEqual(isBS(), false, "Lack of BS was detected");
 });
 
 QUnit.test("giveCenterPileTo()", function(assert) {
-  // Create artificial environment
+  // Create artificial center pile
   bs.centerPile = [];
-  var numberOfCards = 5;
-  for (var i = 0; i < numberOfCards; ++i) {
+  var numberOfCardsToTransfer = 5;
+  for (var i = 0; i < numberOfCardsToTransfer; ++i) {
     bs.centerPile.push(new Card(bs.SUITS.HEART, bs.RANKS.ACE));
   }
+
+  // Create artificial players
   createArtificialPlayers(3);
   var indexPlayerToTransferTo = 2;
+  var originalNumberOfCards = 4;
+  createArtificialCards(originalNumberOfCards, indexPlayerToTransferTo);
 
-  assert.equal(giveCenterPileTo(indexPlayerToTransferTo),
-    numberOfCards, "Number of transferred cards is returned");
-  assert.equal(bs.centerPile.length, 0,
+  assert.deepEqual(giveCenterPileTo(indexPlayerToTransferTo),
+    numberOfCardsToTransfer, "Number of transferred cards is returned");
+  assert.deepEqual(bs.centerPile.length, 0,
     "The center pile has been emptied");
-  assert.equal(bs.players[indexPlayerToTransferTo].cards.length,
-    numberOfCards,
+  assert.deepEqual(bs.players[indexPlayerToTransferTo].cards.length,
+    (numberOfCardsToTransfer + originalNumberOfCards),
     "The correct player has been given the correct number of cards");
 });
 
@@ -396,8 +382,8 @@ QUnit.test("checkForWin()", function(assert) {
 
   // Call the function and test the postcondition
   checkForWin();
-  assert.equal(bs.isWinner, true, "Winner is detected");
-  assert.equal(bs.winningPlayerIndex, 1,
+  assert.deepEqual(bs.isWinner, true, "Winner is detected");
+  assert.deepEqual(bs.winningPlayerIndex, 1,
     "bs.winningPlayerIndex is correctly associated with the winner");
 
   // Change the artificial environment so that none of the players
@@ -408,7 +394,7 @@ QUnit.test("checkForWin()", function(assert) {
 
   // Call the function and test the postcondition
   checkForWin();
-  assert.equal(bs.isWinner, false, "Lack of winner is detected");
-  assert.equal(bs.winningPlayerIndex, bs.NO_WINNER_INDEX,
+  assert.deepEqual(bs.isWinner, false, "Lack of winner is detected");
+  assert.deepEqual(bs.winningPlayerIndex, bs.NO_WINNER_INDEX,
     "bs.winningPlayerIndex isn't affected if no winner");
 });

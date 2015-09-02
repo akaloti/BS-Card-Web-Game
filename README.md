@@ -12,25 +12,29 @@ programming this application, to challenge myself,
 I wanted to avoid using any frameworks
 given to me by books, and I successfully did that. (Usually, I have
 some framework to start with that may be from, for example, a book's
-supplied source code, but I didn't have that this time.)
+supplied source code, but I didn't use any such framework this time.)
 
 Regarding languages, I used HTML5, CSS, JavaScript,
 and a little bit of PHP.
 
-Regarding other people's software, I used jQuery and QUnit.
+Regarding other people's software, I used jQuery and QUnit. Also,
+for the project glossary, I used AngularJS. I downloaded the QUnit
+(JavaScript and CSS) files, but I included both jQuery and AngularJS
+with the Google CDN (Content Delivery Network).
 
 Features
 --------
 
-As of the latest release, only clicking the first main menu option
-does anything significant, and there is no GUI yet.
+The user interacts with the game through clicking. He/she can choose
+which of three styles (i.e. stylesheets) that he/she wants the game to
+use.
 
-However, the application allows much of what is expected in a typical
+The application allows much of what is expected in a typical
 game of BS. Each player has to claim to play cards of a certain rank.
 Another player can call "BS" in response, risking that he/she will take
 the center pile of cards, but also potentially forcing a lying player
 to take his/her cards back along with the center pile. Each player is
-shown a list of his/her cards when he/she does his turn and when
+shown a list of his/her cards as he/she does his turn and as
 he/she decides whether or not to call "BS". Victory is achieved by the
 player who successfully empties his/her hand without anyone's being
 correct in calling "BS".
@@ -40,7 +44,9 @@ on the same computer. Thus, most of the time, the players cannot all
 look at the screen at the same time, otherwise they would see each
 other's cards. However, the game does warn the players about who
 should look at the screen next. Admittedly, this does make the game
-significantly less playable, but if I get to implement multiplayer
+significantly less playable, but I wasn't trying to program an
+application that wasn't trivial; I was programming for practice.
+However, if I get to implement multiplayer
 through a server with Node.js, then these problems will be resolved.
 
 With each defined function is a contract explaining things such as
@@ -63,7 +69,7 @@ The todo list is in todo-list.txt.
 Releases
 --------
 
-The latest release is: v0.1
+The latest release is: v1.0
 
 Please see the releases section under this repository on GitHub
 to download the latest release.
@@ -75,8 +81,12 @@ Download the source code (preferably from the releases section of
 this repository on GitHub) and run index.php. Because the application
 uses PHP, you'll need to use something that supports PHP. For example,
 I used Microsoft WebMatrix to run the project. Given that the
-application has no animations or use of CSS3 yet, it should work on
-any browser (e.g. Chrome, Safari, Internet Explorer, Opera, Firefox).
+application has no animations or crucial use of CSS3, it should
+work on any browser (e.g. Chrome, Safari, Internet Explorer,
+Opera, Firefox). Users of older browsers that don't support gradients,
+a CSS3 feature, must be able to identify which cards they've picked
+based on the transparency of the cards; users of browsers that do
+support gradients will notice the tint of picked cards.
 
 How to Run the Unit Tests
 -------------------------
@@ -139,5 +149,9 @@ The following books helped teach me skills that helped me program this
 application:
 "HTML5 Games Development by Example" by Makzan and
 "The Pragmatic Programmer" by Andy Hunt and Dave Thomas.
+
+The spritesheet of the cards and the background image of the third
+selectable style came from the source code of the book "HTML5 Games
+Development by Example" by Makzan.
 
 W3Schools.com and the jQuery API also helped.

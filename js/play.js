@@ -2,18 +2,20 @@
 
 /*
   Author: Aaron Kaloti
-  Release number: 0.1
+  Release number: 1.0
 */
 
 var bs = {};
 bs.deck = [];
 bs.centerPile = []; // players submit cards to this pile
 bs.DECK_LENGTH = 52;
+bs.positions = []; // of each card on sprite sheet
 bs.players = [];
 bs.currentPlayerIndex = 0;
 bs.currentBSAskingIndex = 0; // current player whose being asked if
                              // wishes to call BS
 bs.currentHoveredCardIndex = 0;
+bs.canSelectCards = false;
 bs.SUITS = {SPADE : 0, HEART : 1, CLUB : 2, DIAMOND : 3};
 bs.RANKS = {ACE : 1, TWO : 2, THREE : 3, FOUR : 4,
   FIVE : 5, SIX : 6, SEVEN : 7, EIGHT : 8, NINE : 9,
@@ -44,6 +46,35 @@ function Card(suit, rank) {
 
 /*
   @pre none
+  @post see @returns
+  @hasTest yes
+  @param suit of the card
+  @param rank of the card
+  @returns the appropriate HTML id for the card specified by the
+  suit and rank (e.g. "s0r1" for ace of spades)
+  @throws nothing
+*/
+function getCardId(suit, rank) {
+  return 's' + suit + 'r' + rank;
+}
+
+/*
+  @pre none
+  @post instance of class Positions created
+  @hasTest no
+  @param x x-coordinate of the position (with suffix (e.g. 'px') at
+  end if needed)
+  @param y y-coordinate of the position (with suffix at end if needed)
+  @returns nothing
+  @throws nothing
+*/
+function Position(x, y) {
+  this.x = x;
+  this.y = y;
+}
+
+/*
+  @pre none
   @post instance of class Player created
   @hasTest no
   @returns nothing
@@ -53,6 +84,33 @@ function Player() {
   // this.name = name;
 
   this.cards = [];
+}
+
+/*
+  @pre bs.positions is an empty array
+  @post bs.positions has coordinates of sprite for each
+  card in spritesheet
+  @hasTest yes
+  @returns nothing
+  @throws nothing
+*/
+function initializeCardBackgroundPositions() {
+  var y = 0;
+  var CARD_HEIGHT = 120;
+  var x = 0;
+  var CARD_WIDTH = 80;
+
+  for (var s in bs.SUITS) {
+    bs.positions[bs.SUITS[s]] = [];
+    x = 0;
+
+    for (var r in bs.RANKS) {
+      bs.positions[bs.SUITS[s]][bs.RANKS[r]] =
+        new Position(x + 'px', y + 'px');
+      x -= CARD_WIDTH;
+    }
+    y -= CARD_HEIGHT;
+  }
 }
 
 /*
@@ -213,57 +271,6 @@ function updateIndicators() {
   bs.currentPlayerIndex =
     getIncrementedPlayerIndex(bs.currentPlayerIndex);
   bs.currentRank = updateCurrentRank(bs.currentRank);
-  bs.currentHoveredCardIndex = updateHoveredCard(
-    bs.currentHoveredCardIndex, "reset");
-}
-
-/*
-  @pre none
-  @post correct card is hovered over by user's selector
-  @hasTest yes
-  @param index array index of currently selected card
-  @param action indicates what to do and has any of the
-  following values: "reset", "up", "down"
-  @returns if "reset", then 0; if "up", then
-  bs.currentHoveredCardIndex - 1; if "down", then
-  bs.currentHoveredCardIndex + 1 (wrap around if necessary); if invalid
-  value for action, return value of shared.parameterError()
-  @throws (caught) exception if invalid vlaue of action
-*/
-function updateHoveredCard(index, action) {
-  try {
-    $("#displayed-cards li:nth-child(" + (index + 1) + ')').
-      removeClass("hovered");
-    var newIndex = 0;
-
-    if (action === "reset") {
-      newIndex = 0;
-    }
-    else if (action === "up") {
-      // Wrap around, if necessary
-      if (index === 0)
-        newIndex = bs.players[bs.currentPlayerIndex].cards.length - 1;
-      else
-        newIndex = (index - 1);
-    }
-    else if (action === "down") {
-      // Wrap around, if necessary
-      if (index + 1 === bs.players[bs.currentPlayerIndex].cards.length)
-        newIndex = 0;
-      else
-        newIndex = (index + 1);
-    }
-    else {
-      throw "Exception: Invalid argument for updateHoveredCard()";
-    }
-
-    $("#displayed-cards li:nth-child(" + (newIndex + 1) + ')').
-      addClass("hovered");
-    return newIndex;
-  }
-  catch(err) {
-    return shared.parameterError(err);
-  }
 }
 
 /*
@@ -325,10 +332,9 @@ function nextTurn() {
   updateIndicators();
   waitForPlayer(bs.currentPlayerIndex, "pick", function() {
     displayIndicators();
-    updateDisplayedCards(bs.currentPlayerIndex);
+    displayCards("displayed-cards",
+      bs.players[bs.currentPlayerIndex].cards);
     promptPickCards();
-    bs.currentHoveredCardIndex = updateHoveredCard(
-      bs.currentHoveredCardIndex, "reset");
   });
 }
 
@@ -406,23 +412,50 @@ function waitForPlayer(playerIndex, purpose, endCallback) {
 }
 
 /*
-  @pre bs.currentPlayerIndex has been updated
-  @post webpage displays list of current player's cards
-  @hasTest yes
-  @param playerIndex index of the player whose cards to display
+  @pre bs.positions is correct
+  @post elements have been appended to the element noted by divId
+  so that each card in arrayOfCards is graphically displayed in
+  that noted element
+  @hasTest no (because, for the most part, only other functions
+  are called)
+  @param divId id (without the '#') of the element to attach the
+  cards to
+  @param arrayOfCards the cards to display
   @returns nothing
   @throws nothing
 */
-function updateDisplayedCards(playerIndex) {
-  // Clear the previous list
-  $("#displayed-cards").html("");
+function displayCards(divId, arrayOfCards) {
+  // Clear any already existing display
+  $('#' + divId).html("");
 
-  // Create the current list
-  var cards = bs.players[playerIndex].cards;
-  for (var cardIndex in cards) {
-    $("#displayed-cards").append("<li>" +
-      displayableRank(cards[cardIndex].rank) + " of " +
-      displayableSuit(cards[cardIndex].suit) + "</li>");
+  // variables for positioning each sprite
+  var HORIZONTAL_GAP = 100; // horizontal distance between cards
+  var left = HORIZONTAL_GAP;
+  var VERTICAL_GAP = 150; // vertical distance between cards
+  var top = 0;
+
+  for (var cardIndex in arrayOfCards) {
+    var suit = arrayOfCards[cardIndex].suit;
+    var rank = arrayOfCards[cardIndex].rank;
+    var spriteBackgroundPosition = bs.positions[suit][rank].x +
+      ' ' + bs.positions[suit][rank].y;
+    var id = getCardId(suit, rank);
+
+    // It's okay for submitted cards to have this onclick attribute
+    // because whether or not a player can select cards is stored
+    // in bs.canSelectCards, which is checked by selectOrUnselectCard()
+    var onclickValue = "selectOrUnselectCard('" + id + "')";
+
+    $('#' + divId).append("<div class='card' onclick=" +
+      onclickValue + " id=" + id + "></div>");
+    $("#" + id).css({"background-position" : spriteBackgroundPosition,
+      "left" : (left + "px"), "top" : (top + "px")});
+
+    left += HORIZONTAL_GAP;
+    if ((left + 80 + HORIZONTAL_GAP) > $(window).width()) {
+      left = HORIZONTAL_GAP;
+      top += VERTICAL_GAP;
+    }
   }
 }
 
@@ -482,7 +515,7 @@ function submitTurn() {
   @throws nothing
 */
 function isValidMove() {
-  if ($("#displayed-cards li.picked").length === 0)
+  if ($("#displayed-cards div.picked").length === 0)
     return false;
   else
     return true;
@@ -507,7 +540,7 @@ function submitCards() {
   for (var i = 0; i < bs.players[bs.currentPlayerIndex].cards.length;
     ++i)
   {
-    var cardToTest = "#displayed-cards li:nth-child(" + (
+    var cardToTest = "#displayed-cards div:nth-child(" + (
       i + 1) + ')';
     if ($(cardToTest).hasClass(cssClassPicked)) {
       // mark the index of the card to remove from the player
@@ -591,7 +624,8 @@ function prepareWebpageForAskBS(bool) {
   if (bool) {
     // replace the current turn's player's cards by the asked player's
     // cards
-    updateDisplayedCards(bs.currentBSAskingIndex);
+    displayCards("displayed-cards",
+      bs.players[bs.currentBSAskingIndex].cards);
 
     // generate the prompt
     $("#call-bs-prompt").html("Player " +
@@ -624,11 +658,7 @@ function callBS(bool) {
 
     var wasBS = announceCallBS();
 
-    // Wait so that people can see the announcement
-    setTimeout(function() {
-      resolveBSCall(wasBS)
-      },
-      1000);
+    resolveBSCall(wasBS);
   }
   else {
     // if the no button is called, the next player index is checked
@@ -667,13 +697,13 @@ function announceCallBS() {
   var wasBS = isBS();
   if (wasBS) {
     $("#everyone-announcement").html(
-      "<b style='background-color:yellow;'>" +
+      "<b>" +
       "Player " + (bs.currentPlayerIndex + 1) +
       " was lying! He/she gets the center pile.</b>");
   }
   else {
     $("#everyone-announcement").html(
-      "<b style='background-color:yellow;'>" +
+      "<b>" +
       "Player " + (bs.currentPlayerIndex + 1) +
       " wasn't lying! Player " + (bs.currentBSAskingIndex + 1) +
       " gets the center pile.</b>");
@@ -764,13 +794,10 @@ function revealSubmittedCards(bool) {
   if (bool) {
     $("#submission-display").append("<p>Player " +
       (bs.currentPlayerIndex + 1) + " submitted the following:</p>");
-    $("#submission-display").append("<ul id='submitted-cards'></ul");
-    for (var i = 0; i < bs.numberOfCardsSubmitted; ++i) {
-      var cardToDisplay = bs.centerPile[bs.centerPile.length - 1 -i];
-      $("#submitted-cards").append("<li>" +
-        displayableRank(cardToDisplay.rank) + " of " +
-        displayableSuit(cardToDisplay.suit) + "</li>");
-    }
+    var cardsToDisplay = bs.centerPile.slice(
+      (bs.centerPile.length - bs.numberOfCardsSubmitted));
+    $("#submission-display").append("<div id='submitted-cards'></div>");
+    displayCards("submitted-cards", cardsToDisplay);
   }
   else
     $("#submission-display").empty();
@@ -788,12 +815,11 @@ function revealSubmittedCards(bool) {
   @throws nothing
 */
 function giveCenterPileTo(playerIndex) {
-  var numberOfCardsTransferred = 0;
+  var numberOfCardsTransferred = bs.centerPile.length;
 
-  while (bs.centerPile.length > 0) {
-    bs.players[playerIndex].cards.push(bs.centerPile.pop());
-    ++numberOfCardsTransferred;
-  }
+  // Transfer the cards
+  bs.players[playerIndex].cards = bs.players[playerIndex].cards.concat(
+    bs.centerPile.splice(0, bs.centerPile.length));
 
   bs.players[playerIndex].cards =
     sortCards(bs.players[playerIndex].cards);
@@ -884,8 +910,8 @@ function setUpGame() {
   // to certain key presses, allowing continuation of the game
   // from here
   waitForPlayer(bs.currentPlayerIndex, "pick", function() {
-    updateDisplayedCards(bs.currentPlayerIndex);
-    $("#displayed-cards li:first-child").addClass("hovered");
+    displayCards("displayed-cards",
+      bs.players[bs.currentPlayerIndex].cards);
     createSubmitButton(true);
     promptPickCards();
   });
@@ -903,7 +929,7 @@ function setUpGame() {
 function createSubmitButton(bool) {
   if (bool) {
     $("#submit-button").append(
-      "<a href='#top'>Submit</a>");
+      "<a class='button' href='#top'>Submit</a>");
     $("#submit-button a[href='#top']").click(submitTurn);
   }
   else
@@ -920,22 +946,7 @@ function createSubmitButton(bool) {
   @throws nothing
 */
 function enableGameResponseToKeyPresses(bool) {
-  if (bool)
-    $(document).on("keydown", function(e) {
-      var keyCodeDown = 40;
-      var keyCodeUp = 38;
-      var keyCodeSpace = 32;
-      if (e.which === keyCodeDown)
-        bs.currentHoveredCardIndex = updateHoveredCard(
-          bs.currentHoveredCardIndex, "down");
-      else if (e.which === keyCodeUp)
-        bs.currentHoveredCardIndex = updateHoveredCard(
-          bs.currentHoveredCardIndex, "up");
-      else if (e.which === keyCodeSpace)
-        selectOrUnselectCard();
-    });
-  else
-    $(document).off("keydown");
+  bs.canSelectCards = bool;
 }
 
 /*
@@ -950,8 +961,8 @@ function enableGameResponseToKeyPresses(bool) {
 function createBSCallButtons(bool) {
   if (bool) {
     $("#bs-call-buttons").append(
-      "<a id='bs-yes' href='#top'>Yes</a><br>").
-      append("<a id='bs-no' href='#top'>No</a>");
+      "<a class='button' id='bs-yes' href='#top'>Yes</a> ").
+      append("<a class='button' id='bs-no' href='#top'>No</a>");
     $("#bs-yes").click(function() {
       callBS(true);
     });
@@ -964,31 +975,35 @@ function createBSCallButtons(bool) {
 }
 
 /*
-  @pre bs.currentHoveredCardIndex is updated
-  @post if user can select the card marked by
-  bs.currentHoveredCardIndex, the card will be selected; if the card
-  was already selected, it will be unselected
+  @pre bs.currentHoveredCardIndex and bs.canSelectCards are updated
+  @post if selecting cards is allowed, the card marked by divId
+  will be selected (or unselected if it is already selected); if
+  selecting cards isn't allowed, nothing will happen
   @hasTest no
+  @param divId id of the card to affect (without the '#')
   @returns nothing
   @throws nothing
 */
-function selectOrUnselectCard() {
-  var cardToAffect = "#displayed-cards li:nth-child(" + (
-    bs.currentHoveredCardIndex + 1) + ')';
+function selectOrUnselectCard(divId) {
+  if (!bs.canSelectCards)
+    return;
+
+  var cardToAffect = $('#' + divId);
   var cssClassPicked = "picked";
 
-  if ($(cardToAffect).hasClass(cssClassPicked)) {
+  if (cardToAffect.hasClass(cssClassPicked)) {
     // deselect if card already is picked
-    $(cardToAffect).removeClass(cssClassPicked);
+    cardToAffect.removeClass(cssClassPicked);
   }
   else {
     // select an unselected card
-    $(cardToAffect).addClass(cssClassPicked);
+    cardToAffect.addClass(cssClassPicked);
   }
 }
 
 $(document).ready(function(){
   if (!shared.isUnitTesting()) {
+    initializeCardBackgroundPositions();
     setUpGame();
   }
 });

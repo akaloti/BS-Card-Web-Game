@@ -1,0 +1,85 @@
+/*
+  Author: Aaron Kaloti
+  Release number: 1.0
+*/
+
+/*
+  Not webpage-specific
+*/
+
+body {
+  background-image: url(../images/bg.jpg);
+  color: #ccc;
+  font-size: 1.3em;
+}
+
+a {
+  color: #ccc;
+}
+
+/*
+  For index.php
+*/
+
+/* This isn't needed in every stylesheet because the form needs to
+  be displayed before the user can pick a different stylesheet. Thus,
+  this sytle is only needed in the default stylesheet. */
+form.not-displayed {
+  display: none;
+}
+
+#main-menu-options {
+  list-style-type: none;
+}
+
+#sample-card.card {
+  position: relative;
+  left: 50px;
+}
+
+/*
+  For play.php
+*/
+
+.card {
+  background-image: url(../images/deck.png);
+  width: 80px;
+  height: 120px;
+}
+
+.card.picked {
+  opacity: 0.5;
+}
+
+#game-indicators p {
+  margin: 0px;
+}
+
+#everyone-announcement, #submission-display {
+  /* background-color: black; */
+}
+
+#submission-display, #displayed-cards {
+  position: relative;
+}
+
+#submission-display div, #displayed-cards div {
+  position: absolute;
+}
+
+.button {
+  background-color: #ccc;
+  color: black;
+  border-radius: 10px;
+  border: 3px solid black;
+  padding: 5px;
+  text-decoration: none;
+}
+
+input[type=submit]:hover {
+  cursor: pointer;
+}
+
+.invisible {
+  visibility: hidden;
+}

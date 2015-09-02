@@ -19,6 +19,8 @@ sed -i "s~$1~$2~" open-my-files.bat
 # Unstage other changes
 git reset HEAD *
 
-# Commit the change (The renamed file was added earlier by "git mv")
+# Commit the change
 git add open-my-files.bat
+git rm $1
+git add $2
 git commit -m "Renamed file: $1 -> $2"

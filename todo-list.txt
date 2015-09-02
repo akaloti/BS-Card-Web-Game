@@ -1,14 +1,27 @@
 Next (in order of descending priority):
--release v0.1
-
-After release v0.1:
--modules for unit tests (e.g. based on which file each function is in)
--applying stepwise refinement in more areas
--in settings, player can choose whether to use GUI or not
- --store result in either local or session storage
--graphics (CSS and images)
+-release 1.0
+-make wireless choice a radio button, so menu no longer has invisible
+ parts
+-release 1.1
+-look into bootstrap
+ --if this works out, do release 1.2
 -play a sound when a player is asked to check in
+-background music (e.g. "Barrel Blast"); choice
+-applying stepwise refinement in more areas
+ (perhaps a function for changing the webpage that takes the context)
+ --consider the phases of the webpage
+  ---consider using objects to manage these phases
+ --organize functions handling user interaction (e.g. remove the
+   enableResponsesToKeyPresses function)
+-add unit tests to some functions that don't have any
+
+After the above:
+-release 2.0
+-basic (perhaps, stupid) AI
+-release 3.0
 -Node.js
+-release 4.0
+-YouTube video
 
 Considerable:
 -precondition checks for functions with boolean argument (since an
@@ -21,4 +34,3 @@ Considerable:
  tests (as opposed to solely with exceptions)
 -look into generating tests automatically
 -CSS variables
--AI
