@@ -4,15 +4,16 @@
 
 <!--
   Author: Aaron Kaloti
-  Release number: 1.0
+  Release number: 2.0
 -->
+
+<meta charset="utf-8">
+<title>Main Menu</title>
 
 <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 </script>
 <link rel="stylesheet" type="text/css" href="css/bs1.css">
-
-<title>Main Menu</title>
 
 </head>
 <body>

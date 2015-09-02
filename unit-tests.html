@@ -4,7 +4,7 @@
 
 <!--
   Author: Aaron Kaloti
-  Release number: 1.0
+  Release number: 2.0
 -->
 
 <meta charset="utf-8">
