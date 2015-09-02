@@ -1,24 +1,19 @@
 Next (in order of descending priority):
--release 1.0
+-remove traces of hovering (use Find in All Documents)
+-look into bootstrap
+ --if this works out, do release 1.1
+-background music (e.g. "Barrel Blast"); choice
+-release 2.0 (or 1.2)
+-basic (perhaps, stupid) AI
+-release 3.0
 -make wireless choice a radio button, so menu no longer has invisible
  parts
--release 1.1
--look into bootstrap
- --if this works out, do release 1.2
--play a sound when a player is asked to check in
--background music (e.g. "Barrel Blast"); choice
 -applying stepwise refinement in more areas
  (perhaps a function for changing the webpage that takes the context)
  --consider the phases of the webpage
   ---consider using objects to manage these phases
  --organize functions handling user interaction (e.g. remove the
    enableResponsesToKeyPresses function)
--add unit tests to some functions that don't have any
-
-After the above:
--release 2.0
--basic (perhaps, stupid) AI
--release 3.0
 -Node.js
 -release 4.0
 -YouTube video
@@ -29,8 +24,7 @@ Considerable:
 -figure out how to not allow a commit if unit tests failed
 -checking for providing of arguments to functions that require it
  (contract may be sufficient); notify in console
--consider support for both use of keys and use of clicking
--consider whether or not its practical to enforce preconditions in unit
+-consider whether or not it's practical to enforce preconditions in unit
  tests (as opposed to solely with exceptions)
 -look into generating tests automatically
 -CSS variables
