@@ -30,6 +30,11 @@ form.not-displayed {
   list-style-type: none;
 }
 
+#sample-card.card {
+  position: relative;
+  left: 50px;
+}
+
 /*
   For play.php
 */
@@ -82,12 +87,16 @@ form.not-displayed {
   position: absolute;
 }
 
-#bs-call-buttons a, #submit-button a {
+.button {
   background-color: red;
   border-radius: 10px;
   border: 5px solid black;
   padding: 5px;
   text-decoration: none;
+}
+
+input[type=submit]:hover {
+  cursor: pointer;
 }
 
 #interim {

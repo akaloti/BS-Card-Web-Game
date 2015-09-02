@@ -25,6 +25,11 @@ a {
   list-style-type: none;
 }
 
+#sample-card.card {
+  position: relative;
+  left: 50px;
+}
+
 /*
   For play.php
 */
@@ -77,12 +82,17 @@ a {
   position: absolute;
 }
 
-#bs-call-buttons a, #submit-button a {
+.button {
   background-color: black;
   border-radius: 10px;
   border: 2px solid white;
   padding: 5px;
   text-decoration: none;
+  color: white;
+}
+
+input[type=submit]:hover {
+  cursor: pointer;
 }
 
 #interim {
