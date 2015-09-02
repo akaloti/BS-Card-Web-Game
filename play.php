@@ -58,9 +58,14 @@
   </div>
 </section>
 
-<audio id="background-music">
-  <source src="<?php echo $_POST['audio']; ?>" />
-</audio>
+<?php
+$desiredAudio = $_POST['audio'];
+if ($desiredAudio != "none") {
+  echo "<audio id='background-music'>";
+  echo "<source src='$desiredAudio' ?> />";
+  echo "</audio>";
+}
+?>
 
 <script>
   // To get around not being able to use PHP in a JavaScript file

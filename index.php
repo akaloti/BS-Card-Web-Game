@@ -49,6 +49,9 @@
       <input type='radio' name='audio' value='audio/barrel_blast.mp3'
         onclick="switchAudio(2);" />
         Track 2<br>
+      <input type='radio' name='audio' value='none'
+        onclick="switchAudio('none');" />
+        None<br>
 
       <br>
       <input class='button' type='submit' value='Play' />

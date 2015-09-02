@@ -26,8 +26,8 @@ Features
 --------
 
 The user interacts with the game through clicking. He/she can choose
-which of three styles (i.e. stylesheets) that he/she wants the game to
-use, and he/she can choose which of three background tracks that he/she
+which style (i.e. stylesheet) that he/she wants the game to
+use, and he/she can choose which background track that he/she
 wants the game to use.
 
 The application allows much of what is expected in a typical

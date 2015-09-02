@@ -28,16 +28,19 @@ function switchStylesheet(nameOfFile) {
   one represented by audioNumber; mainMenu.currentAudioTrack has
   been updated
   @hasTest no
-  @param audioNumber the number of the audio track to play
+  @param audioNumber the number of the audio track to play, or
+  has value "none" to indicate no background music
   @returns nothing
   @throws nothing
 */
 function switchAudio(audioNumber) {
-  // $("background-music-" + mainMenu.currentAudioTrack).pause();
   document.getElementById("background-music-" +
     mainMenu.currentAudioTrack).pause();
-  document.getElementById("background-music-" + audioNumber).play();
-  mainMenu.currentAudioTrack = audioNumber;
+
+  if (audioNumber !== "none") {
+    document.getElementById("background-music-" + audioNumber).play();
+    mainMenu.currentAudioTrack = audioNumber;
+  }
 }
 
 /*

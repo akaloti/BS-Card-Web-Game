@@ -890,15 +890,29 @@ function removeCardInteraction() {
 }
 
 /*
+  @pre background music hasn't been set up
+  @post if background music is desired, the correct one is played;
+  otherwise, nothing happens
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
+function setUpBackgroundMusic() {
+  var audioElement = document.getElementById('background-music');
+  if (audioElement)
+    audioElement.play();
+}
+
+/*
   @pre game hasn't been set up
   @post functions that set the game up have been called, audio
-  has been played
+  has been played (if applicable)
   @hasTest no
   @returns nothing
   @throws nothing
 */
 function setUpGame() {
-  document.getElementById('background-music').play();
+  setUpBackgroundMusic();
   generateDeck();
   createPlayers(formData.numberOfPlayers);
   randomizePlayerOrder();
