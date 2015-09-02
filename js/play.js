@@ -929,7 +929,7 @@ function setUpGame() {
 function createSubmitButton(bool) {
   if (bool) {
     $("#submit-button").append(
-      "<a href='#top'>Submit</a>");
+      "<a class='button' href='#top'>Submit</a>");
     $("#submit-button a[href='#top']").click(submitTurn);
   }
   else
@@ -961,8 +961,8 @@ function enableGameResponseToKeyPresses(bool) {
 function createBSCallButtons(bool) {
   if (bool) {
     $("#bs-call-buttons").append(
-      "<a id='bs-yes' href='#top'>Yes</a> ").
-      append("<a id='bs-no' href='#top'>No</a>");
+      "<a class='button' id='bs-yes' href='#top'>Yes</a> ").
+      append("<a class='button' id='bs-no' href='#top'>No</a>");
     $("#bs-yes").click(function() {
       callBS(true);
     });

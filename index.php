@@ -38,7 +38,7 @@
         onclick="switchStylesheet('css/bs3.css');" />
         Style 3<br>
 
-      <input type='submit' value='Play' />
+      <input class='button' type='submit' value='Play' />
     </form>
   </li><br>
   <li><a>Play (Wireless Connection) (Coming Eventually)</a></li><br>

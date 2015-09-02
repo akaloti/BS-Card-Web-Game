@@ -62,13 +62,17 @@ form.not-displayed {
   position: absolute;
 }
 
-#bs-call-buttons a, #submit-button a {
+.button {
   background-color: #ccc;
   color: black;
   border-radius: 10px;
   border: 3px solid black;
   padding: 5px;
   text-decoration: none;
+}
+
+input[type=submit]:hover {
+  cursor: pointer;
 }
 
 .invisible {
