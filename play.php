@@ -12,7 +12,8 @@
 <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 </script>
-<link rel="stylesheet" type="text/css" href="<?php echo $_POST['style']; ?>">
+<link rel="stylesheet" type="text/css"
+  href="<?php echo $_POST['style']; ?>" />
 
 </head>
 <body>
@@ -56,6 +57,15 @@
     </div>
   </div>
 </section>
+
+<?php
+$desiredAudio = $_POST['audio'];
+if ($desiredAudio != "none") {
+  echo "<audio id='background-music'>";
+  echo "<source src='$desiredAudio' ?> />";
+  echo "</audio>";
+}
+?>
 
 <script>
   // To get around not being able to use PHP in a JavaScript file
