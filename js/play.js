@@ -14,7 +14,6 @@ bs.players = [];
 bs.currentPlayerIndex = 0;
 bs.currentBSAskingIndex = 0; // current player whose being asked if
                              // wishes to call BS
-bs.currentHoveredCardIndex = 0;
 bs.canSelectCards = false;
 bs.SUITS = {SPADE : 0, HEART : 1, CLUB : 2, DIAMOND : 3};
 bs.RANKS = {ACE : 1, TWO : 2, THREE : 3, FOUR : 4,
@@ -262,7 +261,6 @@ function randomizePlayerOrder() {
   @pre none
   @post bs.currentPlayerIndex and bs.currentRank have
   each been correctly incremented (with wrap around, if necessary).
-  bs.currentHoveredCardIndex has been reset to 0.
   @hasTest no
   @returns nothing
   @throws nothing
@@ -323,7 +321,7 @@ function displayIndicators() {
 /*
   @pre none
   @post the indicators and the displayed cards have been
-  updated; the first card is hovered over
+  updated
   @hasTest no
   @returns nothing
   @throws nothing
@@ -975,7 +973,7 @@ function createBSCallButtons(bool) {
 }
 
 /*
-  @pre bs.currentHoveredCardIndex and bs.canSelectCards are updated
+  @pre bs.canSelectCards is updated
   @post if selecting cards is allowed, the card marked by divId
   will be selected (or unselected if it is already selected); if
   selecting cards isn't allowed, nothing will happen
