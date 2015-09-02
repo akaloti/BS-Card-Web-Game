@@ -32,6 +32,11 @@ form.not-displayed {
   list-style-type: none;
 }
 
+#sample-card.card {
+  position: relative;
+  left: 50px;
+}
+
 /*
   For play.php
 */

@@ -19,6 +19,9 @@
 
 <h1 id="main-menu-header">BS</h1>
 
+<div class='card' id='sample-card'></div>
+<div class='card picked' id='sample-card'></div>
+
 <ul id="main-menu-options">
   <li><a href="#main-menu-options">Play (Shared Computer)</a>
     <form class='not-displayed' name='playSettings' action='play.php'
