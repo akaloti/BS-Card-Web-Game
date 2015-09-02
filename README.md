@@ -27,7 +27,8 @@ Features
 
 The user interacts with the game through clicking. He/she can choose
 which of three styles (i.e. stylesheets) that he/she wants the game to
-use.
+use, and he/she can choose which of three background tracks that he/she
+wants the game to use.
 
 The application allows much of what is expected in a typical
 game of BS. Each player has to claim to play cards of a certain rank.

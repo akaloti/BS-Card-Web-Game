@@ -12,7 +12,8 @@
 <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 </script>
-<link rel="stylesheet" type="text/css" href="<?php echo $_POST['style']; ?>">
+<link rel="stylesheet" type="text/css"
+  href="<?php echo $_POST['style']; ?>" />
 
 </head>
 <body>
@@ -56,6 +57,10 @@
     </div>
   </div>
 </section>
+
+<audio id="background-music">
+  <source src="<?php echo $_POST['audio']; ?>" />
+</audio>
 
 <script>
   // To get around not being able to use PHP in a JavaScript file

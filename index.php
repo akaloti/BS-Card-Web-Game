@@ -43,10 +43,10 @@
         Style 3<br>
 
       <p>Please choose your background music: </p>
-      <input type='radio' name='audio' value='1'
+      <input type='radio' name='audio' value='audio/down_the_tubes.mp3'
         onclick="switchAudio(1);" checked />
         Track 1<br>
-      <input type='radio' name='audio' value='2'
+      <input type='radio' name='audio' value='audio/barrel_blast.mp3'
         onclick="switchAudio(2);" />
         Track 2<br>
 

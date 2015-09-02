@@ -891,12 +891,14 @@ function removeCardInteraction() {
 
 /*
   @pre game hasn't been set up
-  @post functions that set the game up have been called
+  @post functions that set the game up have been called, audio
+  has been played
   @hasTest no
   @returns nothing
   @throws nothing
 */
 function setUpGame() {
+  document.getElementById('background-music').play();
   generateDeck();
   createPlayers(formData.numberOfPlayers);
   randomizePlayerOrder();

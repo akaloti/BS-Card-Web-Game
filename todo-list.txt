@@ -1,7 +1,6 @@
 Next (in order of descending priority):
 -background music (e.g. "Barrel Blast"); choice of:
- --music
- --volume
+ --no music
 -release 2.0 (or 1.2)
 -applying stepwise refinement in more areas
  (perhaps a function for changing the webpage that takes the context)
