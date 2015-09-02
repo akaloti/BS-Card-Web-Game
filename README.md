@@ -78,15 +78,26 @@ How to Run the Game
 -------------------
 
 Download the source code (preferably from the releases section of
-this repository on GitHub) and run index.php. Because the application
+this repository on GitHub) and run index.php.
+
+Because the application
 uses PHP, you'll need to use something that supports PHP. For example,
-I used Microsoft WebMatrix to run the project. Given that the
-application has no animations or crucial use of CSS3, it should
-work on any browser (e.g. Chrome, Safari, Internet Explorer,
-Opera, Firefox). Users of older browsers that don't support gradients,
-a CSS3 feature, must be able to identify which cards they've picked
+I used Microsoft WebMatrix to run the project.
+
+The application works on any major browser (e.g. Chrome, Internet
+Explorer, Opera, Firefox, Safari). However, users of older versions
+of those browsers may not be able to see the gradients, a CSS3 feature,
+that appear on picked cards. Thus, those users must be able to
+identify which cards they've picked
 based on the transparency of the cards; users of browsers that do
 support gradients will notice the tint of picked cards.
+
+The background music doesn't work on older versions of Safari. Although
+W3Schools states that Safari 4.0 supports the audio element, my Safari
+browser, 5.1.7 for Windows, doesn't. Because my version seems to be
+the last available version of Safari for Windows, I can't determine
+the earliest version of Safari needed for the user to hear the
+background music.
 
 How to Run the Unit Tests
 -------------------------
@@ -154,4 +165,8 @@ The spritesheet of the cards and the background image of the third
 selectable style came from the source code of the book "HTML5 Games
 Development by Example" by Makzan.
 
-W3Schools.com and the jQuery API also helped.
+The audio track "barrel_blast.mp3" comes from the soundtrack of the
+video game "Pac-Man World".
+
+W3Schools and the jQuery API also helped. I used W3Schools.com
+to determine which browsers supported which features (e.g. gradients).
