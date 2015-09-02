@@ -12,7 +12,7 @@ programming this application, to challenge myself,
 I wanted to avoid using any frameworks
 given to me by books, and I successfully did that. (Usually, I have
 some framework to start with that may be from, for example, a book's
-supplied source code, but I didn't have that this time.)
+supplied source code, but I didn't use any such framework this time.)
 
 Regarding languages, I used HTML5, CSS, JavaScript,
 and a little bit of PHP.
@@ -25,15 +25,16 @@ with the Google CDN (Content Delivery Network).
 Features
 --------
 
-As of the latest release, only clicking the first main menu option
-does anything significant, and there is no GUI yet.
+The user interacts with the game through clicking. He/she can choose
+which of three styles (i.e. stylesheets) that he/she wants the game to
+use.
 
-However, the application allows much of what is expected in a typical
+The application allows much of what is expected in a typical
 game of BS. Each player has to claim to play cards of a certain rank.
 Another player can call "BS" in response, risking that he/she will take
 the center pile of cards, but also potentially forcing a lying player
 to take his/her cards back along with the center pile. Each player is
-shown a list of his/her cards when he/she does his turn and when
+shown a list of his/her cards as he/she does his turn and as
 he/she decides whether or not to call "BS". Victory is achieved by the
 player who successfully empties his/her hand without anyone's being
 correct in calling "BS".
@@ -43,7 +44,9 @@ on the same computer. Thus, most of the time, the players cannot all
 look at the screen at the same time, otherwise they would see each
 other's cards. However, the game does warn the players about who
 should look at the screen next. Admittedly, this does make the game
-significantly less playable, but if I get to implement multiplayer
+significantly less playable, but I wasn't trying to program an
+application that wasn't trivial; I was programming for practice.
+However, if I get to implement multiplayer
 through a server with Node.js, then these problems will be resolved.
 
 With each defined function is a contract explaining things such as
@@ -66,7 +69,7 @@ The todo list is in todo-list.txt.
 Releases
 --------
 
-The latest release is: v0.1
+The latest release is: v1.0
 
 Please see the releases section under this repository on GitHub
 to download the latest release.
