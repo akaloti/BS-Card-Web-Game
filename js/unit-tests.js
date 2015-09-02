@@ -2,7 +2,7 @@
 
 /*
   Author: Aaron Kaloti
-  Release number: 0.1
+  Release number: 1.0
 */
 
 QUnit.module("unit-tests.js");

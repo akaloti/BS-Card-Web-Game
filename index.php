@@ -1,12 +1,12 @@
 <!doctype html>
+<html>
+<head>
 
 <!--
   Author: Aaron Kaloti
-  Release number: 0.1
+  Release number: 1.0
 -->
 
-<html>
-<head>
 <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 </script>
