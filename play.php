@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 
 <!--
@@ -7,6 +7,7 @@
   Release number: 1.0
 -->
 
+<meta charset="utf-8">
 <title>Play: BS</title>
 <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
