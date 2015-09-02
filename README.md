@@ -165,7 +165,7 @@ The spritesheet of the cards and the background image of the third
 selectable style came from the source code of the book "HTML5 Games
 Development by Example" by Makzan.
 
-The audio track "barrel_blast.mp3" comes from the soundtrack of the
+All background audio tracks come from the soundtrack of the
 video game "Pac-Man World".
 
 W3Schools and the jQuery API also helped. I used W3Schools.com

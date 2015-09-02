@@ -5,9 +5,12 @@
   Release number: 1.0
 */
 
+var mainMenu = {};
+mainMenu.currentAudioTrack = 1;
+
 /*
   @pre the stylesheet indicated by nameOfFile exists
-  @post the stylesheet used by index.html has been switched to the
+  @post the stylesheet used by index.php has been switched to the
   one indicated by nameOfFile
   @hasTest no (only a jQuery function is used)
   @param nameOfFile the stylesheet to apply to the webpage
@@ -16,6 +19,25 @@
 */
 function switchStylesheet(nameOfFile) {
   $("link[rel='stylesheet']").attr('href', nameOfFile);
+}
+
+/*
+  @pre the audio track represented by audioNumber exists
+  @post the audio track currently played by index.php has been
+  paused; the audio track indicated by audioNumber has been played
+  one represented by audioNumber; mainMenu.currentAudioTrack has
+  been updated
+  @hasTest no
+  @param audioNumber the number of the audio track to play
+  @returns nothing
+  @throws nothing
+*/
+function switchAudio(audioNumber) {
+  // $("background-music-" + mainMenu.currentAudioTrack).pause();
+  document.getElementById("background-music-" +
+    mainMenu.currentAudioTrack).pause();
+  document.getElementById("background-music-" + audioNumber).play();
+  mainMenu.currentAudioTrack = audioNumber;
 }
 
 /*
@@ -31,7 +53,7 @@ function setUpMenu() {
     $("form.not-displayed").removeClass('not-displayed');
   });
 
-  document.getElementById("background-music").play();
+  document.getElementById("background-music-1").play();
 }
 
 /*
