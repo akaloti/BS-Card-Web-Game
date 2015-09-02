@@ -70,7 +70,7 @@ The todo list is in todo-list.txt.
 Releases
 --------
 
-The latest release is: v1.0
+The latest release is: v2.0
 
 Please see the releases section under this repository on GitHub
 to download the latest release.
