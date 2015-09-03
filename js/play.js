@@ -913,6 +913,7 @@ function setUpBackgroundMusic() {
 */
 function setUpGame() {
   setUpBackgroundMusic();
+  initializeCardBackgroundPositions();
   generateDeck();
   createPlayers(formData.numberOfPlayers);
   randomizePlayerOrder();
@@ -1017,7 +1018,6 @@ function selectOrUnselectCard(divId) {
 
 $(document).ready(function(){
   if (!shared.isUnitTesting()) {
-    initializeCardBackgroundPositions();
     setUpGame();
   }
 });
