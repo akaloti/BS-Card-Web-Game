@@ -11,6 +11,7 @@ bs.centerPile = []; // players submit cards to this pile
 bs.DECK_LENGTH = 52;
 bs.positions = []; // of each card on sprite sheet
 bs.players = [];
+bs.userIndex = 0; // index of the user in bs.players
 bs.currentPlayerIndex = 0;
 bs.currentBSAskingIndex = 0; // current player whose being asked if
                              // wishes to call BS
@@ -239,7 +240,7 @@ function determineHigherRank(firstCard, secondCard) {
 
 /*
   @pre there are players (i.e. bs.players.length > 0)
-  @post bs.players has a random order
+  @post bs.players has been randomly sorted
   @hasTest no (testing randomness isn't useful)
   @returns nothing
   @throws nothing
@@ -254,7 +255,32 @@ function randomizePlayerOrder() {
     resultantArray.push(bs.players.splice(randomIndex, 1).pop());
   }
 
+  // Apply sort to bs.players
   bs.players = resultantArray;
+}
+
+/*
+  @pre user index hasn't been set up
+  @post bs.userIndex has been
+  randomly assigned to the index of a player in bs.players
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
+function randomizeUserIndex() {
+  bs.userIndex = Math.floor(Math.random() * bs.players.length);
+}
+
+/*
+  @pre user index hasn't been set up
+  @post bs.userIndex has been set up and displayed
+  @hasTest no
+  @returns nothing
+  @throws nothing
+*/
+function setUpUserIndex() {
+  randomizeUserIndex();
+  $("#user-number").html(bs.userIndex + 1);
 }
 
 /*
@@ -917,6 +943,7 @@ function setUpGame() {
   generateDeck();
   createPlayers(formData.numberOfPlayers);
   randomizePlayerOrder();
+  setUpUserIndex();
   dealOutCards();
   sortPlayersCards();
   displayIndicators();
