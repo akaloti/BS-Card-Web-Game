@@ -363,7 +363,7 @@ function promptPickCards() {
 */
 function waitForPlayer(playerIndex, purpose, endCallback) {
   $("#game").addClass("invisible");
-  enableGameResponseToKeyPresses(false);
+  toggleSelectableCards(false);
 
   try {
     if (purpose === "pick") {
@@ -398,7 +398,7 @@ function waitForPlayer(playerIndex, purpose, endCallback) {
       $(document).off("keydown");
       $("#between-turns-announcements").html("");
       $("#game").removeClass("invisible");
-      enableGameResponseToKeyPresses(true);
+      toggleSelectableCards(true);
 
       // Remove the BS announcement
       $("#everyone-announcement").html("");
@@ -606,7 +606,7 @@ function askIfCallBS() {
 */
 function prepareWebpageForGaming(bool) {
   createSubmitButton(bool);
-  enableGameResponseToKeyPresses(bool);
+  toggleSelectableCards(bool);
 }
 
 /*
@@ -959,7 +959,7 @@ function createSubmitButton(bool) {
   @returns nothing
   @throws nothing
 */
-function enableGameResponseToKeyPresses(bool) {
+function toggleSelectableCards(bool) {
   bs.canSelectCards = bool;
 }
 
