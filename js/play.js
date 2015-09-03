@@ -363,6 +363,22 @@ function nextTurn() {
 }
 
 /*
+  @pre bs.currentPlayerIndex and bs.userIndex are correct
+  @post card submission of player indicated by bs.currentPlayerIndex
+  has been obtained
+  @hasTest no (this function calls other functions)
+  @returns array of submitted cards (that have been spliced from
+  the player who had them)
+  @throws nothing
+*/
+function getCardSubmission() {
+  if (bs.currentPlayerIndex === bs.userIndex)
+    return getCardSubmissionOfUser();
+  else
+    return getCardSubmissionOfComputerOpponent();
+}
+
+/*
   @pre none
   @post the webpage informs the player to pick cards
   @hasTest no
