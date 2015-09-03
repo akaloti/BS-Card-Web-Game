@@ -18,6 +18,7 @@ Next (in order of descending priority):
    --consider the phases of the webpage
     ---consider using objects to manage these phases
    --organize functions handling user interaction
+ -remove functions that have been made useless
 -release 3.0
 -make wireless choice a radio button, so menu no longer has invisible
  parts

@@ -34,6 +34,7 @@
 
 <section id="game">
   <div id="game-indicators">
+    <p>You are: Player <span id="user-number"></span></p>
     <p>Current player: <span id="current-player"></span></p>
     <p>Current rank: <span id="current-rank"></span></p>
   </div>
