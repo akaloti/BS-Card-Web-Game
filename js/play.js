@@ -947,16 +947,10 @@ function setUpGame() {
   dealOutCards();
   sortPlayersCards();
   displayIndicators();
-
-  // Note that waitForPlayer() calls a function to bind functions
-  // to certain key presses, allowing continuation of the game
-  // from here
-  waitForPlayer(bs.currentPlayerIndex, "pick", function() {
-    displayCards("displayed-cards",
-      bs.players[bs.currentPlayerIndex].cards);
-    createSubmitButton(true);
-    promptPickCards();
-  });
+  displayCards("displayed-cards",
+    bs.players[bs.userIndex].cards);
+  createSubmitButton(true);
+  promptPickCards();
 }
 
 /*
