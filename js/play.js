@@ -371,9 +371,9 @@ function nextTurn() {
     @throws nothing
 */
 function getCardSubmission() {
-    if (bs.currentPlayerIndex === bs.userIndex)
-        return getCardSubmissionOfUser();
-    else
+    // if (bs.currentPlayerIndex === bs.userIndex)
+        // return getCardSubmissionOfUser();
+    // else
         return getCardSubmissionOfComputerOpponent();
 }
 
@@ -393,7 +393,7 @@ function getCardSubmissionOfComputerOpponent() {
     if (hasCardsOfRank(cards, bs.currentRank))
         return removeCardsOfRank(bs.currentRank, bs.currentPlayerIndex);
     else
-        return removeRandomNumberOfCards();
+        return removeRandomNumberOfCards(bs.currentPlayerIndex);
 }
 
 /*
@@ -628,16 +628,16 @@ function displayableSuit(suit) {
     @throws nothing
 */
 function submitTurn() {
-    if (isValidMove()) {
-        bs.numberOfCardsSubmitted = submitCards();
+    // if (isValidMove()) {
+        bs.numberOfCardsSubmitted = getCardSubmission().length;
         announceSubmission(bs.numberOfCardsSubmitted);
 
         bs.currentBSAskingIndex =
             getIncrementedPlayerIndex(bs.currentPlayerIndex);
         askIfCallBS();
-    }
-    else
-        alert("Invalid move: please pick at least one card");
+    // }
+    // else
+        // alert("Invalid move: please pick at least one card");
 }
 
 /*
@@ -713,6 +713,7 @@ function announceSubmission(numberOfCardsSubmitted) {
         "submitted " + numberOfCardsSubmitted + " cards of rank " +
         displayableRank(bs.currentRank);
     $("#announcement").html(output);
+    alert(output);
 }
 
 /*
@@ -1060,7 +1061,8 @@ function setUpGame() {
     displayCards("displayed-cards",
         bs.players[bs.userIndex].cards);
     createSubmitButton(true);
-    promptPickCards();
+    // promptPickCards();
+    submitTurn();
 }
 
 /*
