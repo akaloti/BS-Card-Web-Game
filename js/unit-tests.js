@@ -218,6 +218,28 @@ QUnit.test("updateCurrentRank()", function(assert) {
     "Wrap around 'increment' from King to Ace worked");
 });
 
+QUnit.test("hasCardsOfRank()", function(assert) {
+   // Create first artificial environment
+   var rank = bs.RANKS.TWO;
+   var cards = [];
+   cards.push(new Card(bs.SUITS.HEART, bs.RANKS.THREE));
+   cards.push(new Card(bs.SUITS.HEART, bs.RANKS.TWO));
+
+   assert.deepEqual(hasCardsOfRank(cards, rank), true,
+     "Can detect when honesty is the best policy for " +
+     "computer opponent");
+
+   // Change artificial environment
+   cards = [];
+   cards.push(new Card(bs.SUITS.SPADE, bs.RANKS.KING));
+   cards.push(new Card(bs.SUITS.SPADE, bs.RANKS.QUEEN));
+   cards.push(new Card(bs.SUITS.SPADE, bs.RANKS.SEVEN));
+
+   assert.deepEqual(hasCardsOfRank(cards, rank), false,
+     "Can detect when honesty is an impossible policy for " +
+     "computer opponent");
+});
+
 QUnit.test("waitForPlayer()", function(assert) {
   assert.deepEqual(waitForPlayer(0, "invalidPurpose", function() {}),
     shared.PARAMETER_ERROR, "Enforcement of valid parameter");

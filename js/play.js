@@ -380,6 +380,24 @@ function getCardSubmission() {
 
 /*
   @pre none
+  @post see @returns
+  @hasTest yes
+  @param arrayOfCards to check if honesty is possible
+  @param rank to compare to
+  @returns true if at least one card in arrayOfCards has a rank
+  that matches rank; false, otherwise
+  @throws nothing
+*/
+function hasCardsOfRank(arrayOfCards, rank) {
+  for (var cardIndex in arrayOfCards) {
+    if (arrayOfCards[cardIndex].rank === rank)
+      return true;
+  }
+  return false;
+}
+
+/*
+  @pre none
   @post the webpage informs the player to pick cards
   @hasTest no
   @returns nothing
