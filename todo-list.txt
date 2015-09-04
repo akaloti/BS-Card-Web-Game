@@ -1,12 +1,9 @@
 Next (in order of descending priority):
--change game so that it only focuses on one human player's viewpoint
- --disable turn switching
+-figure out how to organize game flow
 -basic (perhaps, stupid) AI
  --create radio button for choice
  --make waitForPlayer() optional; replace with delay, so humans can
    see computers' moves
- --each AI is either honest, or plays one to three cards that are a
-   lie
  --each AI difficulty has a different chance of calling BS
  --game should be like the following from a single viewpoint:
     --someone submits cards

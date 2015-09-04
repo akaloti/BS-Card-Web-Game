@@ -38,10 +38,6 @@ bs.numberOfCardsSubmitted = 0; // updated each turn
 function Card(suit, rank) {
     this.suit = suit;
     this.rank = rank;
-
-    // coordinates of image on sprite sheet
-    // this.x = [get from list]
-    // this.y = [get from list]
 }
 
 /*
