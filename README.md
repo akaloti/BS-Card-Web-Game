@@ -6,6 +6,10 @@
 About
 -----
 
+The develop branch contains an unfinished application, for I decided
+to move on to a different project. For the latest, working application,
+please see either the master branch or the releases section on GitHub.
+
 This is an application that I programmed during the summer before my
 freshman year in college (that is, during the summer of 2015). In
 programming this application, to challenge myself,
@@ -71,6 +75,9 @@ Releases
 --------
 
 The latest release is: v2.0
+
+I did start working on v3.0 before I decided that I'd rather practice
+programming with a different project.
 
 Please see the releases section under this repository on GitHub
 to download the latest release.
