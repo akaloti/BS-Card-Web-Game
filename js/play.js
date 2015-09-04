@@ -341,14 +341,14 @@ function displayIndicators() {
 }
 
 /*
-    @pre none
+    @pre bs.currentPlayerIndex has been updated
     @post the indicators and the displayed cards have been
     updated
     @hasTest no
     @returns nothing
     @throws nothing
 */
-function nextTurn() {
+function startTurn() {
     updateIndicators();
     waitForPlayer(bs.currentPlayerIndex, "pick", function() {
         displayIndicators();
@@ -630,7 +630,8 @@ function submitTurn() {
 
         bs.currentBSAskingIndex =
             getIncrementedPlayerIndex(bs.currentPlayerIndex);
-        askIfCallBS();
+        // askIfCallBS();
+        startTurn();
     // }
     // else
         // alert("Invalid move: please pick at least one card");
@@ -900,7 +901,7 @@ function continueGameFromBSPrompting() {
     else {
         // continue game
         prepareWebpageForGaming(true);
-        nextTurn();
+        startTurn();
     }
 }
 
