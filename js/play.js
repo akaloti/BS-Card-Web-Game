@@ -613,9 +613,9 @@ function displayableSuit(suit) {
 }
 
 /*
-    @pre game is set up
-    @post went to next turn if user had valid move; otherwise,
-    stayed on same turn and alerted user
+    @pre game is set up; members of object bs are updated
+    @post gets card from current player to center pile, checks
+    for win, and goes to next turn (if necessary)
     @hasTest no
     @returns nothing
     @throws nothing
@@ -626,6 +626,12 @@ function submitTurn() {
         // center, remember the number submitted, and announce
         bs.numberOfCardsSubmitted =
             putInCenterPile(getCardSubmission());
+
+        // Update the human user's card display if necessary
+        if (bs.currentPlayerIndex === bs.userIndex) {
+            displayCards("displayed-cards",
+                bs.players[bs.userIndex].cards);
+        }
 
         checkForWin();
         if (bs.isWinner) {
@@ -736,7 +742,7 @@ function announceSubmission(numberOfCardsSubmitted, endCallback) {
     $("#announcement").html(output);
 
     // Delay so the user can read the announcement
-    var readingTime = 3000;
+    var readingTime = 2000;
     setTimeout(endCallback, readingTime);
 }
 

@@ -1,5 +1,4 @@
 Next (in order of descending priority):
--update dislay of user's cards
 -delay between start of turn and AI's picking move
 -let user choose a move
 -fix ability to call BS
@@ -8,6 +7,8 @@ Next (in order of descending priority):
     --if someone calls BS, it'll be announced and resolved (with delays
       and maybe animations, so the human can see)
     --switch turn (but not viewpoint), and repeat the above two steps
+    --update dislay of user's cards if user gets the center pile (and
+      when he submits cards, which is alredy done)
 -remove no longer needed functions (e.g. waitForPlayer())
 -remove no longer needed webpage elements; reorganize webpage
 -different AI skill
