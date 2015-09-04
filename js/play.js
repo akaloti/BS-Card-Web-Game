@@ -637,6 +637,19 @@ function submitTurn() {
 }
 
 /*
+    @pre bs.centerPile is good for use
+    @post arrayOfCards has been added to bs.centerPile
+    @hasTest yes
+    @param arrayOfCards to transfer
+    @returns number of cards transferred
+    @throws nothing
+*/
+function putInCenterPile(arrayOfCards) {
+    bs.centerPile = bs.centerPile.concat(arrayOfCards);
+    return arrayOfCards.length;
+}
+
+/*
     @pre user submitted cards that he/she owns, game indicators
     (e.g. current player) are correct
     @post n/a
