@@ -3,24 +3,24 @@
 <head>
 
 <!--
-  Author: Aaron Kaloti
-  Release number: 2.0
+    Author: Aaron Kaloti
+    Release number: 2.0
 -->
 
 <meta charset="utf-8">
 <title>Application Dictionary</title>
 
 <script
-  src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js">
+    src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js">
 </script>
 
 <style>
 table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
+    border: 1px solid black;
+    border-collapse: collapse;
 }
 th, td {
-  padding: 15px;
+    padding: 15px;
 }
 </style>
 
@@ -30,37 +30,37 @@ th, td {
 <div ng-app="dictionary" ng-controller="dictionaryCtrl">
 
 <table style="width:100%">
-  <tr>
-    <th>Term</th>
-    <th>Definition</th>
-  </tr>
-  <tr ng-repeat="term in dictionary">
-    <td>{{ term.name }}</td>
-    <td>{{ term.definition }}</td>
-  </tr>
+    <tr>
+        <th>Term</th>
+        <th>Definition</th>
+    </tr>
+    <tr ng-repeat="term in dictionary">
+        <td>{{ term.name }}</td>
+        <td>{{ term.definition }}</td>
+    </tr>
 </table>
 
 </div>
 
 <script>
-  var app = angular.module('dictionary', []);
-  app.controller('dictionaryCtrl', function($scope) {
-    var dictionary = [];
+    var app = angular.module('dictionary', []);
+    app.controller('dictionaryCtrl', function($scope) {
+        var dictionary = [];
 
-    dictionary.push({name : "center pile",
-      definition : "In the game of BS, this is" +
-      " where players submit their cards" +
-      " to try to empty their hands and win the game."});
-    dictionary.push({name : "contract",
-      definition : "This is a description of a function." +
-      " A contract states the function's preconditions, its" +
-      " postconditions, whether or not it has a unit test, its" +
-      " parameters (and descriptions of them), what it returns," +
-      " and what it throws (e.g. exception)."});
-    dictionary.push({name : "pick",
-      definition : "This refers to selecting a card to submit" +
-      " to the center pile."});
+        dictionary.push({name : "center pile",
+            definition : "In the game of BS, this is" +
+            " where players submit their cards" +
+            " to try to empty their hands and win the game."});
+        dictionary.push({name : "contract",
+            definition : "This is a description of a function." +
+            " A contract states the function's preconditions, its" +
+            " postconditions, whether or not it has a unit test, its" +
+            " parameters (and descriptions of them), what it returns," +
+            " and what it throws (e.g. exception)."});
+        dictionary.push({name : "pick",
+            definition : "This refers to selecting a card to submit" +
+            " to the center pile."});
 
-    $scope.dictionary = dictionary;
-  });
+        $scope.dictionary = dictionary;
+    });
 </script>

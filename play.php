@@ -3,17 +3,17 @@
 <head>
 
 <!--
-  Author: Aaron Kaloti
-  Release number: 2.0
+    Author: Aaron Kaloti
+    Release number: 2.0
 -->
 
 <meta charset="utf-8">
 <title>Play: BS</title>
 <script
-  src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 </script>
 <link rel="stylesheet" type="text/css"
-  href="<?php echo $_POST['style']; ?>" />
+    href="<?php echo $_POST['style']; ?>" />
 
 </head>
 <body>
@@ -22,56 +22,56 @@
 <div id="top"></div>
 
 <div id="for-everyone">
-  <div id="between-turns-announcements">
-  </div>
+    <div id="between-turns-announcements">
+    </div>
 
-  <div id="everyone-announcement">
-  </div>
+    <div id="everyone-announcement">
+    </div>
 
-  <div id="submission-display">
-  </div>
+    <div id="submission-display">
+    </div>
 </div>
 
 <section id="game">
-  <div id="game-indicators">
-    <p>You are: Player <span id="user-number"></span></p>
-    <p>Current player: <span id="current-player"></span></p>
-    <p>Current rank: <span id="current-rank"></span></p>
-  </div>
-
-  <!-- Elements that deal solely with prompting a player about
-    whether or not he wants to call BS -->
-  <div id="prompting-for-call-bs">
-    <p id="call-bs-prompt"></p>
-    <div id="bs-call-buttons">
+    <div id="game-indicators">
+        <p>You are: Player <span id="user-number"></span></p>
+        <p>Current player: <span id="current-player"></span></p>
+        <p>Current rank: <span id="current-rank"></span></p>
     </div>
-  </div>
 
-  <p id="announcement"></p>
-
-  <div id="submit-button">
-  </div>
-
-  <div id="card-display">
-    <p>Your cards:</p>
-    <div id="displayed-cards">
+    <!-- Elements that deal solely with prompting a player about
+        whether or not he wants to call BS -->
+    <div id="prompting-for-call-bs">
+        <p id="call-bs-prompt"></p>
+        <div id="bs-call-buttons">
+        </div>
     </div>
-  </div>
+
+    <p id="announcement"></p>
+
+    <div id="submit-button">
+    </div>
+
+    <div id="card-display">
+        <p>Your cards:</p>
+        <div id="displayed-cards">
+        </div>
+    </div>
 </section>
 
 <?php
 $desiredAudio = $_POST['audio'];
 if ($desiredAudio != "none") {
-  echo "<audio id='background-music'>";
-  echo "<source src='$desiredAudio' ?> />";
-  echo "</audio>";
+    echo "<audio id='background-music'>";
+    echo "<source src='$desiredAudio' ?> />";
+    echo "</audio>";
 }
 ?>
 
 <script>
-  // To get around not being able to use PHP in a JavaScript file
-  var formData = {};
-  formData.numberOfPlayers = "<?php echo $_POST['number-of-players']; ?>";
+    // To get around not being able to use PHP in a JavaScript file
+    var formData = {};
+    formData.numberOfPlayers = "<?php echo $_POST['number-of-players']; ?>";
 </script>
 <script src="js/shared.js"></script>
 <script src="js/play.js"></script>

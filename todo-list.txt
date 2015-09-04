@@ -2,23 +2,23 @@ Next (in order of descending priority):
 -change game so that it only focuses on one human player's viewpoint
  --disable turn switching
 -basic (perhaps, stupid) AI
-  -create radio button for choice
-  -make waitForPlayer() optional; replace with delay, so humans can
+ --create radio button for choice
+ --make waitForPlayer() optional; replace with delay, so humans can
    see computers' moves
-  -each AI is either honest, or plays one to three cards that are a
+ --each AI is either honest, or plays one to three cards that are a
    lie
-  -each AI difficulty has a different chance of calling BS
-  -game should be like the following from a single viewpoint:
+ --each AI difficulty has a different chance of calling BS
+ --game should be like the following from a single viewpoint:
     --someone submits cards
     --if someone calls BS, it'll be announced and resolved (with delays
       and maybe animations, so the human can see)
     --switch turn (but not viewpoint), and repeat the above two steps
-  -(if needed) applying stepwise refinement in more areas
+ --(if needed) applying stepwise refinement in more areas
    (perhaps a function for changing the webpage that takes the context)
    --consider the phases of the webpage
     ---consider using objects to manage these phases
    --organize functions handling user interaction
- -remove functions that have been made useless
+ --remove functions that have been made useless
 -release 3.0
 -make wireless choice a radio button, so menu no longer has invisible
  parts
