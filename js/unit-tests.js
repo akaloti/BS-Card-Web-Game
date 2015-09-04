@@ -300,6 +300,26 @@ QUnit.test("displayableSuit()", function(assert) {
         "Rank Diamond is properly converted");
 });
 
+QUnit.test("putInCenterPile()", function(assert) {
+    // Create artificial environment
+    bs.centerPile = [];
+    bs.centerPile.push(new Card(bs.SUITS.SPADE, bs.RANKS.ACE));
+    bs.centerPile.push(new Card(bs.SUITS.SPADE, bs.RANKS.ACE));
+    var originalLength = bs.centerPile.length;
+
+    // Create array to add
+    var arrayToAdd = [];
+    arrayToAdd.push(new Card(bs.SUITS.HEART, bs.RANKS.TWO));
+    var changeInLength = arrayToAdd.length;
+
+    // Test
+    assert.deepEqual(putInCenterPile(arrayToAdd), changeInLength,
+        "Correct return value (i.e. number of cards transferred");
+    assert.deepEqual(bs.centerPile.length,
+        originalLength + changeInLength,
+        "Length of center pile correctly changed");
+});
+
 QUnit.test("isValidMove()", function(assert) {
     // Create artificial environment
     createArtificialPlayers(1);

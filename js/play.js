@@ -287,7 +287,7 @@ function setUpUserIndex() {
     @returns nothing
     @throws nothing
 */
-function updateIndicators() {
+function setUpNextTurn() {
     bs.currentPlayerIndex =
         getIncrementedPlayerIndex(bs.currentPlayerIndex);
     bs.currentRank = updateCurrentRank(bs.currentRank);
@@ -341,21 +341,18 @@ function displayIndicators() {
 }
 
 /*
-    @pre none
+    @pre turn has been set up
     @post the indicators and the displayed cards have been
     updated
     @hasTest no
     @returns nothing
     @throws nothing
 */
-function nextTurn() {
-    updateIndicators();
-    waitForPlayer(bs.currentPlayerIndex, "pick", function() {
+function startTurn() {
+    // waitForPlayer(bs.currentPlayerIndex, "pick", function() {
         displayIndicators();
-        displayCards("displayed-cards",
-            bs.players[bs.currentPlayerIndex].cards);
-        promptPickCards();
-    });
+        submitTurn();
+    // });
 }
 
 /*
@@ -625,15 +622,38 @@ function displayableSuit(suit) {
 */
 function submitTurn() {
     // if (isValidMove()) {
-        bs.numberOfCardsSubmitted = getCardSubmission().length;
-        announceSubmission(bs.numberOfCardsSubmitted);
+        // Get a submission of cards, put that submission in the
+        // center, remember the number submitted, and announce
+        bs.numberOfCardsSubmitted =
+            putInCenterPile(getCardSubmission());
 
-        bs.currentBSAskingIndex =
-            getIncrementedPlayerIndex(bs.currentPlayerIndex);
-        askIfCallBS();
+        checkForWin();
+        if (bs.isWinner) {
+            updateWebpageForWinner();
+        }
+        else {
+            announceSubmission(bs.numberOfCardsSubmitted);
+
+            setUpNextTurn();
+            // askIfCallBS();
+            startTurn();
+        }
     // }
     // else
         // alert("Invalid move: please pick at least one card");
+}
+
+/*
+    @pre bs.centerPile is good for use
+    @post arrayOfCards has been added to bs.centerPile
+    @hasTest yes
+    @param arrayOfCards to transfer
+    @returns number of cards transferred
+    @throws nothing
+*/
+function putInCenterPile(arrayOfCards) {
+    bs.centerPile = bs.centerPile.concat(arrayOfCards);
+    return arrayOfCards.length;
 }
 
 /*
@@ -887,7 +907,7 @@ function continueGameFromBSPrompting() {
     else {
         // continue game
         prepareWebpageForGaming(true);
-        nextTurn();
+        startTurn();
     }
 }
 
@@ -1053,12 +1073,11 @@ function setUpGame() {
     setUpUserIndex();
     dealOutCards();
     sortPlayersCards();
-    displayIndicators();
     displayCards("displayed-cards",
         bs.players[bs.userIndex].cards);
-    createSubmitButton(true);
+    startTurn();
+    // createSubmitButton(true);
     // promptPickCards();
-    submitTurn();
 }
 
 /*
