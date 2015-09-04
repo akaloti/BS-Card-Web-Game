@@ -341,7 +341,7 @@ function displayIndicators() {
 }
 
 /*
-    @pre bs.currentPlayerIndex has been updated
+    @pre turn has been set up
     @post the indicators and the displayed cards have been
     updated
     @hasTest no
@@ -349,13 +349,10 @@ function displayIndicators() {
     @throws nothing
 */
 function startTurn() {
-    updateIndicators();
-    waitForPlayer(bs.currentPlayerIndex, "pick", function() {
+    // waitForPlayer(bs.currentPlayerIndex, "pick", function() {
         displayIndicators();
-        displayCards("displayed-cards",
-            bs.players[bs.currentPlayerIndex].cards);
-        promptPickCards();
-    });
+        submitTurn();
+    // });
 }
 
 /*
@@ -625,13 +622,22 @@ function displayableSuit(suit) {
 */
 function submitTurn() {
     // if (isValidMove()) {
-        bs.numberOfCardsSubmitted = getCardSubmission().length;
-        announceSubmission(bs.numberOfCardsSubmitted);
+        // Get a submission of cards, put that submission in the
+        // center, remember the number submitted, and announce
+        bs.numberOfCardsSubmitted =
+            putInCenterPile(getCardSubmission());
 
-        bs.currentBSAskingIndex =
-            getIncrementedPlayerIndex(bs.currentPlayerIndex);
-        // askIfCallBS();
-        startTurn();
+        checkForWin();
+        if (bs.isWinner) {
+            updateWebpageForWinner();
+        }
+        else {
+            announceSubmission(bs.numberOfCardsSubmitted);
+
+            setUpNextTurn();
+            // askIfCallBS();
+            startTurn();
+        }
     // }
     // else
         // alert("Invalid move: please pick at least one card");
@@ -1067,12 +1073,11 @@ function setUpGame() {
     setUpUserIndex();
     dealOutCards();
     sortPlayersCards();
-    displayIndicators();
     displayCards("displayed-cards",
         bs.players[bs.userIndex].cards);
-    createSubmitButton(true);
+    startTurn();
+    // createSubmitButton(true);
     // promptPickCards();
-    submitTurn();
 }
 
 /*
