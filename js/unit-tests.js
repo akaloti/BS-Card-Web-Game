@@ -218,6 +218,23 @@ QUnit.test("updateCurrentRank()", function(assert) {
         "Wrap around 'increment' from King to Ace worked");
 });
 
+QUnit.test("removeRandomCards()", function(assert) {
+    // Create artificial environment
+    createArtificialPlayers(2);
+    var playerIndex = 1;
+    var numberOfCards = 5;
+    createArtificialCards(numberOfCards, playerIndex);
+
+    // Test
+    var numberToRemove = 2;
+    var result = removeRandomCards(playerIndex, numberToRemove);
+    assert.deepEqual(result.length, numberToRemove,
+        "Correct number of cards were returned");
+    assert.deepEqual(bs.players[playerIndex].cards.length,
+        (numberOfCards - numberToRemove),
+        "Correct number of cards were removed");
+});
+
 QUnit.test("removeCardsOfRank()", function(assert) {
     // Create artificial environment
     createArtificialPlayers(2);

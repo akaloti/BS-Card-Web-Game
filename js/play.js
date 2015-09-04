@@ -379,7 +379,7 @@ function getCardSubmission() {
 
 /*
     @pre bs.currentPlayerIndex is correct and represents a computer
-    opponent
+    opponent; bs.currentRank is correct
     @post see @returns
     @hasTest no
     @returns array of submitted cards that have been removed from the
@@ -391,14 +391,50 @@ function getCardSubmissionOfComputerOpponent() {
     var cards = bs.players[bs.currentPlayerIndex].cards;
 
     if (hasCardsOfRank(cards, bs.currentRank))
-        return removeCardsOfRank(bs.currentRank);
+        return removeCardsOfRank(bs.currentRank, bs.currentPlayerIndex);
     else
         return removeRandomNumberOfCards();
 }
 
 /*
     @pre bs.players[indexOfPlayer].cards is updated
-    @post see @return
+    @post see @returns
+    @hasTest no
+    @param indexOfPlayer to remove cards from
+    @returns an array of cards containing a random number of cards
+    that has been spliced from bs.players[indexOfPlayer].cards
+    @throws nothing
+*/
+function removeRandomNumberOfCards(indexOfPlayer) {
+    // remove anywhere from one to three cards
+    return removeRandomCards(indexOfPlayer,
+      Math.floor(Math.random() * 2) + 1);
+}
+
+/*
+    @pre bs.players[indexOfPlayer].cards is updated
+    @post see @returns
+    @hasTest yes
+    @param indexOfPlayer to remove cards from
+    @param howMany cards to remove
+    @returns an array of cards that were randomly spliced from
+    bs.players[indexOfPlayer].cards; this array has a length of howMany
+    @throws nothing
+*/
+function removeRandomCards(indexOfPlayer, howMany) {
+    var removedCards = [];
+    for (var i = 0; i < howMany; ++i) {
+        var randomIndex = Math.floor(Math.random() *
+                bs.players[indexOfPlayer].cards.length)
+        removedCards.push(bs.players[indexOfPlayer].cards.splice(
+            randomIndex, 1).pop());
+    }
+    return removedCards;
+}
+
+/*
+    @pre bs.players[indexOfPlayer].cards is updated
+    @post see @returns
     @hasTest yes
     @param rank of cards to remove
     @param indexOfPlayer to take cards from
