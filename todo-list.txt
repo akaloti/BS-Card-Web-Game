@@ -1,4 +1,6 @@
 Next (in order of descending priority):
+-change indent from 2 spaces to 4 spaces
+ --fix generate-contract.sh
 -change game so that it only focuses on one human player's viewpoint
  --disable turn switching
 -basic (perhaps, stupid) AI
