@@ -632,11 +632,11 @@ function submitTurn() {
             updateWebpageForWinner();
         }
         else {
-            announceSubmission(bs.numberOfCardsSubmitted);
-
-            setUpNextTurn();
-            // askIfCallBS();
-            startTurn();
+            announceSubmission(bs.numberOfCardsSubmitted, function() {
+                setUpNextTurn();
+                // askIfCallBS();
+                startTurn();
+            });
         }
     // }
     // else
@@ -717,19 +717,27 @@ function submitCards() {
 /*
     @pre game indicators are correct
     @post the webpage says how many cards were submitted by the current
-    player and what rank the cards were
+    player and what rank the cards were; the game is delayed so the
+    human user can read the announcement; after the delay, the
+    endCallback is called
     @hasTest no
     @param numberOfCardsSubmitted by the player who has submitted
     his choice
+    @param endCallback function to call after the delay of the
+    announcement
     @returns nothing
     @throws nothing
 */
-function announceSubmission(numberOfCardsSubmitted) {
+function announceSubmission(numberOfCardsSubmitted, endCallback) {
+    // Create the message
     var output = "Player " + (bs.currentPlayerIndex + 1) + " has " +
         "submitted " + numberOfCardsSubmitted + " cards of rank " +
         displayableRank(bs.currentRank);
     $("#announcement").html(output);
-    alert(output);
+
+    // Delay so the user can read the announcement
+    var readingTime = 3000;
+    setTimeout(endCallback, readingTime);
 }
 
 /*

@@ -1,6 +1,6 @@
 Next (in order of descending priority):
--delay between AI moves
 -update dislay of user's cards
+-delay between start of turn and AI's picking move
 -let user choose a move
 -fix ability to call BS
     --game should be like the following from a single viewpoint:
@@ -11,6 +11,7 @@ Next (in order of descending priority):
 -remove no longer needed functions (e.g. waitForPlayer())
 -remove no longer needed webpage elements; reorganize webpage
 -different AI skill
+-remove use of alerts
 
 After the above:
 -release 3.0
