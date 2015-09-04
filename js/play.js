@@ -287,7 +287,7 @@ function setUpUserIndex() {
     @returns nothing
     @throws nothing
 */
-function updateIndicators() {
+function setUpNextTurn() {
     bs.currentPlayerIndex =
         getIncrementedPlayerIndex(bs.currentPlayerIndex);
     bs.currentRank = updateCurrentRank(bs.currentRank);
