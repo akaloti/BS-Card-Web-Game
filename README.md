@@ -22,6 +22,9 @@ for the project glossary, I used AngularJS. I downloaded the QUnit
 (JavaScript and CSS) files, but I included both jQuery and AngularJS
 with the Google CDN (Content Delivery Network).
 
+A demonstrative YouTube video can be found here:
+https://www.youtube.com/watch?v=d8jOFy8-14Y
+
 Features
 --------
 
